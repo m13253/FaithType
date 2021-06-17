@@ -11,6 +11,7 @@ use std::rc::Rc;
 use crate::types::FourCC;
 use crate::types::SfntHeader;
 use crate::types::TTCHeader;
+use crate::types::TableHashKey;
 use crate::types::TableRecord;
 
 pub struct TTCReader<R: Read + Seek> {
@@ -46,7 +47,7 @@ impl<R: Read + Seek> TTCReader<R> {
         let minor_version = self.read_u16be()?;
         if major_version > 2 {
             bail!(
-                "position 0x{:x}: unsupported TTC version: {}.{}",
+                "file position 0x{:08x}: unsupported TTC version: {}.{}",
                 self.r.stream_position()? - 4,
                 major_version,
                 minor_version
@@ -102,7 +103,7 @@ impl<R: Read + Seek> TTCReader<R> {
             b"true" => (),
             // sfnt can also contain other formats
             _ => bail!(
-                "position 0x{:x}: unsupported font format: {}",
+                "file position 0x{:08x}: unsupported sfnt version: {}",
                 self.r.stream_position()? - 4,
                 format_args!("{}", sfnt_version)
             ),
@@ -119,7 +120,14 @@ impl<R: Read + Seek> TTCReader<R> {
                 let offset = self.read_u32be()?;
                 let length = self.read_u32be()?;
                 let raw_data = self.read_raw_data(offset.into(), length.try_into()?)?;
-                Ok((table_tag, TableRecord { checksum, raw_data }))
+                Ok((
+                    table_tag,
+                    TableRecord {
+                        checksum,
+                        hash_key: Some(TableHashKey::OriginalOffset(offset)),
+                        raw_data,
+                    },
+                ))
             })
             .collect::<Result<_>>()?;
 

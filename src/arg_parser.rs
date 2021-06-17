@@ -14,23 +14,22 @@ impl ArgParser {
         let program_name = args.next();
 
         enum CurrentOption {
-            None,
             End,
             Output,
         }
-        let mut current_option = CurrentOption::None;
+        let mut current_option = Option::<CurrentOption>::None;
         let mut input_filename = Option::<OsString>::None;
         let mut output_filename = Option::<OsString>::None;
 
         for arg in args {
             match current_option {
-                CurrentOption::None => {
+                None => {
                     if arg == "--" {
-                        current_option = CurrentOption::End;
+                        current_option = Some(CurrentOption::End);
                     } else if arg == "--help" {
                         Self::print_help_and_exit(&program_name, 0);
                     } else if arg == "-o" || arg == "--output" {
-                        current_option = CurrentOption::Output;
+                        current_option = Some(CurrentOption::Output);
                     } else {
                         if input_filename.is_some() {
                             Self::print_help_and_exit(&program_name, 1);
@@ -38,23 +37,23 @@ impl ArgParser {
                         input_filename = Some(arg);
                     }
                 }
-                CurrentOption::End => {
+                Some(CurrentOption::End) => {
                     if input_filename.is_some() {
                         Self::print_help_and_exit(&program_name, 1);
                     }
                     input_filename = Some(arg);
                 }
-                CurrentOption::Output => {
+                Some(CurrentOption::Output) => {
                     if output_filename.is_some() {
                         Self::print_help_and_exit(&program_name, 1);
                     }
                     output_filename = Some(arg);
-                    current_option = CurrentOption::None;
+                    current_option = None;
                 }
             }
         }
         match current_option {
-            CurrentOption::None | CurrentOption::End => (),
+            None | Some(CurrentOption::End) => (),
             _ => Self::print_help_and_exit(&program_name, 1),
         }
 

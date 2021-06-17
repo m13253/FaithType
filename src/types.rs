@@ -7,9 +7,6 @@ use std::fmt::Display;
 use std::fmt::Write;
 use std::rc::Rc;
 
-#[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord)]
-pub struct FourCC(pub [u8; 4]);
-
 #[derive(Clone)]
 pub struct TTCHeader {
     pub ttc_tag: FourCC,
@@ -29,17 +26,17 @@ pub struct SfntHeader {
 #[derive(Clone)]
 pub struct TableRecord {
     pub checksum: u32,
+    pub hash_key: Option<TableHashKey>,
     pub raw_data: Rc<[u8]>,
 }
 
-impl FourCC {
-    pub const fn new(bytes: &'static [u8; 4]) -> Self {
-        Self(*bytes)
-    }
+#[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord)]
+pub struct FourCC(pub [u8; 4]);
 
-    pub const fn zeroed() -> Self {
-        Self([0; 4])
-    }
+#[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord)]
+pub enum TableHashKey {
+    OriginalOffset(u32),
+    PatchedGASP,
 }
 
 impl SfntHeader {
@@ -131,7 +128,28 @@ impl Debug for TableRecord {
     fn fmt(&self, fmt: &mut fmt::Formatter) -> fmt::Result {
         fmt.debug_struct("tableRecord")
             .field("checksum", &format_args!("0x{:08x}", self.checksum))
+            .field(
+                "offset",
+                &format_args!(
+                    "{}",
+                    if let Some(TableHashKey::OriginalOffset(offset)) = self.hash_key {
+                        format!("0x{:08x}", offset)
+                    } else {
+                        format!("unknown")
+                    }
+                ),
+            )
             .field("data", &format_args!("({} bytes)", self.raw_data.len()))
             .finish()
+    }
+}
+
+impl FourCC {
+    pub const fn new(bytes: &'static [u8; 4]) -> Self {
+        Self(*bytes)
+    }
+
+    pub const fn zeroed() -> Self {
+        Self([0; 4])
     }
 }
