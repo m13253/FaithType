@@ -8,32 +8,32 @@ use std::io::Seek;
 use std::io::SeekFrom;
 use std::rc::Rc;
 
-use crate::types::FourCC;
-use crate::types::SfntHeader;
-use crate::types::TTCHeader;
-use crate::types::TableRecord;
+use super::types::FourCC;
+use super::types::SfntHeader;
+use super::types::TTCHeader;
+use super::types::TableRecord;
 
-pub struct TTCReader<R: Read + Seek> {
-    r: R,
-    buffer_cache: HashMap<(u64, usize), Rc<[u8]>>,
+pub struct TTCReader<'a, R: Read + Seek> {
+    r: &'a mut R,
+    raw_data_cache: HashMap<(u64, usize), Rc<[u8]>>,
 }
 
-impl<R: Read + Seek> TTCReader<R> {
-    pub fn new(r: R) -> Self {
+impl<'a, R: Read + Seek> TTCReader<'a, R> {
+    pub fn new(r: &'a mut R) -> Self {
         Self {
             r,
-            buffer_cache: HashMap::new(),
+            raw_data_cache: HashMap::new(),
         }
     }
 
     pub fn read_ttc(mut self) -> Result<TTCHeader> {
         let old_pos = self.r.stream_position()?;
         let ttc_tag = self.read_fourcc()?;
-        if ttc_tag != FourCC::new(b"ttcf") {
+        if ttc_tag != b"ttcf".into() {
             self.r.seek(SeekFrom::Start(old_pos))?;
             let sfnt = self.read_sfnt()?;
             return Ok(TTCHeader {
-                ttc_tag: FourCC::new(b"ttcf"),
+                ttc_tag: b"ttcf".into(),
                 major_version: 1,
                 minor_version: 0,
                 table_directories: vec![sfnt],
@@ -75,8 +75,8 @@ impl<R: Read + Seek> TTCReader<R> {
             dsig_length = self.read_u32be()?;
             dsig_offset = self.read_u32be()?;
         }
-        let dsig_data = if dsig_tag == FourCC::new(b"DSIG") {
-            self.read_raw_data(dsig_offset.into(), dsig_length.try_into()?)?
+        let dsig_data = if dsig_tag == b"DSIG".into() {
+            self.read_raw_data(dsig_offset.into(), dsig_length.try_into().unwrap())?
         } else {
             self.empty_raw_data()
         };
@@ -95,7 +95,7 @@ impl<R: Read + Seek> TTCReader<R> {
         let sfnt_version = self.read_fourcc()?;
         match &sfnt_version.0 {
             // Microsoft OpenType font
-            [0, 1, 0, 0] => (),
+            &[0, 1, 0, 0] => (),
             // Adobe CFF font
             b"OTTO" => (),
             // Apple TrueType font
@@ -118,7 +118,7 @@ impl<R: Read + Seek> TTCReader<R> {
                 let checksum = self.read_u32be()?;
                 let offset = self.read_u32be()?;
                 let length = self.read_u32be()?;
-                let raw_data = self.read_raw_data(offset.into(), length.try_into()?)?;
+                let raw_data = self.read_raw_data(offset.into(), length.try_into().unwrap())?;
                 Ok((table_tag, TableRecord { checksum, raw_data }))
             })
             .collect::<Result<_>>()?;
@@ -129,16 +129,16 @@ impl<R: Read + Seek> TTCReader<R> {
         })
     }
 
-    fn read_u32be(&mut self) -> Result<u32> {
-        let mut buf = [0; 4];
-        self.r.read_exact(&mut buf)?;
-        Ok((buf[0] as u32) << 24 | (buf[1] as u32) << 16 | (buf[2] as u32) << 8 | (buf[3] as u32))
-    }
-
     fn read_u16be(&mut self) -> Result<u16> {
         let mut buf = [0; 2];
         self.r.read_exact(&mut buf)?;
         Ok((buf[0] as u16) << 8 | (buf[1] as u16))
+    }
+
+    fn read_u32be(&mut self) -> Result<u32> {
+        let mut buf = [0; 4];
+        self.r.read_exact(&mut buf)?;
+        Ok((buf[0] as u32) << 24 | (buf[1] as u32) << 16 | (buf[2] as u32) << 8 | (buf[3] as u32))
     }
 
     fn read_fourcc(&mut self) -> Result<FourCC> {
@@ -152,7 +152,7 @@ impl<R: Read + Seek> TTCReader<R> {
             return Ok(self.empty_raw_data());
         }
 
-        match self.buffer_cache.entry((pos, len)) {
+        match self.raw_data_cache.entry((pos, len)) {
             Entry::Occupied(entry) => Ok(entry.get().clone()),
             Entry::Vacant(entry) => {
                 let old_pos = self.r.stream_position()?;
@@ -166,7 +166,7 @@ impl<R: Read + Seek> TTCReader<R> {
     }
 
     fn empty_raw_data(&mut self) -> Rc<[u8]> {
-        match self.buffer_cache.entry((0, 0)) {
+        match self.raw_data_cache.entry((0, 0)) {
             Entry::Occupied(entry) => entry.get().clone(),
             Entry::Vacant(entry) => entry.insert(Rc::new([])).clone(),
         }

@@ -34,37 +34,41 @@ pub struct FourCC(pub [u8; 4]);
 
 impl SfntHeader {
     pub fn search_range(&self) -> u16 {
+        if self.table_records.is_empty() {
+            return 0;
+        }
         if self.table_records.len() >= 4096 {
             return 32768;
         }
-        16 << self.log2_num_tables()
+        ((self.table_records.len() - 1).next_power_of_two() * 8)
+            .try_into()
+            .unwrap()
     }
 
     pub fn entry_selector(&self) -> u16 {
-        self.log2_num_tables().try_into().unwrap()
+        if self.table_records.is_empty() {
+            return 0;
+        }
+        (self.table_records.len() / 2 - 1)
+            .next_power_of_two()
+            .trailing_zeros()
+            .try_into()
+            .unwrap()
     }
 
     pub fn range_shift(&self) -> u16 {
+        if self.table_records.is_empty() {
+            return 0;
+        }
         if self.table_records.len() >= 6144 {
             return 65520;
         }
         if self.table_records.len() >= 4096 {
-            return ((self.table_records.len() << 4) - 32768)
-                .try_into()
-                .unwrap();
+            return (self.table_records.len() * 16 - 32768).try_into().unwrap();
         }
-        ((self.table_records.len() << 4) - (16 << self.log2_num_tables()))
+        (self.table_records.len() * 16 - (self.table_records.len() - 1).next_power_of_two() * 8)
             .try_into()
             .unwrap()
-    }
-    fn log2_num_tables(&self) -> u32 {
-        let mut len = self.table_records.len();
-        let mut result = 0;
-        while len != 0 {
-            len >>= 1;
-            result += 1;
-        }
-        result
     }
 }
 
@@ -127,11 +131,19 @@ impl Debug for TableRecord {
 }
 
 impl FourCC {
-    pub const fn new(bytes: &'static [u8; 4]) -> Self {
-        Self(*bytes)
-    }
-
     pub const fn zeroed() -> Self {
         Self([0; 4])
+    }
+}
+
+impl From<[u8; 4]> for FourCC {
+    fn from(bytes: [u8; 4]) -> Self {
+        Self(bytes)
+    }
+}
+
+impl From<&'static [u8; 4]> for FourCC {
+    fn from(bytes: &'static [u8; 4]) -> Self {
+        Self(*bytes)
     }
 }
