@@ -119,7 +119,14 @@ impl<'a, R: Read + Seek> TTCReader<'a, R> {
                 let offset = self.read_u32be()?;
                 let length = self.read_u32be()?;
                 let raw_data = self.read_raw_data(offset.into(), length.try_into().unwrap())?;
-                Ok((table_tag, TableRecord { checksum, raw_data }))
+                Ok((
+                    table_tag,
+                    TableRecord {
+                        checksum,
+                        offset,
+                        raw_data,
+                    },
+                ))
             })
             .collect::<Result<_>>()?;
 

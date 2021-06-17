@@ -26,6 +26,7 @@ pub struct SfntHeader {
 #[derive(Clone)]
 pub struct TableRecord {
     pub checksum: u32,
+    pub offset: u32,
     pub raw_data: Rc<[u8]>,
 }
 
