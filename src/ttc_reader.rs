@@ -11,7 +11,6 @@ use std::rc::Rc;
 use crate::types::FourCC;
 use crate::types::SfntHeader;
 use crate::types::TTCHeader;
-use crate::types::TableHashKey;
 use crate::types::TableRecord;
 
 pub struct TTCReader<R: Read + Seek> {
@@ -120,14 +119,7 @@ impl<R: Read + Seek> TTCReader<R> {
                 let offset = self.read_u32be()?;
                 let length = self.read_u32be()?;
                 let raw_data = self.read_raw_data(offset.into(), length.try_into()?)?;
-                Ok((
-                    table_tag,
-                    TableRecord {
-                        checksum,
-                        hash_key: Some(TableHashKey::OriginalOffset(offset)),
-                        raw_data,
-                    },
-                ))
+                Ok((table_tag, TableRecord { checksum, raw_data }))
             })
             .collect::<Result<_>>()?;
 
