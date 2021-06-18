@@ -28,7 +28,7 @@
    .\faithtype.exe --help
    ```
 
-5. **可省略：**若要完全移除 hinting，在這一步下載 [ttfautohint](https://www.freetype.org/ttfautohint/#download) 並使用 `ttfautohint --dehint`。
+5. **可省略：** 若要完全移除 hinting，在這一步下載 [ttfautohint](https://www.freetype.org/ttfautohint/#download) 並使用 `ttfautohint --dehint`。
 
 6. 處理字型檔：
    ```ps1
@@ -37,7 +37,7 @@
    ```
    根據你是否要移除或重建 hinting，選用 `--remove-hinting` 或者 `--keep-hinting` 兩者其一。
 
-7. **可省略：**若要重建 hinting 指令，不要在第 5 步，而是在這一步使用 [ttfautohint](https://www.freetype.org/ttfautohint/#download)。
+7. **可省略：** 若要重建 hinting 指令，不要在第 5 步，而是在這一步使用 [ttfautohint](https://www.freetype.org/ttfautohint/#download)。
 
 8. 給目前使用者安裝修改後的字型檔。放在這個路徑就可以了：
    ```
