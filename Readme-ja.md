@@ -20,20 +20,20 @@ Windows 10バージョン1703 (Creators Update) から、内蔵のTrueTypeレン
    ```ps1
    cd path_to_FaithType
    cargo build --release
-   cd .\target\release
+   cd .¥target¥release
    ```
 
 4. 使用方法を読む（英語）：
    ```ps1
-   .\faithtype.exe --help
+   .¥faithtype.exe --help
    ```
 
 5. **オプション：** ヒンティングを完全に除去したい場合は、[ttfautohint](https://www.freetype.org/ttfautohint/#download)をダウンロードして、このステップで `ttfautohint --dehint` を使ってください。
 
 6. フォントファイルを処理します：
    ```ps1
-   mkdir C:\XXXXXX
-   .\faithtype.exe C:\Windows\Fonts\msgothic.ttc -o C:\XXXXXX\msgothic.ttc --remove-bitmap --remove-hinting --modify-gasp
+   mkdir C:¥XXXXXX
+   .¥faithtype.exe C:¥Windows¥Fonts¥msgothic.ttc -o C:¥XXXXXX¥msgothic.ttc --remove-bitmap --remove-hinting --modify-gasp
    ```
    ヒンティングを削除するか維持するかによって、`--remove-hinting` または `--keep-hinting` のいずれかを使用する。
 
