@@ -8,6 +8,10 @@ Since Windows 10 version 1703 (Creators Update), its builtin TrueType renderer
 now supports vertical anti-aliasing. However, it is only enabled for selected
 fonts at selected sizes.
 
+By using this tool, you can enable vertical anti-aliasing for almost any
+TrueType outline font, also removing the embedded bitmap, to make the text
+look much better on HiDPI displays.
+
 ## How to use this tool?
 
 1. Download [Rust compiler](https://www.rust-lang.org/tools/install).
@@ -56,17 +60,19 @@ fonts at selected sizes.
 
 10. Restart the system.
 
-## Why remove bitmap?
+## FAQs
+
+### Why remove bitmap?
 
 Although OpenType supports grayscale bitmap, all Windows built-in bitmap fonts
-only contain black-and-white version. This happens even at HiDPI display where
-the number of pixels are enough to produce legible anti-aliased text.
+only contain black-and-white version. This happens even on HiDPI displays,
+where the number of pixels are enough to produce legible anti-aliased text.
 
 Also, some bitmap fonts only load when ClearType is off. Normally we don't
 care about them. But since current ClearType is broken (see below), we now
 need to remove these bitmaps.
 
-## Why disable gridfit?
+### Why disable gridfit?
 
 Windows built-in fonts tend to use TrueType hinting to heavily gridfit the
 outlines, rendering the text blocky and pixelated even on HiDPI screens. Some
@@ -74,23 +80,24 @@ people, who may be using an old VGA connector or an uncalibrated display,
 claims this style maintains color contrast and sharpness. But to me, heavily
 gridfitted text gives me headache after reading for a few minutes.
 
-## Why patch the `gasp` table?
+### Why patch the `gasp` table?
 
-Because ClearType is now broken: Somewhere between Windows 10 version 1703 and
-21H1, the LCD filter can no longer be turned off through ClearType Text Tuner.
+**Because ClearType is now broken:** Somewhere between Windows 10 version 1703
+and 21H1, the LCD filter can no longer be turned off through the “ClearType
+Text Tuner”.
 
 LCD filter is originally designed for LCD screens with 1:1 viewing scale.
 Meaning you cannot use it on projectors, televisions, Pentile displays,
 rotatable displays, video recordings, screenshots, remote meetings,
 slideshows, or DPI-scaled applications. **But now, even the Text Tool in
-Microsoft Paint can only draw LCD-filtered text.**
+“Microsoft Paint” can only draw LCD-filtered text.**
 
 If you turn ClearType altogether, you also get bugs and lose legible
 anti-aliasing with certain built-in fonts. One solution is to process those
 fonts with FaithType, which patches the `gasp` table to request bidirectional
 anti-aliasing while you keep ClearType off.
 
-## Strokes looks too thin!
+### Strokes looks too thin!
 
 On older versions of (Mac) OS X, the TrueType renderer widens the strokes to
 maintain a stable contrast on Low-DPI displays. Windows can't do stroke
@@ -109,7 +116,7 @@ too thin.
 2. Another way is to use [ttfautohint](https://www.freetype.org/ttfautohint/)
    to generate TrueType hinting to widen the strokes.
 
-## Issues
+### Common issues
 
 - Microsoft Yahei (微软雅黑), Microsoft Jhenghei (微軟正黑體), and Meiryo
   (メイリオ):
