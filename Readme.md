@@ -124,7 +124,8 @@ too thin.
 - **Microsoft Yahei** (微软雅黑), **Microsoft Jhenghei** (微軟正黑體),
   and **Meiryo** (メイリオ):
 
-  They have issues with vertical anti-aliasing. You need to remove hinting.
+  Their hinting instructions have issues with vertical anti-aliasing. You need
+  to remove hinting.
 
 - **Monotype Courier New**:
 
