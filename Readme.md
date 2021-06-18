@@ -106,7 +106,7 @@ widening. My personal experience with graphics indicates 1.3px is the minimum
 width for legible font rendering, but most built-in fonts in Windows are way
 too thin.
 
-1. Changing the gamma level from 0x898 to 0x708 may help:
+1. Changing the gamma level from `0x00000898` to `0x00000708` may help:
    ```reg
    Windows Registry Editor Version 5.00
 
