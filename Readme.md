@@ -121,8 +121,8 @@ too thin.
 
 ## Common issues
 
-- **Microsoft Yahei (微软雅黑)**, **Microsoft Jhenghei (微軟正黑體)**,
-  and **Meiryo (メイリオ)**
+- **Microsoft Yahei** (微软雅黑), **Microsoft Jhenghei** (微軟正黑體),
+  and **Meiryo** (メイリオ):
 
   They have issues with vertical anti-aliasing. You need to remove hinting.
 
@@ -134,7 +134,7 @@ too thin.
   Therefore, this Monotype font is garbage, replace it with “Bitstream Courier
   10 Pitch”.
 
-- **DynaLab MingLiU (華康新細明體)** version 3.21:
+- **DynaLab MingLiU** (華康新細明體) before version 4.55:
 
   The font rendering requires TrueType hinting. Don't remove hinting.
 
