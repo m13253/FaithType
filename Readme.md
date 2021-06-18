@@ -1,6 +1,6 @@
 # FaithType
 
-Disable bitmap and gridfit for Windows font rendering.
+Modify fonts to remove bitmap and disable gridfit for Windows font rendering.
 
 ## Description
 
