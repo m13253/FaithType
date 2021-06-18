@@ -39,6 +39,8 @@ look much better on HiDPI displays.
    mkdir C:\XXXXXX
    .\faithtype.exe C:\Windows\Fonts\simsun.ttc -o C:\XXXXXX\simsun.ttc --remove-bitmap --remove-hinting --modify-gasp
    ```
+   Depending on whether you want to remove or keep hinting, use one of
+   `--remove-hinting` or `--keep-hinting`.
 
 7. **Optional:** If you want to recreate hinting instructions, use
    [ttfautohint](https://www.freetype.org/ttfautohint/#download) at this step
