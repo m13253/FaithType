@@ -84,7 +84,7 @@ look much better on HiDPI displays.
 - **Why patch the `gasp` table?**
 
   Because **ClearType is now broken** somewhere between Windows 10 version 1703
-  and 21H1, the LCD filter can no longer be turned off through the “ClearType
+  and 21H1. The LCD filter can no longer be turned off through the “ClearType
   Text Tuner”.
 
   LCD filter is originally designed for LCD screens with 1:1 viewing scale.
