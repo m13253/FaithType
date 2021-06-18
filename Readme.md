@@ -17,7 +17,7 @@ look much better on Hi-DPI displays.
 
 ## How to use this tool?
 
-1. Download [Rust compiler](https://www.rust-lang.org/tools/install).
+1. Download [the Rust compiler](https://www.rust-lang.org/tools/install).
 
 2. Download the source code of FaithType.
 
@@ -42,10 +42,10 @@ look much better on Hi-DPI displays.
    mkdir "C:\Patched Fonts"
    .\faithtype.exe "C:\Windows\Fonts\simsun.ttc" -o "C:\Patched Fonts\simsun.ttc" --remove-bitmap --remove-hinting --modify-gasp
    ```
-   Depending on whether you want to remove or keep hinting, use one of
+   Depending on whether you want to remove or regenerate hinting, use one of
    `--remove-hinting` or `--keep-hinting`.
 
-7. **Optional:** If you want to recreate hinting instructions, use
+7. **Optional:** If you want to regenerate hinting instructions, use
    [ttfautohint](https://www.freetype.org/ttfautohint/#download) at this step
    instead of Step 5.
 

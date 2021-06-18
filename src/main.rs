@@ -37,6 +37,10 @@ use self::ttc_writer::TTCWriter;
 fn main() -> Result<()> {
     let args = ArgParser::parse(env::args_os());
 
+    eprintln!(
+        "[ INFO ] Loading “{}”.",
+        args.input_filename.to_string_lossy()
+    );
     let mut ttc = {
         let mut input_file = BufReader::new(File::open(args.input_filename)?);
         TTCReader::new(&mut input_file).read_ttc()?
@@ -44,16 +48,23 @@ fn main() -> Result<()> {
 
     modify::remove_dsig(&mut ttc);
     if !args.keep_bitmap {
+        eprintln!("[ INFO ] Removing embedded bitmap.");
         modify::remove_bitmap(&mut ttc);
     }
     if !args.keep_hinting {
+        eprintln!("[ INFO ] Removing hinting instructions.");
         modify::remove_hinting(&mut ttc);
     }
     if !args.keep_gasp {
+        eprintln!("[ INFO ] Regenerating “gasp” table.");
         modify::regenerate_gasp(&mut ttc);
     }
     modify::patch_head(&mut ttc);
 
+    eprintln!(
+        "[ INFO ] Saving to “{}”.",
+        args.output_filename.to_string_lossy()
+    );
     {
         let mut output_file = BufWriter::new(File::create(args.output_filename)?);
         TTCWriter::new(&mut output_file).write_ttc(&ttc)

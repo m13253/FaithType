@@ -91,22 +91,22 @@ impl SfntHeader {
 
 impl Display for FourCC {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        f.write_str("\"")?;
+        f.write_str("“")?;
         for c in self.0.iter().copied().flat_map(ascii::escape_default) {
             f.write_char(c.into())?;
         }
-        f.write_str("\"")?;
+        f.write_str("”")?;
         Ok(())
     }
 }
 
 impl Debug for FourCC {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        f.write_str("\"")?;
+        f.write_str("“")?;
         for c in self.0.iter().copied().flat_map(ascii::escape_default) {
             f.write_char(c.into())?;
         }
-        f.write_str("\"")?;
+        f.write_str("”")?;
         Ok(())
     }
 }

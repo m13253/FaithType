@@ -8,7 +8,7 @@ Windowsの文字レンダリングにおいて、ビットマップを削除し�
 
 Windows 10バージョン1703 (Creators Update) から、内蔵のTrueTypeレンダラーが縦方向のアンチエイリアスを対応するようになりました。グレースケールの濃淡が30段階しかないにも関わらず、特に日本語の表現力が劇的に向上します。残念なことに、この機能は一部のフォントの特定のサイズに対してのみ有効です。
 
-このツールを使えば、ほとんどのTrueTypeアウトラインフォントに対して縦方向のアンチエイリアス処理を有効にすることができ、ビットマップも除去できるので、高DPIディスプレイでの書体の見栄えが格段に良くなります。
+このツールを使えば、ほとんどのTrueTypeアウトラインフォントに対して縦方向のアンチエイリアス処理を有効にすることができ、ビットマップも削除できるので、高DPIディスプレイでの書体の見栄えが格段に良くなります。
 
 ## 使い方は？
 
@@ -28,18 +28,18 @@ Windows 10バージョン1703 (Creators Update) から、内蔵のTrueTypeレン
    .¥faithtype.exe --help
    ```
 
-5. **オプション：** ヒンティングを完全に除去したい場合は、[ttfautohint](https://www.freetype.org/ttfautohint/#download)をダウンロードして、このステップで `ttfautohint --dehint` を使ってください。
+5. **オプション：** ヒンティングを完全に削除したい場合は、[ttfautohint](https://www.freetype.org/ttfautohint/#download)をダウンロードして、このステップで `ttfautohint --dehint` を使ってください。
 
 6. フォントファイルを処理します：
    ```ps1
    mkdir "C:¥Patched Fonts"
    .¥faithtype.exe "C:¥Windows¥Fonts¥msgothic.ttc" -o "C:¥Patched Fonts¥msgothic.ttc" --remove-bitmap --remove-hinting --modify-gasp
    ```
-   ヒンティングを削除するか維持するかによって、`--remove-hinting` または `--keep-hinting` のいずれかを使用する。
+   ヒンティングを削除するか再生成するかによって、`--remove-hinting` または `--keep-hinting` のいずれかを使用する。
 
 7. **オプション：** ヒンティングを再生成したい場合は、第5歩の代わりにここで[ttfautohint](https://www.freetype.org/ttfautohint/#download)を使ってください。
 
-8. 修正したフォントファイルを開く可能を確認します。
+8. 修正したフォントファイルを開く可能を確認してください。
 
 9. レジストリを設定してください：
    ```reg

@@ -61,6 +61,11 @@ const PATCHED_PREP: [u8; 15] = [
 ];
 
 pub fn remove_hinting(ttc: &mut TTCHeader) {
+    eprintln!("[ WARN ] You request to remove hinting instructions.  But FaithType does not");
+    eprintln!("         know whether there are remaining hinting instructions inside the");
+    eprintln!("         “glyf” table due to its high complexity.  Instead, they are simply");
+    eprintln!("         disabled and will not cause trouble. If you want to remove cleanly to");
+    eprintln!("         reduce the file size, use “ttfautohint --dehint” before this program.");
     for sfnt in ttc.table_directories.iter_mut() {
         sfnt.table_records.remove(&b"cvar".into());
         sfnt.table_records.remove(&b"cvt ".into());
