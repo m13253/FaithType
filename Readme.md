@@ -2,11 +2,11 @@
 
 Modify fonts to remove bitmap and disable gridfit for Windows font rendering.
 
-\[ English \] [\[ 正體中文 \]](Readme-zh_tw.md)
+\[ English \] [\[ 正體中文 \]](Readme-zh_tw.md) [\[ 简体中文 \]](Readme-zh_cn.md)
 
 ## Description
 
-Since Windows 10 version 1703 (Creators Update), its builtin TrueType renderer
+Since Windows 10 version 1703 (Creators Update), its built-in TrueType renderer
 now supports vertical anti-aliasing. Despite there are only 30 levels of
 grayscale shade, it dramatically improves text rendering, especially for CJK
 languages. Sadly, it is only enabled for selected fonts at selected sizes.
@@ -151,8 +151,9 @@ later.
 
 This software may cause instability to your operating system due to bugs on my
 side, or on Microsoft's side, or on any third-paty application's side. This
-software is released only under the hope that it may be helpful, and comes
-with no warranty in case anything happens with your usage of this software.
+software is released free-of-charge only under the hope that it may be helpful,
+thus comes with no warranty in case anything happens during your usage of this
+software.
 
 ## Acknowledgement
 
