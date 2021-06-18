@@ -57,7 +57,7 @@ Windows 10バージョン1703 (Creators Update) から、内蔵のTrueTypeレン
 
 ## FAQ
 
-（申し訳ございません。大量の文章を翻訳するのは疲れるから、[英語版](Readme.md)を参照してください。）
+（申し訳ございません。大量の文章を翻訳するのは疲れるので、[英語版](Readme.md)を参照してください。）
 
 ## 筆画が細すぎます。
 
@@ -83,7 +83,7 @@ Windows 10バージョン1703 (Creators Update) から、内蔵のTrueTypeレン
 
 - **Monotype Courier New**：
 
-  Monotypeは、インクが紙の上に広がった後の形状にはなく、IBMタイプライターの細い金属活字に参考してデザインしました。この理由のて、「Bitstream Courier 10 Pitch」に代用してください。
+  Monotypeは、インクが紙の上に広がった後の形状にはなく、IBMタイプライターの細い金属活字に参考してデザインしました。この理由より、「Bitstream Courier 10 Pitch」に代用してください。
 
 - バージョン4.55以前の**DynaLab MingLiU**（華康細明體）：
 
