@@ -71,7 +71,7 @@ look much better on Hi-DPI displays.
 
   Although OpenType supports grayscale bitmap, all Windows built-in bitmap
   fonts only contain black-and-white version. This happens even on Hi-DPI
-  displays, where the number of pixels are enough to produce legible
+  displays, where the number of pixels are already enough to produce legible
   anti-aliased text.
 
   Also, some bitmap fonts only load when ClearType is off. Normally we don't
