@@ -1,8 +1,24 @@
+// FaithType
+// Copyright (C) 2021  Star Brilliant <coder@poorlab.com>
+//
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
 use std::rc::Rc;
 
-use crate::types::FourCC;
-use crate::types::TTCHeader;
-use crate::types::TableRecord;
+use super::types::FourCC;
+use super::types::TTCHeader;
+use super::types::TableRecord;
 
 pub fn remove_dsig(ttc: &mut TTCHeader) {
     if ttc.dsig_tag == b"DSIG".into() {
