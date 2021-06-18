@@ -48,9 +48,9 @@ Windows 10バージョン1703 (Creators Update) から、内蔵のTrueTypeレン
    ```reg
    Windows Registry Editor Version 5.00
 
-   [HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Fonts]
-   "MS Gothic & MS UI Gothic & MS PGothic (TrueType)"="C:\Users\<ユーザー名>\AppData\Local\Microsoft\Windows\Fonts\msgothic.ttc"
-   "ＭＳ ゴシック & MS UI Gothic & ＭＳ Ｐゴシック (TrueType)"="C:\Users\<ユーザー名>\AppData\Local\Microsoft\Windows\Fonts\msgothic.ttc"
+   [HKEY_CURRENT_USER¥SOFTWARE¥Microsoft¥Windows NT¥CurrentVersion¥Fonts]
+   "MS Gothic & MS UI Gothic & MS PGothic (TrueType)"="C:¥Users¥<ユーザー名>¥AppData¥Local¥Microsoft¥Windows¥Fonts¥msgothic.ttc"
+   "ＭＳ ゴシック & MS UI Gothic & ＭＳ Ｐゴシック (TrueType)"="C:¥Users¥<ユーザー名>¥AppData¥Local¥Microsoft¥Windows¥Fonts¥msgothic.ttc"
    ```
 
 10. システムを再起動してください。
@@ -67,7 +67,7 @@ Windows 10バージョン1703 (Creators Update) から、内蔵のTrueTypeレン
    ```reg
    Windows Registry Editor Version 5.00
 
-   [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Avalon.Graphics\DISPLAY1]
+   [HKEY_LOCAL_MACHINE¥SOFTWARE¥Microsoft¥Avalon.Graphics¥DISPLAY1]
    "GammaLevel"=dword:00000708
    ```
 
