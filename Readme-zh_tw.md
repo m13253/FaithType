@@ -12,7 +12,7 @@
 
 ## 如何使用本工具？
 
-1. 下載 [Rust 編譯器](https://www.rust-lang.org/tools/install)
+1. 下載 [Rust 編譯器](https://www.rust-lang.org/tools/install)。
 
 2. 下載 FaithType 的原始碼。
 
