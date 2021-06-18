@@ -6,6 +6,9 @@ use std::process;
 pub struct ArgParser {
     pub input_filename: OsString,
     pub output_filename: OsString,
+    pub keep_bitmap: bool,
+    pub keep_gasp: bool,
+    pub keep_hinting: bool,
 }
 
 impl ArgParser {
@@ -20,6 +23,9 @@ impl ArgParser {
         let mut current_option = Option::<CurrentOption>::None;
         let mut input_filename = Option::<OsString>::None;
         let mut output_filename = Option::<OsString>::None;
+        let mut keep_bitmap = false;
+        let mut keep_gasp = false;
+        let mut keep_hinting = true;
 
         for arg in args {
             match current_option {
@@ -28,6 +34,18 @@ impl ArgParser {
                         current_option = Some(CurrentOption::End);
                     } else if arg == "--help" {
                         Self::print_help_and_exit(&program_name, 0);
+                    } else if arg == "--keep-bitmap" {
+                        keep_bitmap = true;
+                    } else if arg == "--keep-gasp" {
+                        keep_gasp = true;
+                    } else if arg == "--keep-hinting" {
+                        keep_hinting = true;
+                    } else if arg == "--modify-gasp" {
+                        keep_gasp = false;
+                    } else if arg == "--remove-bitmap" {
+                        keep_bitmap = false;
+                    } else if arg == "--remove-hinting" {
+                        keep_hinting = false;
                     } else if arg == "-o" || arg == "--output" {
                         current_option = Some(CurrentOption::Output);
                     } else {
@@ -62,6 +80,9 @@ impl ArgParser {
                 .unwrap_or_else(|| Self::print_help_and_exit(&program_name, 1)),
             output_filename: output_filename
                 .unwrap_or_else(|| Self::print_help_and_exit(&program_name, 1)),
+            keep_bitmap,
+            keep_gasp,
+            keep_hinting,
         }
     }
 
@@ -75,6 +96,23 @@ impl ArgParser {
             "Usage: {} -o OUTPUT.<otf,ttc,ttf> INPUT.<otf,ttc,ttf>",
             program_name
         );
+        println!();
+        println!("Options:");
+        println!("    --remove-bitmap     Remove embedded bitmap.                    [Default]");
+        println!("    --keep-bitmap       Do not remove embedded bitmap.");
+        println!();
+        println!("    --modify-gasp       Modify “gasp” table to enable 6 × 5 super- [Default]");
+        println!("                        sampled  anti-aliasing.  Consider  also");
+        println!("                        removing  hinting  instructions  if  the");
+        println!("                        rendering becomes buggy at certain sizes.");
+        println!("    --keep-gasp         Keep the original “gasp” table.");
+        println!();
+        println!("    --remove-hinting    Remove TrueType hinting instructions.");
+        println!("                        Due to the complexity, not all instructions");
+        println!("                        are  removed.  Use  “ttfautohint --dehint”");
+        println!("                        before using this tool to really remove all");
+        println!("                        hinting instructions.");
+        println!("    --keep-hinting      Do not remove TrueType hinting.            [Default]");
         println!();
         process::exit(exit_code);
     }

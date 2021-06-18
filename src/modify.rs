@@ -16,9 +16,53 @@ pub fn remove_dsig(ttc: &mut TTCHeader) {
 
 pub fn remove_bitmap(ttc: &mut TTCHeader) {
     for sfnt in ttc.table_directories.iter_mut() {
+        sfnt.table_records.remove(&b"bdat".into());
+        sfnt.table_records.remove(&b"bloc".into());
         sfnt.table_records.remove(&b"EBDT".into());
         sfnt.table_records.remove(&b"EBLC".into());
         sfnt.table_records.remove(&b"EBSC".into());
+    }
+}
+
+const PATCHED_PREP: [u8; 15] = [
+    0xb1, // PUSHB[1]
+    0x04, // value = 4
+    0x03, // s = 3
+    0x8e, // INSTRCTRL[], turn Microsoft ClearType on
+    //
+    0xb8, // PUSHW[0]
+    0x01, 0xff, // n = 0x01ff, always do dropout control
+    0x85, // SCANCTRL[]
+    //
+    0xb0, // PUSHB[0]
+    0x04, // n = 4, smart dropout control scan conversion including stubs
+    0x8d, // SCANTYPE[]
+    //
+    0xb1, // PUSHB[1]
+    0x01, // value = 1
+    0x01, // s = 1
+    0x8e, // INSTRCTRL[], turn grid-fitting off
+];
+
+pub fn remove_hinting(ttc: &mut TTCHeader) {
+    for sfnt in ttc.table_directories.iter_mut() {
+        sfnt.table_records.remove(&b"cvar".into());
+        sfnt.table_records.remove(&b"cvt ".into());
+        sfnt.table_records.remove(&b"fpgm".into());
+        sfnt.table_records.remove(&b"hdmx".into());
+        // The hinting instructions in "glyf" table is not modified due to the high complexity.
+        // Instead, the "PUSHB[1] 1 1 INSTRCTRL[]" instruction makes "glyf" instructions useless.
+        // Use "ttfautohint --dehint" before this if you are interested in removing them.
+        sfnt.table_records.insert(
+            b"prep".into(),
+            TableRecord {
+                checksum: 0,
+                offset: 0,
+                raw_data: Rc::from(PATCHED_PREP),
+            },
+        );
+        sfnt.table_records.remove(&b"LTSH".into());
+        sfnt.table_records.remove(&b"VDMX".into());
     }
 }
 
@@ -44,6 +88,9 @@ pub fn regenerate_gasp(ttc: &mut TTCHeader) {
 
 pub fn patch_head(ttc: &mut TTCHeader) {
     for sfnt in ttc.table_directories.iter_mut() {
+        if sfnt.sfnt_version == b"true".into() {
+            sfnt.sfnt_version = [0, 1, 0, 0].into();
+        }
         if let Some(head) = sfnt.table_records.get_mut(&b"head".into()) {
             if head.raw_data.len() >= 16 {
                 let mut raw_data_copy = head.raw_data.to_vec();

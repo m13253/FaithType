@@ -28,8 +28,15 @@ fn main() -> Result<()> {
     };
 
     modify::remove_dsig(&mut ttc);
-    modify::remove_bitmap(&mut ttc);
-    modify::regenerate_gasp(&mut ttc);
+    if !args.keep_bitmap {
+        modify::remove_bitmap(&mut ttc);
+    }
+    if !args.keep_hinting {
+        modify::remove_hinting(&mut ttc);
+    }
+    if !args.keep_gasp {
+        modify::regenerate_gasp(&mut ttc);
+    }
     modify::patch_head(&mut ttc);
 
     {
