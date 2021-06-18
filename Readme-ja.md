@@ -10,7 +10,7 @@ Windows 10バージョン1703 (Creators Update) から、内蔵のTrueTypeレン
 
 このツールを使えば、ほとんどのTrueTypeアウトラインフォントに対して縦方向のアンチエイリアス処理を有効にすることができ、ビットマップも除去できるので、高DPIディスプレイでのテキストの見栄えが格段に良くなります。
 
-# 使い方は？
+## 使い方は？
 
 1. [Rust言語のコンパイラ](https://www.rust-lang.org/tools/install)をダウンロードしてください。
 
@@ -89,13 +89,13 @@ Windows 10バージョン1703 (Creators Update) から、内蔵のTrueTypeレン
 
   このフォントはTrueTypeヒンティングが必要です。ヒンティングを削除しないでください。
 
-# ライセンスと保証
+## ライセンスと保証
 
 本ソフトウェアは、[GPLライセンス](LICENSE)（バージョン3以降）に基づいてリリースされています。
 
 本ソフトウェアは、本人、マイクロソフト、または第三者のアプリケーションのバグにより、お使いのOSが不安定になる可能性があります。本ソフトウェアは、少しでもお役に立てることを願って、無償で公開しておりますので、いかなる種類の保証もなく提供する。
 
-# 謝辞
+## 謝辞
 
 - [RemoveBitmapFont](https://github.com/tkumata/RemoveBitmapFont)
 - [ttfautohint](https://www.freetype.org/ttfautohint/)
