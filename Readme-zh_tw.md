@@ -2,7 +2,7 @@
 
 透過修改字型檔來刪除 Windows 文字彩現的點陣字並停用 gridfit。
 
-[\[ English \]](Readme.md) \[ 正體中文 \] [\[ 简体中文 \]](Readme-zh_cn.md)
+[\[ English \]](Readme.md) \[ 正體中文 \] [\[ 简体中文 \]](Readme-zh_cn.md) [\[ 日本語 \]](Readme-ja.md)
 
 ## 簡介
 
@@ -44,7 +44,7 @@
    C:\Users\<使用者名稱>\AppData\Local\Microsoft\Windows\Fonts
    ```
 
-9. 修改登錄：
+9. 修改登錄檔：
    ```
    Windows Registry Editor Version 5.00
 

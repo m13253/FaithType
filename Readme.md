@@ -2,7 +2,7 @@
 
 Modify fonts to remove bitmap and disable gridfit for Windows font rendering.
 
-\[ English \] [\[ 正體中文 \]](Readme-zh_tw.md) [\[ 简体中文 \]](Readme-zh_cn.md)
+\[ English \] [\[ 正體中文 \]](Readme-zh_tw.md) [\[ 简体中文 \]](Readme-zh_cn.md) [\[ 日本語 \]](Readme-ja.md)
 
 ## Description
 
@@ -38,7 +38,7 @@ look much better on Hi-DPI displays.
    `ttfautohint --dehint` at this step.
 
 6. Process the font:
-   ```reg
+   ```ps1
    mkdir C:\XXXXXX
    .\faithtype.exe C:\Windows\Fonts\simsun.ttc -o C:\XXXXXX\simsun.ttc --remove-bitmap --remove-hinting --modify-gasp
    ```

@@ -2,7 +2,7 @@
 
 通过修改字体来删除 Windows 文字渲染的点阵字并禁用 gridfit。
 
-[\[ English \]](Readme.md) [\[ 正體中文 \]](Readme-zh_tw.md) \[ 简体中文 \]
+[\[ English \]](Readme.md) [\[ 正體中文 \]](Readme-zh_tw.md) \[ 简体中文 \] [\[ 日本語 \]](Readme-ja.md)
 
 ## 简介
 
@@ -31,7 +31,7 @@
 5. **可选：** 如果你打算完全移除 hinting，请在这一步下载 [ttfautohint](https://www.freetype.org/ttfautohint/#download) 并使用 `ttfautohint --dehint`。
 
 6. 处理字体文件：
-   ```reg
+   ```ps1
    mkdir C:\XXXXXX
    .\faithtype.exe C:\Windows\Fonts\simsun.ttc -o C:\XXXXXX\simsun.ttc --remove-bitmap --remove-hinting --modify-gasp
    ```
