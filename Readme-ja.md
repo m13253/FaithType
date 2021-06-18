@@ -32,25 +32,22 @@ Windows 10バージョン1703 (Creators Update) から、内蔵のTrueTypeレン
 
 6. フォントファイルを処理します：
    ```ps1
-   mkdir C:¥XXXXXX
-   .¥faithtype.exe C:¥Windows¥Fonts¥msgothic.ttc -o C:¥XXXXXX¥msgothic.ttc --remove-bitmap --remove-hinting --modify-gasp
+   mkdir "C:¥Patched Fonts"
+   .¥faithtype.exe "C:¥Windows¥Fonts¥msgothic.ttc" -o "C:¥Patched Fonts¥msgothic.ttc" --remove-bitmap --remove-hinting --modify-gasp
    ```
    ヒンティングを削除するか維持するかによって、`--remove-hinting` または `--keep-hinting` のいずれかを使用する。
 
-6. **オプション：** ヒンティングを再生成したい場合は、第5歩の代わりにここで[ttfautohint](https://www.freetype.org/ttfautohint/#download)を使ってください。
+7. **オプション：** ヒンティングを再生成したい場合は、第5歩の代わりにここで[ttfautohint](https://www.freetype.org/ttfautohint/#download)を使ってください。
 
-7. 修正したフォントをこのユーザーにインストールしてください。ここにはいいです：
-   ```
-   C:¥Users¥<ユーザー名>¥AppData¥Local¥Microsoft¥Windows¥Fonts
-   ```
+8. 修正したフォントファイルを開く可能を確認します。
 
-8. レジストリを設定してください：
+9. レジストリを設定してください：
    ```reg
    Windows Registry Editor Version 5.00
 
    [HKEY_CURRENT_USER¥SOFTWARE¥Microsoft¥Windows NT¥CurrentVersion¥Fonts]
-   "MS Gothic & MS UI Gothic & MS PGothic (TrueType)"="C:¥Users¥<ユーザー名>¥AppData¥Local¥Microsoft¥Windows¥Fonts¥msgothic.ttc"
-   "ＭＳ ゴシック & MS UI Gothic & ＭＳ Ｐゴシック (TrueType)"="C:¥Users¥<ユーザー名>¥AppData¥Local¥Microsoft¥Windows¥Fonts¥msgothic.ttc"
+   "MS Gothic & MS UI Gothic & MS PGothic (TrueType)"="C:¥Patched Fonts¥msgothic.ttc"
+   "ＭＳ ゴシック & MS UI Gothic & ＭＳ Ｐゴシック (TrueType)"="C:¥Patched Fonts¥msgothic.ttc"
    ```
 
 10. システムを再起動してください。

@@ -32,25 +32,22 @@
 
 6. 處理字型檔：
    ```ps1
-   mkdir C:\XXXXXX
-   .\faithtype.exe C:\Windows\Fonts\mingliu.ttc -o C:\XXXXXX\mingliu.ttc --remove-bitmap --remove-hinting --modify-gasp
+   mkdir "C:\Patched Fonts"
+   .\faithtype.exe "C:\Windows\Fonts\mingliu.ttc" -o "C:\Patched Fonts\mingliu.ttc" --remove-bitmap --remove-hinting --modify-gasp
    ```
    根據你是否要移除或重建 hinting，選用 `--remove-hinting` 或者 `--keep-hinting` 兩者其一。
 
 7. **可省略：** 若要重建 hinting 指令，不要在第 5 步，而是在這一步使用 [ttfautohint](https://www.freetype.org/ttfautohint/#download)。
 
-8. 給目前使用者安裝修改後的字型檔。放在這個路徑就可以了：
-   ```
-   C:\Users\<使用者名稱>\AppData\Local\Microsoft\Windows\Fonts
-   ```
+8. 確認 Windows 可以正常打開和預覽修改後的檔案。
 
 9. 修改登錄檔：
    ```
    Windows Registry Editor Version 5.00
 
    [HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Fonts]
-   "MingLiU & PMingLiU & MingLiU_HKSCS (TrueType)"="C:\Users\<使用者名稱>\AppData\Local\Microsoft\Windows\Fonts\mingliu.ttc"
-   "細明體 & 新細明體 & 新細明體_HKSCS (TrueType)"="C:\Users\<使用者名稱>\AppData\Local\Microsoft\Windows\Fonts\mingliu.ttc"
+   "MingLiU & PMingLiU & MingLiU_HKSCS (TrueType)"="C:\Patched Fonts\mingliu.ttc"
+   "細明體 & 新細明體 & 新細明體_HKSCS (TrueType)"="C:\Patched Fonts\mingliu.ttc"
    ```
 
 10. 重新啟動系統。

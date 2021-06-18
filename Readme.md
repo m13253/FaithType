@@ -39,8 +39,8 @@ look much better on Hi-DPI displays.
 
 6. Process the font:
    ```ps1
-   mkdir C:\XXXXXX
-   .\faithtype.exe C:\Windows\Fonts\simsun.ttc -o C:\XXXXXX\simsun.ttc --remove-bitmap --remove-hinting --modify-gasp
+   mkdir "C:\Patched Fonts"
+   .\faithtype.exe "C:\Windows\Fonts\simsun.ttc" -o "C:\Patched Fonts\simsun.ttc" --remove-bitmap --remove-hinting --modify-gasp
    ```
    Depending on whether you want to remove or keep hinting, use one of
    `--remove-hinting` or `--keep-hinting`.
@@ -49,18 +49,15 @@ look much better on Hi-DPI displays.
    [ttfautohint](https://www.freetype.org/ttfautohint/#download) at this step
    instead of Step 5.
 
-8. Install modified fonts user-wide. Putting them here would work:
-   ```
-   C:\Users\<USERNAME>\AppData\Local\Microsoft\Windows\Fonts
-   ```
+8. Make sure Windows can open and preview the modified font file.
 
 9. Change the registry:
    ```reg
    Windows Registry Editor Version 5.00
 
-   [HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Fonts]
-   "SimSun & NSimSun (TrueType)"="C:\Users\<USERNAME>\AppData\Local\Microsoft\Windows\Fonts\simsun.ttc"
-   "宋体 & 新宋体 (TrueType)"="C:\Users\<USERNAME>\AppData\Local\Microsoft\Windows\Fonts\simsun.ttc"
+   [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Fonts]
+   "SimSun & NSimSun (TrueType)"="C:\Patched Fonts\simsun.ttc"
+   "宋体 & 新宋体 (TrueType)"="C:\Patched Fonts\simsun.ttc"
    ```
 
 10. Restart the system.
