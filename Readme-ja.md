@@ -37,9 +37,9 @@ Windows 10バージョン1703 (Creators Update) から、内蔵のTrueTypeレン
    ```
    ヒンティングを削除するか維持するかによって、`--remove-hinting` または `--keep-hinting` のいずれかを使用する。
 
-6. **オプション：** ヒンティングを再生成したい場合は、第5歩の代わりにここで[ttfautohint](https://www.freetype.org/ttfautohint/#download)を使う。
+6. **オプション：** ヒンティングを再生成したい場合は、第5歩の代わりにここで[ttfautohint](https://www.freetype.org/ttfautohint/#download)を使ってください。
 
-7. 修正したフォントをこのユーザーにインストールする。ここにはいいです：
+7. 修正したフォントをこのユーザーにインストールしてください。ここにはいいです：
    ```
    C:¥Users¥<ユーザー名>¥AppData¥Local¥Microsoft¥Windows¥Fonts
    ```
