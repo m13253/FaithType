@@ -30,8 +30,9 @@ look much better on HiDPI displays.
    .\faithtype.exe --help
    ```
 
-5. (Optional: If you want to remove hinting, download and use
-   [ttfautohint](https://www.freetype.org/ttfautohint/#download) at this step.)
+5. **Optional:** If you want to completely remove hinting, download
+   [ttfautohint](https://www.freetype.org/ttfautohint/#download) and use
+   `ttfautohint --dehint` at this step.
 
 6. Process the font:
    ```reg
@@ -39,9 +40,9 @@ look much better on HiDPI displays.
    .\faithtype.exe C:\Windows\Fonts\simsun.ttc -o C:\XXXXXX\simsun.ttc --remove-bitmap --remove-hinting --modify-gasp
    ```
 
-7. (Optional: If you want to recreate hinting instructions, use
+7. **Optional:** If you want to recreate hinting instructions, use
    [ttfautohint](https://www.freetype.org/ttfautohint/#download) at this step
-   instead of Step 5.)
+   instead of Step 5.
 
 8. Install modified fonts user-wide. Putting them under
    ```
