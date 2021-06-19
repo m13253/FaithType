@@ -100,7 +100,7 @@ look much better on Hi-DPI displays.
   FaithType, which patches the `gasp` table to request bidirectional
   anti-aliasing while you can keep ClearType turned off.
 
-## Strokes looks too thin!
+## Strokes look too thin!
 
 On older versions of (Mac) OS X, the TrueType renderer widens the strokes to
 maintain a stable contrast on Low-DPI displays. Windows can't do stroke
