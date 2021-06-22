@@ -33,11 +33,7 @@ look much better on Hi-DPI displays.
    .\faithtype.exe --help
    ```
 
-5. **Optional:** If you want to completely remove hinting, download
-   [ttfautohint](https://www.freetype.org/ttfautohint/#download) and use
-   `ttfautohint --dehint` at this step.
-
-6. Process the font:
+5. Process the font:
    ```ps1
    mkdir "C:\Patched Fonts"
    .\faithtype.exe "C:\Windows\Fonts\simsun.ttc" -o "C:\Patched Fonts\simsun.ttc" --remove-bitmap --remove-hinting --modify-gasp
@@ -45,13 +41,12 @@ look much better on Hi-DPI displays.
    Depending on whether you want to remove or regenerate hinting, use one of
    `--remove-hinting` or `--keep-hinting`.
 
-7. **Optional:** If you want to regenerate hinting instructions, use
-   [ttfautohint](https://www.freetype.org/ttfautohint/#download) at this step
-   instead of Step 5.
+6. **Optional:** If you want to regenerate hinting instructions, use
+   [ttfautohint](https://www.freetype.org/ttfautohint/#download) at this step.
 
-8. Make sure Windows can open and preview the modified font file.
+7. Make sure Windows can open and preview the modified font file.
 
-9. Change the registry:
+8. Change the registry:
    ```reg
    Windows Registry Editor Version 5.00
 
@@ -60,7 +55,7 @@ look much better on Hi-DPI displays.
    "宋体 & 新宋体 (TrueType)"="C:\Patched Fonts\simsun.ttc"
    ```
 
-10. Restart the system.
+9. Restart the system.
 
 ## FAQs
 

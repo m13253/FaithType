@@ -28,20 +28,18 @@ Windows 10バージョン1703 (Creators Update) から、内蔵のTrueTypeレン
    .¥faithtype.exe --help
    ```
 
-5. **オプション：** ヒンティングを完全に削除したい場合は、[ttfautohint](https://www.freetype.org/ttfautohint/#download)をダウンロードして、このステップで `ttfautohint --dehint` を使ってください。
-
-6. フォントファイルを処理します：
+5. フォントファイルを処理します：
    ```ps1
    mkdir "C:¥Patched Fonts"
    .¥faithtype.exe "C:¥Windows¥Fonts¥msgothic.ttc" -o "C:¥Patched Fonts¥msgothic.ttc" --remove-bitmap --remove-hinting --modify-gasp
    ```
    ヒンティングを削除するか再生成するかによって、`--remove-hinting` または `--keep-hinting` のいずれかを使用する。
 
-7. **オプション：** ヒンティングを再生成したい場合は、第5歩の代わりにここで[ttfautohint](https://www.freetype.org/ttfautohint/#download)を使ってください。
+6. **オプション：** ヒンティングを再生成したい場合は、このステップで[ttfautohint](https://www.freetype.org/ttfautohint/#download)を使ってください。
 
-8. 修正したフォントファイルを開く可能を確認してください。
+7. 修正したフォントファイルを開く可能を確認してください。
 
-9. レジストリを設定してください：
+8. レジストリを設定してください：
    ```reg
    Windows Registry Editor Version 5.00
 
@@ -50,7 +48,7 @@ Windows 10バージョン1703 (Creators Update) から、内蔵のTrueTypeレン
    "ＭＳ ゴシック & MS UI Gothic & ＭＳ Ｐゴシック (TrueType)"="C:¥Patched Fonts¥msgothic.ttc"
    ```
 
-10. システムを再起動してください。
+9. システムを再起動してください。
 
 ## FAQ
 

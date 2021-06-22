@@ -28,20 +28,18 @@
    .\faithtype.exe --help
    ```
 
-5. **可选：** 如果你打算完全移除 hinting，请在这一步下载 [ttfautohint](https://www.freetype.org/ttfautohint/#download) 并使用 `ttfautohint --dehint`。
-
-6. 处理字体文件：
+5. 处理字体文件：
    ```ps1
    mkdir "C:\Patched Fonts"
    .\faithtype.exe "C:\Windows\Fonts\simsun.ttc" -o "C:\Patched Fonts\simsun.ttc" --remove-bitmap --remove-hinting --modify-gasp
    ```
    根据你是否要移除或重建 hinting，选择 `--remove-hinting` 或者 `--keep-hinting` 两者其一。
 
-7. **可选：** 如果你打算重建 hinting 指令，不要在第 5 步，而是在这一步使用 [ttfautohint](https://www.freetype.org/ttfautohint/#download) 进行 hinting 重建。
+6. **可选：** 如果你打算重建 hinting 指令，在这一步使用 [ttfautohint](https://www.freetype.org/ttfautohint/#download) 进行 hinting 重建。
 
-8. 确认 Windows 可以正常打开和预览修改后的字体文件。
+7. 确认 Windows 可以正常打开和预览修改后的字体文件。
 
-9. 修改注册表：
+8. 修改注册表：
    ```reg
    Windows Registry Editor Version 5.00
 
@@ -50,7 +48,7 @@
    "宋体 & 新宋体 (TrueType)"="C:\Users\<USERNAME>\AppData\Local\Microsoft\Windows\Fonts\simsun.ttc"
    ```
 
-10. 重启系统。
+9. 重启系统。
 
 ## FAQ
 
