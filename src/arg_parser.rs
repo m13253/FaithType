@@ -87,7 +87,8 @@ impl ArgParser {
             }
         }
         match current_option {
-            None | Some(CurrentOption::End) => (),
+            None => (),
+            Some(CurrentOption::End) => (),
             _ => Self::print_help_and_exit(&program_name, 1),
         }
 

@@ -222,9 +222,7 @@ impl<'a, W: Write + Seek> TTCWriter<'a, W> {
         }
 
         for (&table_tag, table_record) in sfnt.table_records.iter() {
-            assert_eq!(data_pos, self.w.stream_position()? as usize);
             data_pos += self.write_padding(data_pos)?;
-            assert_eq!(data_pos, self.w.stream_position()? as usize);
             self.write_sfnt_table_data(table_tag, &table_record.raw_data)?;
             data_pos += table_record.raw_data.len();
         }
@@ -261,19 +259,14 @@ impl<'a, W: Write + Seek> TTCWriter<'a, W> {
     }
 
     fn write_u16be(&mut self, value: u16) -> io::Result<()> {
-        let buf = [(value >> 8) as u8, value as u8];
+        let buf = value.to_be_bytes();
         self.w.write_all(&buf)?;
         self.main_checksum.write_all(&buf).unwrap();
         Ok(())
     }
 
     fn write_u32be(&mut self, value: u32) -> io::Result<()> {
-        let buf = [
-            (value >> 24) as u8,
-            (value >> 16) as u8,
-            (value >> 8) as u8,
-            value as u8,
-        ];
+        let buf = value.to_be_bytes();
         self.w.write_all(&buf)?;
         self.main_checksum.write_all(&buf).unwrap();
         Ok(())

@@ -92,10 +92,10 @@ impl<'a, R: Read + Seek> TTCReader<'a, R> {
             dsig_length = self.read_u32be()?;
             dsig_offset = self.read_u32be()?;
         }
-        let dsig_data = if dsig_tag == b"DSIG".into() {
-            self.read_raw_data(dsig_offset.into(), dsig_length.try_into().unwrap())?
-        } else {
+        let dsig_data = if dsig_tag != b"DSIG".into() {
             self.empty_raw_data()
+        } else {
+            self.read_raw_data(dsig_offset.into(), dsig_length.try_into().unwrap())?
         };
 
         Ok(TTCHeader {
@@ -156,13 +156,13 @@ impl<'a, R: Read + Seek> TTCReader<'a, R> {
     fn read_u16be(&mut self) -> Result<u16> {
         let mut buf = [0; 2];
         self.r.read_exact(&mut buf)?;
-        Ok((buf[0] as u16) << 8 | (buf[1] as u16))
+        Ok(u16::from_be_bytes(buf))
     }
 
     fn read_u32be(&mut self) -> Result<u32> {
         let mut buf = [0; 4];
         self.r.read_exact(&mut buf)?;
-        Ok((buf[0] as u32) << 24 | (buf[1] as u32) << 16 | (buf[2] as u32) << 8 | (buf[3] as u32))
+        Ok(u32::from_be_bytes(buf))
     }
 
     fn read_fourcc(&mut self) -> Result<FourCC> {
