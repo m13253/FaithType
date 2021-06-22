@@ -26,13 +26,13 @@ use super::types::FourCC;
 use super::types::TTCHeader;
 use super::types::TableRecord;
 
-const PATCHED_DSIG: [u8; 8] = [
-    0x00, 0x00, 0x00, 0x01, // version
-    0x00, 0x00, // numSignatures
-    0x00, 0x00, // flags
-];
-
 pub fn remove_dsig(ttc: &mut TTCHeader) {
+    const PATCHED_DSIG: [u8; 8] = [
+        0x00, 0x00, 0x00, 0x01, // version
+        0x00, 0x00, // numSignatures
+        0x00, 0x00, // flags
+    ];
+
     if ttc.table_directories.len() == 1 {
         ttc.dsig_tag = FourCC::zeroed();
         ttc.dsig_data = Rc::from([]);
@@ -47,6 +47,10 @@ pub fn remove_dsig(ttc: &mut TTCHeader) {
             );
         }
     } else {
+        if (ttc.major_version as u32) << 16 | (ttc.minor_version as u32) < 0x0200 {
+            ttc.major_version = 2;
+            ttc.minor_version = 0;
+        }
         ttc.dsig_tag = b"DSIG".into();
         ttc.dsig_data = Rc::from(PATCHED_DSIG);
         for sfnt in ttc.table_directories.iter_mut() {
@@ -70,27 +74,27 @@ pub fn remove_bitmap(ttc: &mut TTCHeader) {
     }
 }
 
-const PATCHED_PREP: [u8; 15] = [
-    0xb1, // PUSHB[1]
-    0x04, // value = 4
-    0x03, // s = 3
-    0x8e, // INSTRCTRL[], turn Microsoft ClearType on
-    //
-    0xb8, // PUSHW[0]
-    0x01, 0xff, // n = 0x01ff, always do dropout control
-    0x85, // SCANCTRL[]
-    //
-    0xb0, // PUSHB[0]
-    0x04, // n = 4, smart dropout control scan conversion including stubs
-    0x8d, // SCANTYPE[]
-    //
-    0xb1, // PUSHB[1]
-    0x01, // value = 1
-    0x01, // s = 1
-    0x8e, // INSTRCTRL[], turn grid-fitting off
-];
-
 pub fn remove_hinting(ttc: &mut TTCHeader) {
+    const PATCHED_PREP: [u8; 15] = [
+        0xb1, // PUSHB[1]
+        0x04, // value = 4
+        0x03, // s = 3
+        0x8e, // INSTRCTRL[], turn Microsoft ClearType on
+        //
+        0xb8, // PUSHW[0]
+        0x01, 0xff, // n = 0x01ff, always do dropout control
+        0x85, // SCANCTRL[]
+        //
+        0xb0, // PUSHB[0]
+        0x04, // n = 4, smart dropout control scan conversion including stubs
+        0x8d, // SCANTYPE[]
+        //
+        0xb1, // PUSHB[1]
+        0x01, // value = 1
+        0x01, // s = 1
+        0x8e, // INSTRCTRL[], turn grid-fitting off
+    ];
+
     for (sfnt_index, sfnt) in ttc.table_directories.iter_mut().enumerate() {
         // CVT variations
         sfnt.table_records.remove(&b"cvar".into());
@@ -555,14 +559,15 @@ pub fn remove_hinting(ttc: &mut TTCHeader) {
     }
 }
 
-const PATCHED_GASP: [u8; 8] = [
-    0x00, 0x01, // version
-    0x00, 0x01, // numRanges
-    0xff, 0xff, // gaspRanges[0].rangeMaxPPEM = 65535
-    0x00, 0x0a, // gaspRanges[0].rangeGaspBehavior = GASP_DO_GRAY | GASP_SYMMETRIC_SMOOTHING
-];
-
 pub fn regenerate_gasp(ttc: &mut TTCHeader) {
+    const PATCHED_GASP: [u8; 8] = [
+        0x00, 0x01, // version
+        0x00, 0x01, // numRanges
+        0xff, 0xff, // gaspRanges[0].rangeMaxPPEM = 65535
+        0x00,
+        0x0a, // gaspRanges[0].rangeGaspBehavior = GASP_DO_GRAY | GASP_SYMMETRIC_SMOOTHING
+    ];
+
     for sfnt in ttc.table_directories.iter_mut() {
         // Grid-fitting/scan-conversion
         sfnt.table_records.insert(

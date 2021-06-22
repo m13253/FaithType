@@ -46,7 +46,6 @@ fn main() -> Result<()> {
         TTCReader::new(&mut input_file).read_ttc()?
     };
 
-    modify::remove_dsig(&mut ttc);
     if !args.keep_bitmap {
         eprintln!("[ INFO ] Removing embedded bitmap.");
         modify::remove_bitmap(&mut ttc);
@@ -59,6 +58,7 @@ fn main() -> Result<()> {
         eprintln!("[ INFO ] Regenerating “gasp” table.");
         modify::regenerate_gasp(&mut ttc);
     }
+    modify::remove_dsig(&mut ttc);
     modify::patch_head(&mut ttc);
 
     eprintln!(

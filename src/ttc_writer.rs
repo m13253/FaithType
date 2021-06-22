@@ -15,6 +15,8 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 use std::collections::btree_map::BTreeMap;
+use std::collections::btree_map::Entry;
+use std::convert::TryFrom;
 use std::convert::TryInto;
 use std::io;
 use std::io::Seek;
@@ -29,10 +31,11 @@ use super::checksum::Checksum;
 use super::types::FourCC;
 use super::types::SfntHeader;
 use super::types::TTCHeader;
+use crate::types::TableRecord;
 
 pub struct TTCWriter<'a, W: Write + Seek> {
     w: &'a mut W,
-    raw_data_cache: BTreeMap<Rc<[u8]>, usize>,
+    data_to_offset_cache: BTreeMap<Rc<[u8]>, u32>,
     main_checksum: Checksum,
     checksum_adjustment_pos: Option<u64>,
 }
@@ -41,7 +44,7 @@ impl<'a, W: Write + Seek> TTCWriter<'a, W> {
     pub fn new(w: &'a mut W) -> Self {
         Self {
             w,
-            raw_data_cache: BTreeMap::new(),
+            data_to_offset_cache: BTreeMap::new(),
             main_checksum: Checksum::new(),
             checksum_adjustment_pos: None,
         }
@@ -51,6 +54,7 @@ impl<'a, W: Write + Seek> TTCWriter<'a, W> {
         if ttc.table_directories.len() == 1 {
             return self.write_sfnt(&ttc.table_directories[0]);
         }
+
         if ttc.major_version > 2 {
             bail!(
                 "unsupported TTC version: {}.{}",
@@ -58,6 +62,12 @@ impl<'a, W: Write + Seek> TTCWriter<'a, W> {
                 ttc.minor_version
             );
         }
+
+        let mut table_records = ttc
+            .table_directories
+            .iter()
+            .map(|sfnt| self.patch_head_table(&sfnt.table_records))
+            .collect::<Vec<_>>();
 
         self.write_fourcc(ttc.ttc_tag)?;
         self.write_u16be(ttc.major_version)?;
@@ -101,69 +111,77 @@ impl<'a, W: Write + Seek> TTCWriter<'a, W> {
             self.w.write_all(&[0; 4])?;
         }
 
+        let storage_order = ttc
+            .table_directories
+            .iter()
+            .zip(table_records.iter())
+            .map(|(sfnt, table_records)| {
+                self.get_table_storage_order(sfnt.sfnt_version, table_records)
+            })
+            .collect::<Vec<_>>();
         for (sfnt_index, sfnt) in ttc.table_directories.iter().enumerate() {
             self.write_fourcc(sfnt.sfnt_version)?;
-            self.write_u16be(sfnt.table_records.len().try_into().or_else(|_| {
+            self.write_u16be(table_records[sfnt_index].len().try_into().or_else(|_| {
                 bail!(
                     "sfnt {} header: number of tables ({}) exceeds 65535",
                     sfnt_index,
-                    sfnt.table_records.len()
+                    table_records[sfnt_index].len()
                 );
             })?)?;
             self.write_u16be(sfnt.search_range())?;
             self.write_u16be(sfnt.entry_selector())?;
             self.write_u16be(sfnt.range_shift())?;
 
-            for (&table_tag, table_record) in sfnt.table_records.iter() {
-                self.write_fourcc(table_tag)?;
-                self.write_u32be(self.checksum_table(table_tag, &table_record.raw_data))?;
+            for &table_tag in storage_order[sfnt_index].iter() {
+                let table_record = table_records[sfnt_index].get_mut(&table_tag).unwrap();
+                table_record.checksum = Checksum::from(table_record.raw_data.as_ref()).get();
 
-                let raw_data = self.patch_ttc_table(table_tag, &table_record.raw_data);
-                if let Some(&cache_offset) = self.raw_data_cache.get(&raw_data) {
-                    self.write_u32be(cache_offset.try_into().or_else(|_| {
-                        bail!(
-                            "sfnt 0 table {}: offset (0x{:x}) exceeds 4 GiB",
-                            table_tag,
-                            cache_offset
-                        );
-                    })?)?;
-                    self.write_u32be(table_record.raw_data.len().try_into().or_else(|_| {
-                        bail!(
-                            "sfnt 0 table {}: length ({}) exceeds 4 GiB",
-                            table_tag,
-                            table_record.raw_data.len()
-                        );
-                    })?)?;
-                } else {
-                    header_offset += self.get_padding(header_offset);
-                    self.write_u32be(header_offset.try_into().or_else(|_| {
-                        bail!(
-                            "sfnt 0 table {}: offset (0x{:x}) exceeds 4 GiB",
-                            table_tag,
-                            header_offset
-                        );
-                    })?)?;
-                    self.raw_data_cache.insert(raw_data, header_offset);
-                    self.write_u32be(table_record.raw_data.len().try_into().or_else(|_| {
-                        bail!(
-                            "sfnt 0 table {}: length ({}) exceeds 4 GiB",
-                            table_tag,
-                            table_record.raw_data.len()
-                        );
-                    })?)?;
-                    header_offset += table_record.raw_data.len();
+                let next_padding = self.get_padding(header_offset);
+                match self
+                    .data_to_offset_cache
+                    .entry(table_record.raw_data.clone())
+                {
+                    Entry::Occupied(entry) => {
+                        table_record.offset = *entry.get();
+                    }
+                    Entry::Vacant(entry) => {
+                        header_offset += next_padding;
+                        table_record.offset =
+                            *entry.insert(header_offset.try_into().or_else(|_| {
+                                bail!(
+                                    "sfnt {} table {}: offset (0x{:x}) exceeds 4 GiB",
+                                    sfnt_index,
+                                    table_tag,
+                                    header_offset
+                                );
+                            })?);
+                        header_offset += table_record.raw_data.len();
+                    }
                 }
+            }
+
+            for (&table_tag, table_record) in table_records[sfnt_index].iter() {
+                self.write_fourcc(table_tag)?;
+                self.write_u32be(table_record.checksum)?;
+                self.write_u32be(table_record.offset)?;
+                self.write_u32be(table_record.raw_data.len().try_into().or_else(|_| {
+                    bail!(
+                        "sfnt {} table {}: length ({}) exceeds 4 GiB",
+                        sfnt_index,
+                        table_tag,
+                        table_record.raw_data.len()
+                    );
+                })?)?;
             }
         }
 
-        for sfnt in ttc.table_directories.iter() {
-            for (&table_tag, table_record) in sfnt.table_records.iter() {
-                let raw_data = self.patch_ttc_table(table_tag, &table_record.raw_data);
-                let cache_offset = *self.raw_data_cache.get(&raw_data).unwrap();
-                if cache_offset >= data_pos {
+        for (sfnt_index, storage_order) in storage_order.iter().enumerate() {
+            for &table_tag in storage_order.iter() {
+                let table_record = table_records[sfnt_index].get(&table_tag).unwrap();
+                if usize::try_from(table_record.offset).unwrap() >= data_pos {
                     data_pos += self.write_padding(data_pos)?;
-                    assert_eq!(cache_offset, data_pos);
-                    self.write_ttc_table_data(table_tag, &table_record.raw_data)?;
+                    assert_eq!(table_record.offset.try_into(), Ok(data_pos));
+                    self.write_ttc_table_data(&table_record.raw_data)?;
                     data_pos += table_record.raw_data.len();
                 }
             }
@@ -171,7 +189,7 @@ impl<'a, W: Write + Seek> TTCWriter<'a, W> {
 
         if let Some(dsig_header_pos) = dsig_header_pos {
             data_pos += self.write_padding(data_pos)?;
-            self.write_ttc_table_data(ttc.dsig_tag, &ttc.dsig_data)?;
+            self.write_ttc_table_data(&ttc.dsig_data)?;
             self.w.seek(SeekFrom::Start(dsig_header_pos))?;
             self.write_u32be(data_pos.try_into().or_else(|_| {
                 bail!(
@@ -186,31 +204,41 @@ impl<'a, W: Write + Seek> TTCWriter<'a, W> {
     }
 
     pub fn write_sfnt(mut self, sfnt: &SfntHeader) -> Result<()> {
+        let mut table_records = self.patch_head_table(&sfnt.table_records);
+
         self.write_fourcc(sfnt.sfnt_version)?;
-        self.write_u16be(sfnt.table_records.len().try_into().or_else(|_| {
+        self.write_u16be(table_records.len().try_into().or_else(|_| {
             bail!(
                 "sfnt 0 header: number of tables ({}) exceeds 65535",
-                sfnt.table_records.len()
+                table_records.len()
             );
         })?)?;
         self.write_u16be(sfnt.search_range())?;
         self.write_u16be(sfnt.entry_selector())?;
         self.write_u16be(sfnt.range_shift())?;
 
-        let mut header_offset = 12 + sfnt.table_records.len() * 16;
+        let mut header_offset = 12 + table_records.len() * 16;
         let mut data_pos = header_offset;
-        for (&table_tag, table_record) in sfnt.table_records.iter() {
-            self.write_fourcc(table_tag)?;
-            self.write_u32be(self.checksum_table(table_tag, &table_record.raw_data))?;
 
+        let storage_order = self.get_table_storage_order(sfnt.sfnt_version, &table_records);
+        for &table_tag in storage_order.iter() {
+            let table_record = table_records.get_mut(&table_tag).unwrap();
+            table_record.checksum = Checksum::from(table_record.raw_data.as_ref()).get();
             header_offset += self.get_padding(header_offset);
-            self.write_u32be(header_offset.try_into().or_else(|_| {
+            table_record.offset = header_offset.try_into().or_else(|_| {
                 bail!(
                     "sfnt 0 table {}: offset (0x{:x}) exceeds 4 GiB",
                     table_tag,
                     header_offset
                 );
-            })?)?;
+            })?;
+            header_offset += table_record.raw_data.len();
+        }
+
+        for (&table_tag, table_record) in table_records.iter() {
+            self.write_fourcc(table_tag)?;
+            self.write_u32be(table_record.checksum)?;
+            self.write_u32be(table_record.offset)?;
             self.write_u32be(table_record.raw_data.len().try_into().or_else(|_| {
                 bail!(
                     "sfnt 0 table {}: length ({}) exceeds 4 GiB",
@@ -218,11 +246,12 @@ impl<'a, W: Write + Seek> TTCWriter<'a, W> {
                     table_record.raw_data.len()
                 );
             })?)?;
-            header_offset += table_record.raw_data.len();
         }
 
-        for (&table_tag, table_record) in sfnt.table_records.iter() {
+        for &table_tag in storage_order.iter() {
+            let table_record = table_records.get(&table_tag).unwrap();
             data_pos += self.write_padding(data_pos)?;
+            assert_eq!(data_pos, table_record.offset as usize);
             self.write_sfnt_table_data(table_tag, &table_record.raw_data)?;
             data_pos += table_record.raw_data.len();
         }
@@ -236,26 +265,86 @@ impl<'a, W: Write + Seek> TTCWriter<'a, W> {
         Ok(())
     }
 
-    fn checksum_table(&self, table_tag: FourCC, raw_data: &[u8]) -> u32 {
-        if table_tag != b"head".into() || raw_data.len() <= 8 {
-            Checksum::from(raw_data).get()
+    fn get_table_storage_order(
+        &self,
+        sfnt_version: FourCC,
+        table_records: &BTreeMap<FourCC, TableRecord>,
+    ) -> Vec<FourCC> {
+        const PRIORITY_LIST_OTF: [FourCC; 20] = [
+            FourCC(*b"head"),
+            FourCC(*b"hhea"),
+            FourCC(*b"maxp"),
+            FourCC(*b"OS/2"),
+            FourCC(*b"hmtx"),
+            FourCC(*b"LTSH"),
+            FourCC(*b"VDMX"),
+            FourCC(*b"hdmx"),
+            FourCC(*b"cmap"),
+            FourCC(*b"fpgm"),
+            FourCC(*b"prep"),
+            FourCC(*b"cvt "),
+            FourCC(*b"loca"),
+            FourCC(*b"glyf"),
+            FourCC(*b"kern"),
+            FourCC(*b"name"),
+            FourCC(*b"post"),
+            FourCC(*b"gasp"),
+            FourCC(*b"PCLT"),
+            FourCC(*b"DSIG"),
+        ];
+        const PRIORITY_LIST_CFF: [FourCC; 8] = [
+            FourCC(*b"head"),
+            FourCC(*b"hhea"),
+            FourCC(*b"maxp"),
+            FourCC(*b"OS/2"),
+            FourCC(*b"name"),
+            FourCC(*b"cmap"),
+            FourCC(*b"post"),
+            FourCC(*b"CFF "),
+        ];
+        let priority_list = if sfnt_version == b"OTTO".into() {
+            PRIORITY_LIST_CFF.as_ref()
         } else {
-            let mut checksum = Checksum::from(&raw_data[..8]);
-            if raw_data.len() >= 12 {
-                checksum.push(&raw_data[12..]);
-            }
-            checksum.get()
-        }
+            PRIORITY_LIST_OTF.as_ref()
+        };
+        priority_list
+            .iter()
+            .filter(|&table_tag| table_records.contains_key(table_tag))
+            .chain(
+                table_records
+                    .keys()
+                    .filter(|&table_tag| !priority_list.contains(table_tag)),
+            )
+            .copied()
+            .collect()
     }
 
-    fn patch_ttc_table(&self, table_tag: FourCC, raw_data: &Rc<[u8]>) -> Rc<[u8]> {
-        if table_tag != b"head".into() || raw_data.len() <= 12 || raw_data[8..12] == [0; 4] {
-            raw_data.clone()
-        } else {
-            let mut raw_data_vec = raw_data.to_vec();
-            raw_data_vec[8..12].fill(0);
-            Rc::from(raw_data_vec)
-        }
+    fn patch_head_table(
+        &self,
+        table_records: &BTreeMap<FourCC, TableRecord>,
+    ) -> BTreeMap<FourCC, TableRecord> {
+        table_records
+            .iter()
+            .map(|(&table_tag, table_record)| {
+                (
+                    table_tag,
+                    if table_tag != b"head".into()
+                        || table_record.raw_data.len() <= 12
+                        || table_record.raw_data[8..12] == [0; 4]
+                    {
+                        table_record.clone()
+                    } else {
+                        let mut raw_data_vec = table_record.raw_data.to_vec();
+                        raw_data_vec[8..12].fill(0);
+                        TableRecord {
+                            checksum: 0,
+                            offset: 0,
+                            raw_data: Rc::from(raw_data_vec),
+                        }
+                    },
+                )
+            })
+            .collect()
     }
 
     fn write_u16be(&mut self, value: u16) -> io::Result<()> {
@@ -278,22 +367,9 @@ impl<'a, W: Write + Seek> TTCWriter<'a, W> {
         Ok(())
     }
 
-    fn write_ttc_table_data(&mut self, table_tag: FourCC, raw_data: &[u8]) -> io::Result<()> {
-        if table_tag != b"head".into() || raw_data.len() <= 8 {
-            self.w.write_all(raw_data)?;
-            self.main_checksum.write_all(raw_data).unwrap();
-        } else {
-            self.w.write_all(&raw_data[..8])?;
-            self.main_checksum.write_all(&raw_data[..8]).unwrap();
-            if raw_data.len() < 12 {
-                self.w.write_all(&raw_data[8..])?;
-                self.main_checksum.write_all(&raw_data[8..]).unwrap();
-            } else {
-                self.w.write_all(&[0; 4])?;
-                self.w.write_all(&raw_data[12..])?;
-                self.main_checksum.write_all(&raw_data[12..]).unwrap();
-            }
-        }
+    fn write_ttc_table_data(&mut self, raw_data: &[u8]) -> io::Result<()> {
+        self.w.write_all(raw_data)?;
+        self.main_checksum.write_all(raw_data).unwrap();
         Ok(())
     }
 
@@ -304,16 +380,12 @@ impl<'a, W: Write + Seek> TTCWriter<'a, W> {
         } else {
             self.w.write_all(&raw_data[..8])?;
             self.main_checksum.write_all(&raw_data[..8]).unwrap();
-            if raw_data.len() < 12 {
-                self.w.write_all(&raw_data[8..])?;
-                self.main_checksum.write_all(&raw_data[8..]).unwrap();
-            } else {
+            if raw_data.len() >= 12 {
                 assert!(self.checksum_adjustment_pos.is_none());
                 self.checksum_adjustment_pos = Some(self.w.stream_position()?);
-                self.w.write_all(&[0; 4])?;
-                self.w.write_all(&raw_data[12..])?;
-                self.main_checksum.write_all(&raw_data[12..]).unwrap();
             }
+            self.w.write_all(&raw_data[8..])?;
+            self.main_checksum.write_all(&raw_data[8..]).unwrap();
         }
         Ok(())
     }

@@ -41,7 +41,7 @@ impl ArgParser {
         let mut output_filename = Option::<OsString>::None;
         let mut keep_bitmap = false;
         let mut keep_gasp = false;
-        let mut keep_hinting = true;
+        let mut keep_hinting = false;
 
         for arg in args {
             match current_option {
@@ -124,12 +124,8 @@ impl ArgParser {
         println!("                        rendering becomes buggy at certain sizes.");
         println!("    --keep-gasp         Keep the original “gasp” table.");
         println!();
-        println!("    --remove-hinting    Remove TrueType hinting instructions.");
-        println!("                        Due to the complexity, not all instructions");
-        println!("                        are  removed.  Use  “ttfautohint --dehint”");
-        println!("                        before using this tool to really remove all");
-        println!("                        hinting instructions.");
-        println!("    --keep-hinting      Do not remove TrueType hinting.            [Default]");
+        println!("    --remove-hinting    Remove TrueType hinting instructions.      [Default]");
+        println!("    --keep-hinting      Do not remove TrueType hinting.");
         println!();
         process::exit(exit_code);
     }
