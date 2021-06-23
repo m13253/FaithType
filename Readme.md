@@ -7,7 +7,7 @@ Modify fonts to remove bitmap and disable gridfit for Windows font rendering.
 ## Description
 
 Since Windows 10 version 1703 (Creators Update), its built-in TrueType renderer
-now supports vertical anti-aliasing. Despite there are only 30 levels of
+now supports vertical anti-aliasing. Despite there are only 16 levels of
 grayscale shade, it dramatically improves text rendering, especially for CJK
 languages. Sadly, it is only enabled for selected fonts at selected sizes.
 
@@ -81,8 +81,9 @@ look much better on Hi-DPI displays.
 - **Why patch the `gasp` table?**
 
   Because **ClearType is now broken** somewhere between Windows 10 version 1703
-  and 21H1. The LCD filter can no longer be turned off through the “ClearType
+  and 1903. The LCD filter can no longer be turned off through the “ClearType
   Text Tuner”.
+  [\[ Investigations \])(https://github.com/bp2008/BetterClearTypeTuner/wiki/ClearType-Investigations)
 
   LCD filter is originally designed for LCD screens with 1:1 viewing scale.
   Meaning you should not use LCD filter on projectors, televisions, PenTile
