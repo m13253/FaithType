@@ -144,7 +144,7 @@ pub fn remove_hinting(ttc: &mut TTCHeader) {
 
         // "head" table:
         // byte 50..52: indexToLocFormat
-        // byte 50..52: glyphDataFormat
+        // byte 52..54: glyphDataFormat
         let (loca_format, glyf_format) =
             sfnt.table_records
                 .get(&b"head".into())
@@ -478,6 +478,15 @@ pub fn remove_hinting(ttc: &mut TTCHeader) {
             .collect::<Vec<_>>();
 
         if !glyf_modified {
+            // "glyf" does not need modification, simply update "head" and skip.
+            let head = sfnt.table_records.get_mut(&b"head".into()).unwrap();
+            let mut new_head = head.raw_data.to_vec();
+            // Byte 17: flags
+            // flags[bit 2]: instructions may depend on point size
+            // flags[bit 3]: force ppem to integer values
+            // flags[bit 4]: instructions may alter advance width
+            new_head[17] &= 0xf1;
+            head.raw_data = Rc::from(new_head);
             continue;
         }
         eprintln!(
@@ -525,6 +534,12 @@ pub fn remove_hinting(ttc: &mut TTCHeader) {
 
             let head = sfnt.table_records.get_mut(&b"head".into()).unwrap();
             let mut new_head = head.raw_data.to_vec();
+            // Byte 17: flags
+            // flags[bit 2]: instructions may depend on point size
+            // flags[bit 3]: force ppem to integer values
+            // flags[bit 4]: instructions may alter advance width
+            new_head[17] &= 0xf1;
+            // byte 50..52: indexToLocFormat
             new_head[50..52].fill(0);
             head.raw_data = Rc::from(new_head);
         } else {
@@ -559,6 +574,12 @@ pub fn remove_hinting(ttc: &mut TTCHeader) {
 
             let head = sfnt.table_records.get_mut(&b"head".into()).unwrap();
             let mut new_head = head.raw_data.to_vec();
+            // Byte 17: flags
+            // flags[bit 2]: instructions may depend on point size
+            // flags[bit 3]: force ppem to integer values
+            // flags[bit 4]: instructions may alter advance width
+            new_head[17] &= 0xf1;
+            // byte 50..52: indexToLocFormat
             new_head[50..52].clone_from_slice(&[0, 1]);
             head.raw_data = Rc::from(new_head);
         }
@@ -599,11 +620,6 @@ pub fn patch_head(ttc: &mut TTCHeader) {
             // flags[bit 11]: font data is lossless converted
             // flags[bit 13]: font optimized for Microsoft ClearType
             raw_data_copy.get_mut(16).map(|x| *x |= 0x28);
-            // Byte 17: flags
-            // flags[bit 2]: instructions may depend on point size
-            // flags[bit 3]: force ppem to integer values
-            // flags[bit 4]: instructions may alter advance width
-            raw_data_copy.get_mut(17).map(|x| *x &= 0xf1);
             // Byte 46..48: smallest readable size in pixels
             raw_data_copy.get_mut(46..48).map(|x| x.fill(0));
 
