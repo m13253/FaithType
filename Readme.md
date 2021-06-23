@@ -83,7 +83,7 @@ look much better on Hi-DPI displays.
   Because **ClearType is now broken** somewhere between Windows 10 version 1703
   and 1903. The LCD filter can no longer be turned off through the “ClearType
   Text Tuner”.
-  [\[ Investigations \])(https://github.com/bp2008/BetterClearTypeTuner/wiki/ClearType-Investigations)
+  [\[ Investigations \]](https://github.com/bp2008/BetterClearTypeTuner/wiki/ClearType-Investigations)
 
   LCD filter is originally designed for LCD screens with 1:1 viewing scale.
   Meaning you should not use LCD filter on projectors, televisions, PenTile

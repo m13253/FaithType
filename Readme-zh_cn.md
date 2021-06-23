@@ -64,7 +64,7 @@
 
 - **为何要修改 `gasp` 表？**
 
-  因为在 Windows 10 的 1703 至 1903 之间的某个版本，**ClearType 坏掉了**。确切来说，通过 “ClearType 文本调谐器” 也关不掉 LCD 滤波器了。[\[ 相关调查 \])(https://github.com/bp2008/BetterClearTypeTuner/wiki/ClearType-Investigations)
+  因为在 Windows 10 的 1703 至 1903 之间的某个版本，**ClearType 坏掉了**。确切来说，通过 “ClearType 文本调谐器” 也关不掉 LCD 滤波器了。[\[ 相关调查 \]](https://github.com/bp2008/BetterClearTypeTuner/wiki/ClearType-Investigations)
 
   LCD 滤波器本来是给液晶显示器在 1:1 缩放比例下使用的。换句话说，在投影仪、电视机、PenTile 屏、可旋转设备、视频录像、屏幕截图、远程会议、PPT 幻灯片、DPI 缩放后的应用程序等等环境下不应该使用 LCD 滤波器。**然而微软 “画图” 的文本框工具画出来的文字竟然有 LCD 滤波的彩边。**
 

@@ -64,7 +64,7 @@
 
 - 為何要修補 `gasp` 資料表？
 
-  因為在 Windows 10 的 1703 和 1903 之間的某個版本開始，**ClearType 出現了 bug**。透過「ClearType 文字調整工具」已經關不掉 LCD 濾波器了。[\[ 相關調查 \])(https://github.com/bp2008/BetterClearTypeTuner/wiki/ClearType-Investigations)
+  因為在 Windows 10 的 1703 和 1903 之間的某個版本開始，**ClearType 出現了 bug**。透過「ClearType 文字調整工具」已經關不掉 LCD 濾波器了。[\[ 相關調查 \]](https://github.com/bp2008/BetterClearTypeTuner/wiki/ClearType-Investigations)
 
   LCD 濾波器本來是設計給 1:1 倍率觀看的液晶顯示器的。也就是說在投影機、電視、PenTile 顯示器、可旋轉熒幕的裝置、影片檔、熒幕擷取檔、遠端會議、簡報投影片、DPI 縮放過的應用程序等場景裡，不應該用 LCD 濾波器。然而，現在 LCD 濾波器完全無法關閉，**甚至「小畫家」的文字工具只能畫出有 LCD 濾波的彩邊文字了。**
 
