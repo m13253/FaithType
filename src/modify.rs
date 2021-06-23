@@ -538,6 +538,7 @@ pub fn remove_hinting(ttc: &mut TTCHeader) {
         // Maximum profile
         if let Some(maxp) = sfnt.table_records.get_mut(&b"maxp".into()) {
             let mut raw_data_copy = maxp.raw_data.to_vec();
+
             // Byte 14..16: maxZones, 1 if instructions do not use the twilight zone (Z0)
             raw_data_copy
                 .get_mut(14..16)
@@ -555,6 +556,8 @@ pub fn remove_hinting(ttc: &mut TTCHeader) {
             raw_data_copy
                 .get_mut(26..28)
                 .map(|x| x.clone_from_slice(&[0, PATCHED_PREP.len().try_into().unwrap()]));
+
+            maxp.raw_data = Rc::from(raw_data_copy);
         }
     }
 }
