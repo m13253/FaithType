@@ -31,9 +31,8 @@
 5. 处理字体文件：
    ```ps1
    mkdir "C:\Patched Fonts"
-   .\faithtype.exe "C:\Windows\Fonts\simsun.ttc" -o "C:\Patched Fonts\simsun.ttc" --remove-bitmap --remove-hinting --modify-gasp
+   .\faithtype.exe "C:\Windows\Fonts\simsun.ttc" -o "C:\Patched Fonts\simsun.ttc"
    ```
-   根据你是否要移除或重建 hinting，选择 `--remove-hinting` 或者 `--keep-hinting` 两者其一。
 
 6. **可选：** 如果你打算重建 hinting 指令，在这一步使用 [ttfautohint](https://www.freetype.org/ttfautohint/#download) 进行 hinting 重建。
 

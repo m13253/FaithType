@@ -36,10 +36,8 @@ look much better on Hi-DPI displays.
 5. Process the font:
    ```ps1
    mkdir "C:\Patched Fonts"
-   .\faithtype.exe "C:\Windows\Fonts\simsun.ttc" -o "C:\Patched Fonts\simsun.ttc" --remove-bitmap --remove-hinting --modify-gasp
+   .\faithtype.exe "C:\Windows\Fonts\simsun.ttc" -o "C:\Patched Fonts\simsun.ttc"
    ```
-   Depending on whether you want to remove or regenerate hinting, use one of
-   `--remove-hinting` or `--keep-hinting`.
 
 6. **Optional:** If you want to regenerate hinting instructions, use
    [ttfautohint](https://www.freetype.org/ttfautohint/#download) at this step.

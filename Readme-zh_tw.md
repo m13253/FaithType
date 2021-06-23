@@ -31,9 +31,8 @@
 5. 處理字型檔：
    ```ps1
    mkdir "C:\Patched Fonts"
-   .\faithtype.exe "C:\Windows\Fonts\mingliu.ttc" -o "C:\Patched Fonts\mingliu.ttc" --remove-bitmap --remove-hinting --modify-gasp
+   .\faithtype.exe "C:\Windows\Fonts\mingliu.ttc" -o "C:\Patched Fonts\mingliu.ttc"
    ```
-   根據你是否要移除或重建 hinting，選用 `--remove-hinting` 或者 `--keep-hinting` 兩者其一。
 
 6. **可省略：** 若要重建 hinting 指令，在這一步使用 [ttfautohint](https://www.freetype.org/ttfautohint/#download)。
 

@@ -31,9 +31,8 @@ Windows 10バージョン1703 (Creators Update) から、内蔵のTrueTypeレン
 5. フォントファイルを処理します：
    ```ps1
    mkdir "C:¥Patched Fonts"
-   .¥faithtype.exe "C:¥Windows¥Fonts¥msgothic.ttc" -o "C:¥Patched Fonts¥msgothic.ttc" --remove-bitmap --remove-hinting --modify-gasp
+   .¥faithtype.exe "C:¥Windows¥Fonts¥msgothic.ttc" -o "C:¥Patched Fonts¥msgothic.ttc"
    ```
-   ヒンティングを削除するか再生成するかによって、`--remove-hinting` または `--keep-hinting` のいずれかを使用する。
 
 6. **オプション：** ヒンティングを再生成したい場合は、このステップで[ttfautohint](https://www.freetype.org/ttfautohint/#download)を使ってください。
 
