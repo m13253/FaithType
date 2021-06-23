@@ -18,7 +18,7 @@ for i in "$@"
 do
     INPUT_FILE="$i"
     OUTPUT_FILE="./out/$(basename "$i")"
-    echo "$ cargo run --quiet -- -o \"$OUTPUT_FILE\" -- \"$INPUT_FILE\""
+    echo "$ faithtype -o \"$OUTPUT_FILE\" -- \"$INPUT_FILE\""
     cargo run --quiet -- -o "$OUTPUT_FILE" -- "$INPUT_FILE"
     echo "Converted $INPUT_FILE -> $OUTPUT_FILE"
     echo
