@@ -18,8 +18,8 @@ for i in "$@"
 do
     INPUT_FILE="$i"
     OUTPUT_FILE="./out/$(basename "$i")"
-    echo "$ cargo run --quiet -- -o \"$OUTPUT_FILE\" --remove-hinting -- \"$INPUT_FILE\""
-    cargo run --quiet -- -o "$OUTPUT_FILE" --remove-bitmap --remove-hinting --modify-gasp -- "$INPUT_FILE"
+    echo "$ cargo run --quiet -- -o \"$OUTPUT_FILE\" -- \"$INPUT_FILE\""
+    cargo run --quiet -- -o "$OUTPUT_FILE" -- "$INPUT_FILE"
     echo "Converted $INPUT_FILE -> $OUTPUT_FILE"
     echo
 done
