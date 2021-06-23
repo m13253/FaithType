@@ -485,7 +485,7 @@ pub fn remove_hinting(ttc: &mut TTCHeader) {
             // flags[bit 2]: instructions may depend on point size
             // flags[bit 3]: force ppem to integer values
             // flags[bit 4]: instructions may alter advance width
-            new_head[17] &= 0xf1;
+            new_head.get_mut(17).map(|x| *x &= 0xf1);
             head.raw_data = Rc::from(new_head);
             continue;
         }
