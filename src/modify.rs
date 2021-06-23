@@ -113,6 +113,30 @@ pub fn remove_hinting(ttc: &mut TTCHeader) {
                 raw_data: Rc::from(PATCHED_PREP),
             },
         );
+        // Maximum profile
+        if let Some(maxp) = sfnt.table_records.get_mut(&b"maxp".into()) {
+            let mut raw_data_copy = maxp.raw_data.to_vec();
+
+            // Byte 14..16: maxZones, 1 if instructions do not use the twilight zone (Z0)
+            raw_data_copy
+                .get_mut(14..16)
+                .map(|x| x.clone_from_slice(&[0, 1]));
+            // Byte 16..18: maxTwilightPoints
+            // Byte 18..20: maxStorage
+            // Byte 20..22: maxFunctionDefs
+            // Byte 22..24: maxInstructionDefs
+            raw_data_copy.get_mut(16..24).map(|x| x.fill(0));
+            // Byte 24..26: maxStackElements
+            raw_data_copy
+                .get_mut(24..26)
+                .map(|x| x.clone_from_slice(&[0, 2]));
+            // Byte 26..28: maxSizeOfInstructions
+            raw_data_copy
+                .get_mut(26..28)
+                .map(|x| x.clone_from_slice(&[0, PATCHED_PREP.len().try_into().unwrap()]));
+
+            maxp.raw_data = Rc::from(raw_data_copy);
+        }
         // Linear Threshold data
         sfnt.table_records.remove(&b"LTSH".into());
         // Vertical Device Metrics
@@ -456,6 +480,10 @@ pub fn remove_hinting(ttc: &mut TTCHeader) {
         if !glyf_modified {
             continue;
         }
+        eprintln!(
+            "[ INFO ] sfnt {} table “glyf”: modified to remove per-glyph hinting.",
+            sfnt_index
+        );
 
         let mut new_raw_glyf =
             Vec::with_capacity(new_glyf.iter().map(|x| x.as_ref().len() + 1).sum());
@@ -533,31 +561,6 @@ pub fn remove_hinting(ttc: &mut TTCHeader) {
             let mut new_head = head.raw_data.to_vec();
             new_head[50..52].clone_from_slice(&[0, 1]);
             head.raw_data = Rc::from(new_head);
-        }
-
-        // Maximum profile
-        if let Some(maxp) = sfnt.table_records.get_mut(&b"maxp".into()) {
-            let mut raw_data_copy = maxp.raw_data.to_vec();
-
-            // Byte 14..16: maxZones, 1 if instructions do not use the twilight zone (Z0)
-            raw_data_copy
-                .get_mut(14..16)
-                .map(|x| x.clone_from_slice(&[0, 1]));
-            // Byte 16..18: maxTwilightPoints
-            // Byte 18..20: maxStorage
-            // Byte 20..22: maxFunctionDefs
-            // Byte 22..24: maxInstructionDefs
-            raw_data_copy.get_mut(16..24).map(|x| x.fill(0));
-            // Byte 24..26: maxStackElements
-            raw_data_copy
-                .get_mut(24..26)
-                .map(|x| x.clone_from_slice(&[0, 2]));
-            // Byte 26..28: maxSizeOfInstructions
-            raw_data_copy
-                .get_mut(26..28)
-                .map(|x| x.clone_from_slice(&[0, PATCHED_PREP.len().try_into().unwrap()]));
-
-            maxp.raw_data = Rc::from(raw_data_copy);
         }
     }
 }
