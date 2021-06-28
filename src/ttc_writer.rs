@@ -251,7 +251,7 @@ impl<'a, W: Write + Seek> TTCWriter<'a, W> {
         for &table_tag in storage_order.iter() {
             let table_record = table_records.get(&table_tag).unwrap();
             data_pos += self.write_padding(data_pos)?;
-            assert_eq!(data_pos, table_record.offset as usize);
+            assert_eq!(table_record.offset.try_into(), Ok(data_pos));
             self.write_sfnt_table_data(table_tag, &table_record.raw_data)?;
             data_pos += table_record.raw_data.len();
         }
