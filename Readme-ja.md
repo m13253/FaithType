@@ -6,15 +6,15 @@ Windowsの文字レンダリングにおいて、ビットマップを削除し�
 
 ## 説明
 
-Windows 10バージョン1703 (Creators Update) から、内蔵のTrueTypeレンダラーが縦方向のアンチエイリアスを対応するようになりました。グレースケールの濃淡が16段階しかないにも関わらず、特に日本語の表現力が劇的に向上します。残念なことに、この機能は一部のフォントの特定のサイズに対してのみ有効です。
+Windows 10バージョン1703 (Creators Update) から、内蔵のTrueTypeレンダラーが縦方向のアンチエイリアスを対応するようになりました。各方向に4段階のグレースケールの濃淡しかないにも関わらず、特に日本語の表現力が劇的に向上します。残念なことに、この機能は一部のフォントの特定のサイズに対してのみ有効です。
 
 このツールを使えば、ほとんどのTrueTypeアウトラインフォントに対して縦方向のアンチエイリアス処理を有効にすることができ、ビットマップも削除できるので、高DPIディスプレイでの書体の見栄えが格段に良くなります。
 
 ## 使い方は？
 
-1. [Rust言語のコンパイラ](https://www.rust-lang.org/tools/install)をダウンロードしてください。
+1. [Rust言語のコンパイラ](https://www.rust-lang.org/tools/install)をダウンロードします。
 
-2. FaithTypeのソースコードをダウンロードしてください。
+2. FaithTypeのソースコードをダウンロードします。
 
 3. ターミナル（コマンドプロンプトまたはPowerShell）を開きます。
    ```ps1
@@ -23,7 +23,7 @@ Windows 10バージョン1703 (Creators Update) から、内蔵のTrueTypeレン
    cd .\target\release
    ```
 
-4. 使用方法を読む（英語）：
+4. 使用方法を読みます（英語）：
    ```ps1
    .\faithtype.exe --help
    ```
@@ -34,11 +34,11 @@ Windows 10バージョン1703 (Creators Update) から、内蔵のTrueTypeレン
    .\faithtype.exe "C:\Windows\Fonts\msgothic.ttc" -o "C:\Patched Fonts\msgothic.ttc"
    ```
 
-6. **オプション：** ヒンティングを再生成したい場合は、このステップで[ttfautohint](https://www.freetype.org/ttfautohint/#download)を使ってください。
+6. **オプション：** ヒンティングを再生成したい場合は、このステップで[ttfautohint](https://www.freetype.org/ttfautohint/#download)を使います。
 
-7. 修正したフォントファイルを開く可能を確認してください。
+7. 修正したフォントファイルを開く可能を確認します。
 
-8. レジストリを設定してください：
+8. レジストリを設定します：
    ```reg
    Windows Registry Editor Version 5.00
 
@@ -47,11 +47,11 @@ Windows 10バージョン1703 (Creators Update) から、内蔵のTrueTypeレン
    "ＭＳ ゴシック & MS UI Gothic & ＭＳ Ｐゴシック (TrueType)"="C:\Patched Fonts\msgothic.ttc"
    ```
 
-9. システムを再起動してください。
+9. システムを再起動します。
 
 ## FAQ
 
-（申し訳ございません。大量の文章を翻訳するのは疲れるので、[英語版](Readme.md)を参照してください。）
+（申し訳ございません。大量の文章を翻訳するのは疲れるから、[英語版](Readme.md)を参照してください。）
 
 ## 筆画が細すぎます。
 
