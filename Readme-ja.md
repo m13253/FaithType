@@ -20,18 +20,18 @@ Windows 10バージョン1703 (Creators Update) から、内蔵のTrueTypeレン
    ```ps1
    cd path_to_FaithType
    cargo build --release
-   cd .¥target¥release
+   cd .\target\release
    ```
 
 4. 使用方法を読む（英語）：
    ```ps1
-   .¥faithtype.exe --help
+   .\faithtype.exe --help
    ```
 
 5. フォントファイルを処理します：
    ```ps1
-   mkdir "C:¥Patched Fonts"
-   .¥faithtype.exe "C:¥Windows¥Fonts¥msgothic.ttc" -o "C:¥Patched Fonts¥msgothic.ttc"
+   mkdir "C:\Patched Fonts"
+   .\faithtype.exe "C:\Windows\Fonts\msgothic.ttc" -o "C:\Patched Fonts\msgothic.ttc"
    ```
 
 6. **オプション：** ヒンティングを再生成したい場合は、このステップで[ttfautohint](https://www.freetype.org/ttfautohint/#download)を使ってください。
@@ -42,9 +42,9 @@ Windows 10バージョン1703 (Creators Update) から、内蔵のTrueTypeレン
    ```reg
    Windows Registry Editor Version 5.00
 
-   [HKEY_CURRENT_USER¥SOFTWARE¥Microsoft¥Windows NT¥CurrentVersion¥Fonts]
-   "MS Gothic & MS UI Gothic & MS PGothic (TrueType)"="C:¥Patched Fonts¥msgothic.ttc"
-   "ＭＳ ゴシック & MS UI Gothic & ＭＳ Ｐゴシック (TrueType)"="C:¥Patched Fonts¥msgothic.ttc"
+   [HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Fonts]
+   "MS Gothic & MS UI Gothic & MS PGothic (TrueType)"="C:\Patched Fonts\msgothic.ttc"
+   "ＭＳ ゴシック & MS UI Gothic & ＭＳ Ｐゴシック (TrueType)"="C:\Patched Fonts\msgothic.ttc"
    ```
 
 9. システムを再起動してください。
@@ -61,7 +61,7 @@ Windows 10バージョン1703 (Creators Update) から、内蔵のTrueTypeレン
    ```reg
    Windows Registry Editor Version 5.00
 
-   [HKEY_LOCAL_MACHINE¥SOFTWARE¥Microsoft¥Avalon.Graphics¥DISPLAY1]
+   [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Avalon.Graphics\DISPLAY1]
    "GammaLevel"=dword:00000708
    ```
 
