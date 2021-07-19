@@ -11,6 +11,7 @@ param (
 
 Set-StrictMode -Version 3.0
 
+Write-Host 'Installing fonts...'
 $RegistryKey = Get-Item -Path 'Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Fonts'
 foreach ($FontName in $RegistryKey.Property | Sort-Object) {
     $FontPath = $RegistryKey.GetValue($FontName)
@@ -30,6 +31,7 @@ foreach ($FontName in $RegistryKey.Property | Sort-Object) {
     }
 }
 
+Write-Host 'Modifying font fallback settings...'
 $RegistryKey = Get-Item -Path 'Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\FontLink\SystemLink'
 foreach ($FontName in $RegistryKey.Property | Sort-Object) {
     $FallbackFonts = $RegistryKey.GetValue($FontName)
@@ -61,7 +63,7 @@ foreach ($FontName in $RegistryKey.Property | Sort-Object) {
         }
     }
     if ($FallbackFontsChanged) {
-        Write-Host "Modifying font fallback: $FontName"
+        Write-Host "Modifying: $FontName"
         try {
             Set-ItemProperty -Path 'Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\FontLink\SystemLink' -Name $FontName -Value $FallbackFonts -Type MultiString -ErrorAction Stop
         } catch [System.SystemException] {

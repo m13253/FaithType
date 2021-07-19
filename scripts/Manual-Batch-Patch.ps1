@@ -16,7 +16,7 @@ param (
 
 Set-StrictMode -Version 3.0
 
-$FaithTypeCmd = '.\faithtype.exe'
+$FaithTypeCmd = Join-Path -Path $PSScriptRoot -ChildPath 'faithtype.exe' -ErrorAction Stop
 $FaithTypeArgs = @()
 if (-not (Test-Path -Path $FaithTypeCmd -PathType Leaf)) {
     $FaithTypeCmd = if ($null -ne $Env:CARGO -and $Env:CARGO -ne '') {
@@ -24,19 +24,23 @@ if (-not (Test-Path -Path $FaithTypeCmd -PathType Leaf)) {
     } else {
         'cargo.exe'
     }
-    $FaithTypeArgs = 'run', '--bin', 'faithtype', '--manifest-path', '..\Cargo.toml', '--quiet', '--release', '--'
+    $CargoTomlPath = Join-Path -Path $PSScriptRoot -ChildPath '..\Cargo.toml'
+    $FaithTypeArgs = 'run', '--bin', 'faithtype', '--manifest-path', """$($CargoTomlPath.replace('"', '\"'))""", '--quiet', '--release', '--'
 }
 
 New-Item -Path $OutputDir -ItemType Directory -ErrorAction Ignore | Out-Null
 
-foreach ($InputFile in $InputFiles) {
-    Get-Item $InputFile | Where-Object {
-        -not $_.PSIsContainer
-    } | Sort-Object | ForEach-Object {
-        $InputFileName = $_.FullName
-        $OutputFileName = Join-Path -Path $OutputDir -ChildPath $_.Name -ErrorAction Stop
-        Write-Host "> faithtype -o ""$OutputFileName"" -- ""$InputFileName"""
-        & $FaithTypeCmd $FaithTypeArgs '-o' $OutputFileName '--' $InputFileName
+foreach ($InputPattern in $InputFiles) {
+    foreach ($InputFile in Get-Item $InputPattern | Where-Object {
+            -not $_.PSIsContainer
+        } | Sort-Object ) {
+        if (-not (Test-Path -Path $InputFile -PathType Leaf)) {
+            return
+        }
+        $InputFileName = $InputFile.FullName
+        $OutputFileName = Join-Path -Path $OutputDir -ChildPath $InputFile.Name -ErrorAction Stop
+        Write-Host "> faithtype -o ""$($OutputFileName.replace('"', '\"'))"" -- ""$($InputFileName.replace('"', '\"'))"""
+        Start-Process -FilePath $FaithTypeCmd -ArgumentList ($FaithTypeArgs + ('-o', """$($OutputFileName.replace('"', '\"'))""", '--', """$($InputFileName.replace('"', '\"'))""")) -NoNewWindow -Wait -ErrorAction Stop
         Write-Host
     }
 }
