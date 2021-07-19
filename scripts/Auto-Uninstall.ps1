@@ -4,8 +4,8 @@
 
 param (
     [String]
-    # Path to output files.
-    $PatchedFontsDir = 'C:\Patched Fonts',
+    # Windows stock font directory.
+    $StockFontsDir = 'C:\Windows\Fonts'
 
     [String]
     $_Private0 = ''
