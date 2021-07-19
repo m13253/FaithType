@@ -19,6 +19,12 @@ Set-StrictMode -Version 3.0
 $FaithTypeCmd = Join-Path -Path $PSScriptRoot -ChildPath 'faithtype.exe' -ErrorAction Stop
 $FaithTypeArgs = @()
 if (-not (Test-Path -Path $FaithTypeCmd -PathType Leaf -ErrorAction Stop)) {
+    $FaithTypeCmd = Join-Path -Path $PSScriptRoot -ChildPath '..\target\release\faithtype.exe' -ErrorAction Stop
+}
+if (-not (Test-Path -Path $FaithTypeCmd -PathType Leaf -ErrorAction Stop)) {
+    $FaithTypeCmd = Join-Path -Path $PSScriptRoot -ChildPath '..\target\debug\faithtype.exe' -ErrorAction Stop
+}
+if (-not (Test-Path -Path $FaithTypeCmd -PathType Leaf -ErrorAction Stop)) {
     $FaithTypeCmd = if ($null -ne $Env:CARGO -and $Env:CARGO -ne '') {
         $Env:CARGO
     } else {

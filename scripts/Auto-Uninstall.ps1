@@ -5,7 +5,7 @@
 param (
     [String]
     # Windows stock font directory.
-    $StockFontsDir = 'C:\Windows\Fonts'
+    $StockFontsDir = 'C:\Windows\Fonts',
 
     [String]
     $_Private0 = ''
