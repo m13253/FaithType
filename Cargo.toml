@@ -8,3 +8,9 @@ edition = "2018"
 
 [dependencies]
 anyhow = "1.0.41"
+
+# Optimize for size
+[profile.release]
+codegen-units = 1
+lto = true
+opt-level = 'z'
