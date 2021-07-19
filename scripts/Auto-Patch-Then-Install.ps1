@@ -100,8 +100,6 @@ if ($_Private0 -eq '') {
             'gulim.ttc',
             # Impact (Latin)
             'impact.ttf',
-            # DFKai-SB (Traditional Chinese)
-            'kaiu.ttf',
             # Lucida Sans Unicode (Latin)
             'l_10646.ttf',
             # Lucida Console (Latin)
