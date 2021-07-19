@@ -12,14 +12,14 @@ param (
 Set-StrictMode -Version 3.0
 
 Write-Host 'Installing fonts...'
-$RegistryKey = Get-Item -Path 'Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Fonts'
+$RegistryKey = Get-Item -Path 'Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Fonts' -ErrorAction Stop
 foreach ($FontName in $RegistryKey.Property | Sort-Object) {
     $FontPath = $RegistryKey.GetValue($FontName)
     if ($FontPath -like '*[/\]*') {
         continue
     }
-    $PatchedFontPath = Join-Path -Path $PatchedFontsDir -ChildPath $FontPath
-    if (-not (Test-Path -Path $PatchedFontPath -PathType Leaf)) {
+    $PatchedFontPath = Join-Path -Path $PatchedFontsDir -ChildPath $FontPath -ErrorAction Stop
+    if (-not (Test-Path -Path $PatchedFontPath -PathType Leaf -ErrorAction Stop)) {
         continue
     }
     Write-Host "Installing: $PatchedFontPath"
@@ -32,7 +32,7 @@ foreach ($FontName in $RegistryKey.Property | Sort-Object) {
 }
 
 Write-Host 'Modifying font fallback settings...'
-$RegistryKey = Get-Item -Path 'Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\FontLink\SystemLink'
+$RegistryKey = Get-Item -Path 'Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\FontLink\SystemLink' -ErrorAction Stop
 foreach ($FontName in $RegistryKey.Property | Sort-Object) {
     $FallbackFonts = $RegistryKey.GetValue($FontName)
     $FallbackFontsChanged = $false
@@ -47,8 +47,8 @@ foreach ($FontName in $RegistryKey.Property | Sort-Object) {
         if ($FallbackFontPath -like '*[/\]*') {
             return $_
         }
-        $PatchedFontPath = Join-Path -Path $PatchedFontsDir -ChildPath $FallbackFontPath
-        if (-not (Test-Path -Path $PatchedFontPath -PathType Leaf)) {
+        $PatchedFontPath = Join-Path -Path $PatchedFontsDir -ChildPath $FallbackFontPath -ErrorAction Stop
+        if (-not (Test-Path -Path $PatchedFontPath -PathType Leaf -ErrorAction Stop)) {
             return $_
         }
         if ($PatchedFontPath.Contains(',')) {

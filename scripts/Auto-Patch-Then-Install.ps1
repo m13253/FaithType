@@ -20,6 +20,7 @@ param (
 Set-StrictMode -Version 3.0
 
 if ($_Private0 -eq '') {
+
     $_Private0 = (Get-Location).Path
     $_Private1 = if ($null -ne $Env:CARGO -and $Env:CARGO -ne '') {
         $Env:CARGO
@@ -29,6 +30,7 @@ if ($_Private0 -eq '') {
     Start-Process -FilePath 'powershell.exe' -ArgumentList (
         '-ExecutionPolicy', 'Bypass', '-NoLogo', '-NoProfile', '-File', """$($PSCommandPath.replace('"', '\"'))""", '-StockFontsDir', """$($StockFontsDir.replace('"', '\"'))""", '-PatchedFontsDir', """$($PatchedFontsDir.replace('"', '\"'))""", '-_Private0', """$($_Private0.replace('"', '\"'))""", '-_Private1', """$($_Private1.replace('"', '\"'))"""
     ) -Verb 'RunAs' -Wait -ErrorAction Stop | Out-Null
+
 } else {
 
     try {
@@ -123,15 +125,16 @@ if ($_Private0 -eq '') {
             $Env:CARGO = $_Private1
         }
         $InputPaths = $FilesToPatch | ForEach-Object {
-            Join-Path -Path $StockFontsDir -ChildPath $_
+            Join-Path -Path $StockFontsDir -ChildPath $_ -ErrorAction Stop
         } | Where-Object {
-            Test-Path $_ -PathType Leaf
+            Test-Path $_ -PathType Leaf -ErrorAction Stop
         }
         . $PSScriptRoot\Manual-Batch-Patch.ps1 -OutputDir $PatchedFontsDir -InputFiles $InputPaths 
         . $PSScriptRoot\Install-Registry.ps1 -PatchedFontsDir $PatchedFontsDir
     } catch {
         Write-Error -Exception $_.Exception
     }
-    Pause
 
+    Write-Host
+    Read-Host 'Press Enter to exit'
 }

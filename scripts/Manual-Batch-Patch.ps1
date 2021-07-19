@@ -18,23 +18,23 @@ Set-StrictMode -Version 3.0
 
 $FaithTypeCmd = Join-Path -Path $PSScriptRoot -ChildPath 'faithtype.exe' -ErrorAction Stop
 $FaithTypeArgs = @()
-if (-not (Test-Path -Path $FaithTypeCmd -PathType Leaf)) {
+if (-not (Test-Path -Path $FaithTypeCmd -PathType Leaf -ErrorAction Stop)) {
     $FaithTypeCmd = if ($null -ne $Env:CARGO -and $Env:CARGO -ne '') {
         $Env:CARGO
     } else {
         'cargo.exe'
     }
-    $CargoTomlPath = Join-Path -Path $PSScriptRoot -ChildPath '..\Cargo.toml'
+    $CargoTomlPath = Join-Path -Path $PSScriptRoot -ChildPath '..\Cargo.toml' -ErrorAction Stop
     $FaithTypeArgs = 'run', '--bin', 'faithtype', '--manifest-path', """$($CargoTomlPath.replace('"', '\"'))""", '--quiet', '--release', '--'
 }
 
 New-Item -Path $OutputDir -ItemType Directory -ErrorAction Ignore | Out-Null
 
 foreach ($InputPattern in $InputFiles) {
-    foreach ($InputFile in Get-Item $InputPattern | Where-Object {
+    foreach ($InputFile in Get-Item $InputPattern -ErrorAction Stop | Where-Object {
             -not $_.PSIsContainer
         } | Sort-Object ) {
-        if (-not (Test-Path -Path $InputFile -PathType Leaf)) {
+        if (-not (Test-Path -Path $InputFile -PathType Leaf -ErrorAction Stop)) {
             return
         }
         $InputFileName = $InputFile.FullName

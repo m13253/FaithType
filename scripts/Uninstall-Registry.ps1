@@ -11,15 +11,15 @@ param (
 Set-StrictMode -Version 3.0
 
 Write-Host 'Installing fonts...'
-$RegistryKey = Get-Item -Path 'Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Fonts'
+$RegistryKey = Get-Item -Path 'Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Fonts' -ErrorAction Stop
 foreach ($FontName in $RegistryKey.Property | Sort-Object) {
     $FontPath = $RegistryKey.GetValue($FontName)
     if (-not ($FontPath -like '*[/\]*')) {
         continue
     }
     $FontFileName = $FontPath.Replace('/', '\').Split('\')[-1]
-    $StockFontPath = Join-Path -Path $StockFontsDir -ChildPath $FontFileName
-    if (-not (Test-Path -Path $StockFontPath -PathType Leaf)) {
+    $StockFontPath = Join-Path -Path $StockFontsDir -ChildPath $FontFileName -ErrorAction Stop
+    if (-not (Test-Path -Path $StockFontPath -PathType Leaf -ErrorAction Stop)) {
         continue
     }
     Write-Host "Uninstalling: $FontPath"
@@ -32,7 +32,7 @@ foreach ($FontName in $RegistryKey.Property | Sort-Object) {
 }
 
 Write-Host 'Modifying font fallback settings...'
-$RegistryKey = Get-Item -Path 'Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\FontLink\SystemLink'
+$RegistryKey = Get-Item -Path 'Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\FontLink\SystemLink' -ErrorAction Stop
 foreach ($FontName in $RegistryKey.Property | Sort-Object) {
     $FallbackFonts = $RegistryKey.GetValue($FontName)
     $FallbackFontsChanged = $false
@@ -48,8 +48,8 @@ foreach ($FontName in $RegistryKey.Property | Sort-Object) {
             return $_
         }
         $FallbackFontFileName = $FallbackFontPath.Replace('/', '\').Split('\')[-1]
-        $StockFontPath = Join-Path -Path $StockFontsDir -ChildPath $FallbackFontFileName
-        if (-not (Test-Path -Path $StockFontPath -PathType Leaf)) {
+        $StockFontPath = Join-Path -Path $StockFontsDir -ChildPath $FallbackFontFileName -ErrorAction Stop
+        if (-not (Test-Path -Path $StockFontPath -PathType Leaf -ErrorAction Stop)) {
             return $_
         }
         $FallbackFontsChanged = $true
