@@ -43,16 +43,67 @@ if ($_Private0 -eq '') {
             'ariblk.ttf',
             # Batang (Korean)
             'batang.ttc',
+            # Calibri (Latin)
+            'calibrib.ttf',
+            'calibrii.ttf',
+            'calibrili.ttf',
+            'calibril.ttf',
+            'calibri.ttf',
+            'calibriz.ttf',
+            # Cambria (Latin)
+            'cambriab.ttf',
+            'cambriai.ttf',
+            'cambria.ttc',
+            'cambriaz.ttf',
+            # Candara (Latin)
+            'Candarab.ttf',
+            'Candarai.ttf',
+            'Candarali.ttf',
+            'Candaral.ttf',
+            'Candara.ttf',
+            'Candaraz.ttf',
+            # Comic Sans MS (Latin)
+            'comicbd.ttf',
+            'comici.ttf',
+            'comic.ttf',
+            'comicz.ttf',
             # Consolas (Latin)
             'consolab.ttf',
             'consolai.ttf',
             'consola.ttf',
             'consolaz.ttf',
+            # Constantia (Latin)
+            'constanb.ttf',
+            'constani.ttf',
+            'constan.ttf',
+            'constanz.ttf',
+            # Corbel (Latin)
+            'corbelb.ttf',
+            'corbeli.ttf',
+            'corbelli.ttf',
+            'corbell.ttf',
+            'corbel.ttf',
+            'corbelz.ttf',
             # Courier New (Latin)
             'couri.ttf',
             'cour.ttf',
+            # DengXian (Simplified Chinese)
+            'Dengb.ttf',
+            'Dengl.ttf',
+            'Deng.ttf',
+            # Georgia (Latin)
+            'georgiab.ttf',
+            'georgiai.ttf',
+            'georgia.ttf',
+            'georgiaz.ttf',
             # Gulim (Korean)
             'gulim.ttc',
+            # Impact (Latin)
+            'impact.ttf',
+            # DFKai-SB (Traditional Chinese)
+            'kaiu.ttf',
+            # Lucida Sans Unicode (Latin)
+            'l_10646.ttf',
             # Lucida Console (Latin)
             'lucon.ttf',
             # Malgun Gothic (Korean)
@@ -79,6 +130,8 @@ if ($_Private0 -eq '') {
             'msyhbd.ttc',
             'msyhl.ttc',
             'msyh.ttc',
+            # Segoe MDL2 Assets (Symbols)
+            'segmdl2.ttf',
             # Segoe UI (Latin)
             'segoeuib.ttf',
             'segoeuii.ttf',
@@ -92,7 +145,11 @@ if ($_Private0 -eq '') {
             'seguisbi.ttf',
             'seguisb.ttf',
             'seguisli.ttf',
-            # Fangsong (Simplified Chinese)
+            # Segoe UI Symbol (Symbols)
+            'seguisym.ttf',
+            # Segoe UI Variable (Latin)
+            'SegUIVar.ttf',
+            # FangSong (Simplified Chinese)
             'simfang.ttf',
             # SimHei (Simpified Chinese)
             'simhei.ttf',
@@ -101,6 +158,8 @@ if ($_Private0 -eq '') {
             # SimSun (Simplified Chinese)
             'simsunb.ttf',
             'simsun.ttc',
+            # Symbol (Symbols)
+            'symbol.ttf',
             # Tahoma (Latin)
             'tahomabd.ttf',
             'tahoma.ttf',
@@ -109,6 +168,20 @@ if ($_Private0 -eq '') {
             'timesbi.ttf',
             'timesi.ttf',
             'times.ttf',
+            # Trebuchet MS (Latin)
+            'trebucbd.ttf',
+            'trebucbi.ttf',
+            'trebucit.ttf',
+            'trebuc.ttf',
+            # Verdana (Latin)
+            'verdanab.ttf',
+            'verdanai.ttf',
+            'verdana.ttf',
+            'verdanaz.ttf',
+            # Webdings (Symbols)
+            'webdings.ttf',
+            # Wingdings (Symbols)
+            'wingding.ttf',
             # Yu Gothic (Japanese)
             'YuGothB.ttc',
             'YuGothL.ttc',
