@@ -11,7 +11,7 @@ param (
 
 Set-StrictMode -Version 3.0
 
-Write-Host 'Installing fonts...'
+Write-Host 'Registering fonts...'
 $RegistryKey = Get-Item -Path 'Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Fonts' -ErrorAction Stop
 foreach ($FontName in $RegistryKey.Property | Sort-Object) {
     $FontPath = $RegistryKey.GetValue($FontName)
@@ -22,7 +22,7 @@ foreach ($FontName in $RegistryKey.Property | Sort-Object) {
     if (-not (Test-Path -Path $PatchedFontPath -PathType Leaf -ErrorAction Stop)) {
         continue
     }
-    Write-Host "Installing: $PatchedFontPath"
+    Write-Host "Registering: $PatchedFontPath"
     try {
         Set-ItemProperty -Path 'Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Fonts' -Name $FontName -Value $PatchedFontPath -Type String -ErrorAction Stop
     } catch [System.SystemException] {
@@ -72,3 +72,5 @@ foreach ($FontName in $RegistryKey.Property | Sort-Object) {
         }
     }
 }
+
+Write-Host 'Patched fonts registered, please restart your device.'

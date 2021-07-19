@@ -45,7 +45,7 @@ foreach ($InputPattern in $InputFiles) {
         }
         $InputFileName = $InputFile.FullName
         $OutputFileName = Join-Path -Path $OutputDir -ChildPath $InputFile.Name -ErrorAction Stop
-        Write-Host "> faithtype -o ""$($OutputFileName.replace('"', '\"'))"" -- ""$($InputFileName.replace('"', '\"'))"""
+        Write-Host "> faithtype.exe -o ""$($OutputFileName.replace('"', '\"'))"" -- ""$($InputFileName.replace('"', '\"'))"""
         Start-Process -FilePath $FaithTypeCmd -ArgumentList ($FaithTypeArgs + ('-o', """$($OutputFileName.replace('"', '\"'))""", '--', """$($InputFileName.replace('"', '\"'))""")) -NoNewWindow -Wait -ErrorAction Stop
         Write-Host
     }

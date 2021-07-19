@@ -10,7 +10,7 @@ param (
 
 Set-StrictMode -Version 3.0
 
-Write-Host 'Installing fonts...'
+Write-Host 'Unregistering fonts...'
 $RegistryKey = Get-Item -Path 'Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Fonts' -ErrorAction Stop
 foreach ($FontName in $RegistryKey.Property | Sort-Object) {
     $FontPath = $RegistryKey.GetValue($FontName)
@@ -22,7 +22,7 @@ foreach ($FontName in $RegistryKey.Property | Sort-Object) {
     if (-not (Test-Path -Path $StockFontPath -PathType Leaf -ErrorAction Stop)) {
         continue
     }
-    Write-Host "Uninstalling: $FontPath"
+    Write-Host "Unregistering: $FontPath"
     try {
         Set-ItemProperty -Path 'Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Fonts' -Name $FontName -Value $FontFileName -Type String -ErrorAction Stop
     } catch [System.SystemException] {
@@ -31,7 +31,7 @@ foreach ($FontName in $RegistryKey.Property | Sort-Object) {
     }
 }
 
-Write-Host 'Modifying font fallback settings...'
+Write-Host 'Restoring font fallback settings...'
 $RegistryKey = Get-Item -Path 'Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\FontLink\SystemLink' -ErrorAction Stop
 foreach ($FontName in $RegistryKey.Property | Sort-Object) {
     $FallbackFonts = $RegistryKey.GetValue($FontName)
@@ -60,7 +60,7 @@ foreach ($FontName in $RegistryKey.Property | Sort-Object) {
         }
     }
     if ($FallbackFontsChanged) {
-        Write-Host "Modifying: $FontName"
+        Write-Host "Restoring: $FontName"
         try {
             Set-ItemProperty -Path 'Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\FontLink\SystemLink' -Name $FontName -Value $FallbackFonts -Type MultiString -ErrorAction Stop
         } catch [System.SystemException] {
@@ -69,3 +69,5 @@ foreach ($FontName in $RegistryKey.Property | Sort-Object) {
         }
     }
 }
+
+Write-Host 'Fonts restored to stock version, please restart your device.'
