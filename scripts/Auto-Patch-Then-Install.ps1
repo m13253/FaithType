@@ -29,7 +29,7 @@ if ($_Private0 -eq '') {
     }
     Start-Process -FilePath 'powershell.exe' -ArgumentList (
         '-ExecutionPolicy', 'Bypass', '-NoLogo', '-NoProfile', '-File', """$($PSCommandPath.replace('"', '\"'))""", '-StockFontsDir', """$($StockFontsDir.replace('"', '\"'))""", '-PatchedFontsDir', """$($PatchedFontsDir.replace('"', '\"'))""", '-_Private0', """$($_Private0.replace('"', '\"'))""", '-_Private1', """$($_Private1.replace('"', '\"'))"""
-    ) -Verb 'RunAs' -Wait -ErrorAction Stop | Out-Null
+    ) -Verb 'RunAs' -ErrorAction Stop | Out-Null
 
 } else {
 

@@ -18,7 +18,7 @@ if ($_Private0 -eq '') {
     $_Private0 = (Get-Location).Path
     Start-Process -FilePath 'powershell.exe' -ArgumentList (
         '-ExecutionPolicy', 'Bypass', '-NoLogo', '-NoProfile', '-File', """$($PSCommandPath.replace('"', '\"'))""", '-StockFontsDir', """$($StockFontsDir.replace('"', '\"'))""", '-_Private0', """$($_Private0.replace('"', '\"'))"""
-    ) -Verb 'RunAs' -Wait -ErrorAction Stop | Out-Null
+    ) -Verb 'RunAs' -ErrorAction Stop | Out-Null
 
 } else {
 
