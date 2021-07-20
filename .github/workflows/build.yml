@@ -22,11 +22,8 @@ jobs:
       run: |
         New-Item -Path .\dist\FaithType -ItemType Directory -ErrorAction Stop
         Copy -Path ('.\target\x86_64-pc-windows-msvc\release\faithtype.exe', '.\scripts\*.ps1', '.\LICENSE', '.\Readme*.md') -Destination .\dist\FaithType -ErrorAction Stop
-        Push-Location .\dist
-        7z a -mx=9 -mfb=258 -mpass=15 -mmt=off FaithType.zip FaithType\*
-        Pop-Location
     - name: Upload artifact
       uses: actions/upload-artifact@v2
       with:
-        name: FaithType.zip
-        path: dist/FaithType.zip
+        name: FaithType
+        path: dist/FaithType/*
