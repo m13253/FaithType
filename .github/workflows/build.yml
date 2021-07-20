@@ -1,0 +1,32 @@
+name: Build
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  build:
+
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build
+      run: cargo build --release --target x86_64-pc-windows-msvc --verbose
+    - name: Package
+      run: |
+        New-Item -Path .\dist\FaithType -ItemType Directory -ErrorAction Stop
+        Copy -Path ('.\target\release\faithtype.exe', '.\scripts\*.ps1', '.\LICENSE', '.\Readme*.md') -Destination .\dist\FaithType -ErrorAction Stop
+        Push-Location .\dist
+        7z a -mx=9 -mfb=258 -mpass=15 -mmt=off FaithType.zip FaithType\*
+        Pop-Location
+    - name: Upload artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: FaithType.zip
+        path: dist/FaithType.zip
