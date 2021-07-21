@@ -21,7 +21,7 @@ jobs:
     - name: Create the ZIP file
       run: |
         New-Item -Path .\dist\FaithType -ItemType Directory -ErrorAction Stop | Out-Null
-        Copy -Path ('.\target\x86_64-pc-windows-msvc\release\faithtype.exe', '.\scripts\*.ps1', '.\LICENSE', '.\Readme*.md') -Destination .\dist\FaithType -ErrorAction Stop
+        Copy -Path ('.\target\x86_64-pc-windows-msvc\release\faithtype.exe', '.\scripts\*.ps1', '.\LICENSE', '.\Readme*.md', '.\img') -Destination .\dist\FaithType -ErrorAction Stop
         Push-Location .\dist
         7z a -mx=9 -mfb=258 -mpass=15 -mmt=off FaithType.zip FaithType\*
         Pop-Location
@@ -29,6 +29,7 @@ jobs:
       uses: "marvinpinto/action-automatic-releases@latest"
       with:
         repo_token: "${{ secrets.GITHUB_TOKEN }}"
+        automatic_release_tag: "latest"
         title: "Automatic Build"
         files: |
           dist/FaithType.zip
