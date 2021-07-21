@@ -34,7 +34,7 @@ Windows 10バージョン1703 (Creators Update) から、内蔵のTrueTypeレン
 
 3. ターミナル（コマンドプロンプトまたはPowerShell）を開きます。
    ```ps1
-   cd path_to_FaithType
+   cd FaithTypeのパス\
    ```
 
 4. 使用方法を読みます（英語）：

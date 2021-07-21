@@ -34,7 +34,7 @@
 
 3. 打开终端（命令提示符或 PowerShell 皆可）：
    ```ps1
-   cd path_to_FaithType
+   cd FaithTyper的路径\
    ```
 
 4. 阅读使用说明（英文）：

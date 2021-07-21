@@ -43,7 +43,7 @@ PowerShell”, then restart the system. Always uninstall before re-installing.
 
 3. Open a terminal (either Command Prompt or PowerShell):
    ```ps1
-   cd path_to_FaithType
+   cd path_to_FaithType\
    ```
 
 4. Read how to use the tool:

@@ -34,7 +34,7 @@
 
 3. 打開終端機（命令提示字元或者 PowerShell 皆可）：
    ```ps1
-   cd path_to_FaithType
+   cd FaithType之路徑\
    ```
 
 4. 閱讀使用說明（英文）：
