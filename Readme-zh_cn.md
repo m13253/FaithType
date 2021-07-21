@@ -120,7 +120,7 @@
 
   它们的 hinting 指令不支持纵向抗锯齿。你需要移除 hinting。
 
-- **Monotype Courier New**:
+- **Monotype Courier New**：
 
   蒙纳的 Courier New 是按照 IBM 打字机的金属活字来设计的，而并不是按照油墨在纸上渗开之后的形状来设计的。总体来说这个字体很垃圾，请改用 “Bitstream Courier 10 Pitch”。
 
