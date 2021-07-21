@@ -12,51 +12,13 @@
 
 ## 比较
 
-<div style="overflow: scroll">
-  <table style="max-width: none">
-    <tr>
-      <th>使用前</th>
-      <th>使用后</th>
-      <th>FreeType</th>
-    </tr>
-    <tr>
-      <td style="padding: 0px"><img src="img/msjh-before.svg" alt="Microsoft JhengHei UI (Before)" width="320" height="240" /></td>
-      <td style="padding: 0px"><img src="img/msjh-after.svg" alt="Microsoft JhengHei UI (After)" width="320" height="240" /></td>
-      <td style="padding: 0px"><img src="img/msjh-freetype.svg" alt="Microsoft JhengHei UI (FreeType)" width="320" height="240" /></td>
-    </tr>
-    <tr>
-      <td style="padding: 0px"><img src="img/msyh-before.svg" alt="Microsoft YaHei UI (Before)" width="320" height="240" /></td>
-      <td style="padding: 0px"><img src="img/msyh-after.svg" alt="Microsoft YaHei UI (After)" width="320" height="240" /></td>
-      <td style="padding: 0px"><img src="img/msyh-freetype.svg" alt="Microsoft YaHei UI (FreeType)" width="320" height="240" /></td>
-    </tr>
-    <tr>
-      <td style="padding: 0px"><img src="img/meiryo-before.svg" alt="Meiryo UI (Before)" width="320" height="240" /></td>
-      <td style="padding: 0px"><img src="img/meiryo-after.svg" alt="Meiryo UI (After)" width="320" height="240" /></td>
-      <td style="padding: 0px"><img src="img/meiryo-freetype.svg" alt="Meiryo UI (FreeType)" width="320" height="240" /></td>
-    </tr>
-    <tr>
-      <td style="padding: 0px"><img src="img/mingliu-before.svg" alt="PMingLiU (Before)" width="320" height="240" /></td>
-      <td style="padding: 0px"><img src="img/mingliu-after.svg" alt="PMingLiU (After)" width="320" height="240" /></td>
-      <td style="padding: 0px"><img src="img/mingliu-freetype.svg" alt="PMingLiU (FreeType)" width="320" height="240" /></td>
-    </tr>
-    <tr>
-      <td style="padding: 0px"><img src="img/simsun-before.svg" alt="SimSun (Before)" width="320" height="240" /></td>
-      <td style="padding: 0px"><img src="img/simsun-after.svg" alt="SimSun (After)" width="320" height="240" /></td>
-      <td style="padding: 0px"><img src="img/simsun-freetype.svg" alt="SimSun (FreeType)" width="320" height="240" /></td>
-    </tr>
-    <tr>
-      <td style="padding: 0px"><img src="img/msgothic-before.svg" alt="MS UI Gothic (Before)" width="320" height="240" /></td>
-      <td style="padding: 0px"><img src="img/msgothic-after.svg" alt="MS UI Gothic (After)" width="320" height="240" /></td>
-      <td style="padding: 0px"><img src="img/msgothic-freetype.svg" alt="MS UI Gothic (FreeType)" width="320" height="240" /></td>
-    </tr>
-  </table>
-</div>
+<img alt="FaithType 使用前後的比較" src="img/comparison.svg" width="1000" height="966" />
 
-使用前：全新安装的 Windows 10，21H1 版本。
+**Before：**全新安装的 Windows 10，21H1 版本。
 
-使用后：FaithType 修改后的字体文件，同时关闭 LCD 滤波器。
+**After：**FaithType 修改后的字体文件，同时关闭 LCD 滤波器。
 
-FreeType：Fedora Linux 34，同时关闭 hinting 和 LCD 滤波器。
+**FreeType：**Fedora Linux 34，同时关闭 hinting 和 LCD 滤波器。
 
 ## 使用方法（自动）
 
