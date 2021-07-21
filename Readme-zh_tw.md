@@ -10,7 +10,23 @@
 
 使用本工具，你可以給幾乎任何 TrueType 字型啟用縱向反鋸齒，同時刪除內嵌的點陣字，讓字型在 Hi-DPI 熒幕上顯示更加美觀。
 
-## 如何使用本工具？
+## 使用方法（自動）
+
+1. 下載[最新釋出版本](https://github.com/m13253/FaithType/releases/latest)。
+
+2. 解壓縮下載的 ZIP 檔案。
+
+3. 右鍵點選 `Auto-Patch-Then-Install.ps1`，選擇「用 PowerShell 執行」。
+
+4. 等待指令碼自動處理字型檔並安裝至 `C:\Patched Fonts`。
+
+5. 完成後，視窗最下方會提示「Press Enter to exit」。請檢查是否有錯誤訊息。
+
+6. 重新啟動系統。
+
+如果需要卸載，請右鍵點選 `Auto-Uninstall.ps1`，選擇「用 PowerShell 執行」，然後重新啟動。如果需要重新安裝，請先卸載再安裝。
+
+## 使用方法（手動）
 
 1. 下載 [Rust 編譯器](https://www.rust-lang.org/tools/install)。
 
@@ -31,7 +47,11 @@
 5. 處理字型檔：
    ```ps1
    mkdir "C:\Patched Fonts"
+   .\faithtype.exe "C:\Windows\Fonts\msjh.ttc" -o "C:\Patched Fonts\msjh.ttc"
+   .\faithtype.exe "C:\Windows\Fonts\msjhbd.ttc" -o "C:\Patched Fonts\msjhbd.ttc"
+   .\faithtype.exe "C:\Windows\Fonts\msjhl.ttc" -o "C:\Patched Fonts\msjhl.ttc"
    .\faithtype.exe "C:\Windows\Fonts\mingliu.ttc" -o "C:\Patched Fonts\mingliu.ttc"
+   .\faithtype.exe "C:\Windows\Fonts\mingliub.ttc" -o "C:\Patched Fonts\mingliub.ttc"
    ```
 
 6. **可省略：** 若要重建 hinting 指令，在這一步使用 [ttfautohint](https://www.freetype.org/ttfautohint/#download)。
@@ -42,9 +62,12 @@
    ```
    Windows Registry Editor Version 5.00
 
-   [HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Fonts]
+   [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Fonts]
+   "Microsoft JhengHei & Microsoft JhengHei UI (TrueType)"="C:\Patched Fonts\msjh.ttc"
+   "Microsoft JhengHei Bold & Microsoft JhengHei UI Bold (TrueType)"="C:\Patched Fonts\msjhbd.ttc"
+   "Microsoft JhengHei Light & Microsoft JhengHei UI Light (TrueType)"="C:\Patched Fonts\msjhl.ttc"
    "MingLiU & PMingLiU & MingLiU_HKSCS (TrueType)"="C:\Patched Fonts\mingliu.ttc"
-   "細明體 & 新細明體 & 新細明體_HKSCS (TrueType)"="C:\Patched Fonts\mingliu.ttc"
+   "MingLiU-ExtB & PMingLiU-ExtB & MingLiU_HKSCS-ExtB (TrueType)"="C:\Patched Fonts\mingliub.ttc"
    ```
 
 9. 重新啟動系統。
@@ -95,7 +118,7 @@
 
   蒙納的 Courier New 是參照 IBM 打字機的金屬活字來設計的，而不是參照墨水在紙張上滲透開來的輪廓來設計的。不要用筆畫纖細的這個版本，推薦換成「Bitstream Courier 10 Pitch」。
 
-- 4.55 版本之前的 **DynaLab MingLiU**（華康細明體）：
+- 4.55 版本之前的 **DynaLab MingLiU**（華康細明體）、**DynaLab BiauKai**（華康標楷體）：
 
   這個字型依賴 TrueType hinting 來動態組字。請不要移除 hinting 指令。
 

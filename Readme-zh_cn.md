@@ -10,7 +10,23 @@
 
 通过本工具，你可以给几乎任何字体启用纵向抗锯齿，同时还能移除内嵌的点阵字，让高分屏下文字更加耐看。
 
-## 如何使用本工具？
+## 使用方法（自动）
+
+1. 下载[最新版本](https://github.com/m13253/FaithType/releases/latest)。
+
+2. 解压下载的 ZIP 压缩包。
+
+3. 右键点击 `Auto-Patch-Then-Install.ps1`，选择“使用 PowerShell 运行”。
+
+4. 等待脚本自动处理字体文件并安装到 `C:\Patched Fonts`。
+
+5. 完成后，窗口最下方会提示“Press Enter to exit”。请检查有没有任何报错。
+
+6. 重启系统。
+
+如果需要卸载，请右键点击 `Auto-Uninstall.ps1`，选择“使用 PowerShell 运行”，再重启系统。如果需要重新安装，请务必先卸载再重新安装。
+
+## 使用方法（手动）
 
 1. 下载 [Rust 编译器](https://www.rust-lang.org/tools/install)。
 
@@ -31,7 +47,14 @@
 5. 处理字体文件：
    ```ps1
    mkdir "C:\Patched Fonts"
+   .\faithtype.exe "C:\Windows\Fonts\msyh.ttc" -o "C:\Patched Fonts\msyh.ttc"
+   .\faithtype.exe "C:\Windows\Fonts\msyhbd.ttc" -o "C:\Patched Fonts\msyhbd.ttc"
+   .\faithtype.exe "C:\Windows\Fonts\msyhl.ttc" -o "C:\Patched Fonts\msyhl.ttc"
+   .\faithtype.exe "C:\Windows\Fonts\simfang.ttf" -o "C:\Patched Fonts\simfang.ttf"
+   .\faithtype.exe "C:\Windows\Fonts\simhei.ttf" -o "C:\Patched Fonts\simhei.ttf"
+   .\faithtype.exe "C:\Windows\Fonts\simkai.ttf" -o "C:\Patched Fonts\simkai.ttf"
    .\faithtype.exe "C:\Windows\Fonts\simsun.ttc" -o "C:\Patched Fonts\simsun.ttc"
+   .\faithtype.exe "C:\Windows\Fonts\simsunb.ttf" -o "C:\Patched Fonts\simsunb.ttf"
    ```
 
 6. **可选：** 如果你打算重建 hinting 指令，在这一步使用 [ttfautohint](https://www.freetype.org/ttfautohint/#download) 进行 hinting 重建。
@@ -42,9 +65,15 @@
    ```reg
    Windows Registry Editor Version 5.00
 
-   [HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Fonts]
-   "SimSun & NSimSun (TrueType)"="C:\Users\<USERNAME>\AppData\Local\Microsoft\Windows\Fonts\simsun.ttc"
-   "宋体 & 新宋体 (TrueType)"="C:\Users\<USERNAME>\AppData\Local\Microsoft\Windows\Fonts\simsun.ttc"
+   [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Fonts]
+   "FangSong (TrueType)"="C:\Patched Fonts\simfang.ttf"
+   "KaiTi (TrueType)"="C:\Patched Fonts\simkai.ttf"
+   "Microsoft YaHei & Microsoft YaHei UI (TrueType)"="C:\Patched Fonts\msyh.ttc"
+   "Microsoft YaHei Bold & Microsoft YaHei UI Bold (TrueType)"="C:\Patched Fonts\msyhbd.ttc"
+   "Microsoft YaHei Light & Microsoft YaHei UI Light (TrueType)"="C:\Patched Fonts\msyhl.ttc"
+   "SimHei (TrueType)"="C:\Patched Fonts\simhei.ttf"
+   "SimSun & NSimSun (TrueType)"="C:\Patched Fonts\simsun.ttc"
+   "SimSun-ExtB (TrueType)"="C:\Patched Fonts\simsunb.ttf"
    ```
 
 9. 重启系统。
@@ -87,7 +116,7 @@
 
 ## 常见问题：
 
-- **Microsoft Yahei** (微软雅黑)、**Microsoft Jhenghei** (微軟正黑體)、**Meiryo** (メイリオ)：
+- **Microsoft Yahei**（微软雅黑）、**Microsoft Jhenghei**（微軟正黑體）、**Meiryo**（メイリオ）：
 
   它们的 hinting 指令不支持纵向抗锯齿。你需要移除 hinting。
 
@@ -95,7 +124,7 @@
 
   蒙纳的 Courier New 是按照 IBM 打字机的金属活字来设计的，而并不是按照油墨在纸上渗开之后的形状来设计的。总体来说这个字体很垃圾，请改用 “Bitstream Courier 10 Pitch”。
 
-- 4.55 版本之前的 **DynaLab MingLiU** (華康細明體)
+- 4.55 版本之前的 **DynaLab MingLiU**（華康細明體）、**DynaLab BiauKai**（華康標楷體）：
 
   此字体使用 TrueType hinting 来动态组字。请不要移除 hinting。
 

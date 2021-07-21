@@ -16,7 +16,26 @@ By using this tool, you can enable vertical anti-aliasing for almost any
 TrueType outline font, also removing the embedded bitmap, to make the text
 look much better on Hi-DPI displays.
 
-## How to use this tool?
+## Usage (the automatic way)
+
+1. Download the [latest release](https://github.com/m13253/FaithType/releases/latest).
+
+2. Extract the downloaded ZIP file.
+
+3. Right click `Auto-Patch-Then-Install.ps1` and select “Run with PowerShell”.
+
+4. Wait for the script to automatically install patched fonts to
+   `C:\Patched Fonts`.
+
+5. When it finishes, you will see “Press Enter to exit” at the bottom of the
+   window. Please check whether there are any error messages.
+
+6. Restart the system.
+
+If you want to uninstall, right click `Auto-Uninstall.ps1`, select “Run with
+PowerShell”, then restart the system. Always uninstall before re-installing.
+
+## Usage (the manual way)
 
 1. Download [the Rust compiler](https://www.rust-lang.org/tools/install).
 
@@ -37,7 +56,18 @@ look much better on Hi-DPI displays.
 5. Process the font:
    ```ps1
    mkdir "C:\Patched Fonts"
+   .\faithtype.exe "C:\Windows\Fonts\msgothic.ttc" -o "C:\Patched Fonts\msgothic.ttc"
+   .\faithtype.exe "C:\Windows\Fonts\msjh.ttc" -o "C:\Patched Fonts\msjh.ttc"
+   .\faithtype.exe "C:\Windows\Fonts\msjhbd.ttc" -o "C:\Patched Fonts\msjhbd.ttc"
+   .\faithtype.exe "C:\Windows\Fonts\msjhl.ttc" -o "C:\Patched Fonts\msjhl.ttc"
+   .\faithtype.exe "C:\Windows\Fonts\msyh.ttc" -o "C:\Patched Fonts\msyh.ttc"
+   .\faithtype.exe "C:\Windows\Fonts\msyhbd.ttc" -o "C:\Patched Fonts\msyhbd.ttc"
+   .\faithtype.exe "C:\Windows\Fonts\msyhl.ttc" -o "C:\Patched Fonts\msyhl.ttc"
    .\faithtype.exe "C:\Windows\Fonts\simsun.ttc" -o "C:\Patched Fonts\simsun.ttc"
+   .\faithtype.exe "C:\Windows\Fonts\YuGothB.ttc" -o "C:\Patched Fonts\YuGothB.ttc"
+   .\faithtype.exe "C:\Windows\Fonts\YuGothL.ttc" -o "C:\Patched Fonts\YuGothL.ttc"
+   .\faithtype.exe "C:\Windows\Fonts\YuGothM.ttc" -o "C:\Patched Fonts\YuGothM.ttc"
+   .\faithtype.exe "C:\Windows\Fonts\YuGothR.ttc" -o "C:\Patched Fonts\YuGothR.ttc"
    ```
 
 6. **Optional:** If you want to regenerate hinting instructions, use
@@ -50,8 +80,18 @@ look much better on Hi-DPI displays.
    Windows Registry Editor Version 5.00
 
    [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Fonts]
+   "Microsoft JhengHei & Microsoft JhengHei UI (TrueType)"="C:\Patched Fonts\msjh.ttc"
+   "Microsoft JhengHei Bold & Microsoft JhengHei UI Bold (TrueType)"="C:\Patched Fonts\msjhbd.ttc"
+   "Microsoft JhengHei Light & Microsoft JhengHei UI Light (TrueType)"="C:\Patched Fonts\msjhl.ttc"
+   "Microsoft YaHei & Microsoft YaHei UI (TrueType)"="C:\Patched Fonts\msyh.ttc"
+   "Microsoft YaHei Bold & Microsoft YaHei UI Bold (TrueType)"="C:\Patched Fonts\msyhbd.ttc"
+   "Microsoft YaHei Light & Microsoft YaHei UI Light (TrueType)"="C:\Patched Fonts\msyhl.ttc"
+   "MS Gothic & MS UI Gothic & MS PGothic (TrueType)"="C:\Patched Fonts\msgothic.ttc"
    "SimSun & NSimSun (TrueType)"="C:\Patched Fonts\simsun.ttc"
-   "宋体 & 新宋体 (TrueType)"="C:\Patched Fonts\simsun.ttc"
+   "Yu Gothic Bold & Yu Gothic UI Semibold & Yu Gothic UI Bold (TrueType)"="C:\Patched Fonts\YuGothB.ttc"
+   "Yu Gothic Light & Yu Gothic UI Light (TrueType)"="C:\Patched Fonts\YuGothL.ttc"
+   "Yu Gothic Medium & Yu Gothic UI Regular (TrueType)"="C:\Patched Fonts\YuGothM.ttc"
+   "Yu Gothic Regular & Yu Gothic UI Semilight (TrueType)"="C:\Patched Fonts\YuGothR.ttc"
    ```
 
 9. Restart the system.
@@ -132,7 +172,7 @@ too thin.
   Therefore, this Monotype font is garbage, replace it with “Bitstream Courier
   10 Pitch”.
 
-- **DynaLab MingLiU** (華康細明體) before version 4.55:
+- **DynaLab MingLiU** (華康細明體) before version 4.55, **DynaLab BiauKai** (華康標楷體):
 
   The font rendering requires TrueType hinting. Don't remove hinting.
 
