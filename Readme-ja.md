@@ -88,11 +88,11 @@ Windows 10バージョン1703 (Creators Update) から、内蔵のTrueTypeレン
 
 - **なぜ`gasp`テーブルをパッチするのか？**
 
-  Windows 10バージョン1703と1903の間のどこかでClearTypeが壊れてしまったからです。「ClearTypeテキスト チューナー」でLCDフィルタを無効にすることができなくなっています。[\[ 調査 \]](https://github.com/bp2008/BetterClearTypeTuner/wiki/ClearType-Investigations)
+  Windows 10バージョン1703と1903の間のどのバージョンかでClearTypeが壊れてしまったからです。「ClearTypeテキスト チューナー」でLCDフィルタを無効にすることができなくなっています。[\[ 調査 \]](https://github.com/bp2008/BetterClearTypeTuner/wiki/ClearType-Investigations)
 
   LCDフィルタは、本来1:1の表示倍率で液晶ディスプレイ用に設計されています。つまり、プロジェクター、テレビ、ペンタイル配列のディスプレイ、ピボット対応のディスプレイ、スクリーンキャスト、スクリーンショット、Web会議、スライドショー、DPIスケールが必要の古いアプリなどでは、LCDフィルタを使用してはいけません。**「Microsoftペイント」のテキストツールで描かれた文字も、LCDフィルタがかかっている。**
 
-  また、ClearTypeを完全に無効にすると、不具合が発生したり、特定のフォントが読むにくくなります。解決策の一つは、これらのフォントをFaithTypeで処理することです。FaithTypeは、ClearTypeをオフにしたまま、双方向のアンチエイリアシングを有効にするように`gasp`テーブルを修正します。
+  また、ClearTypeを完全に無効にすると、不具合が発生したり、特定のフォントが読むにくくなります。解決策の一つは、これらのフォントをFaithTypeで処理することです。FaithTypeは、ClearTypeをオフにしたまま、双方向のアンチエイリアシングを有効にするように`gasp`テーブルをパッチします。
 
 ## 筆画が細すぎます。
 
