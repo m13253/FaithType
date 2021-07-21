@@ -24,7 +24,7 @@ if ($_Private0 -eq '') {
 
     try {
         Set-Location -LiteralPath $_Private0 -ErrorAction Stop
-        . $PSScriptRoot\Uninstall-Registry.ps1 -StockFontsDir $StockFontsDir
+        . $PSScriptRoot\Manual-Uninstall-Registry.ps1 -StockFontsDir $StockFontsDir
     } catch {
         Write-Error -Exception $_.Exception
     }

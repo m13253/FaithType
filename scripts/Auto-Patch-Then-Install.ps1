@@ -201,7 +201,7 @@ if ($_Private0 -eq '') {
             Test-Path $_ -PathType Leaf -ErrorAction Stop
         }
         . $PSScriptRoot\Manual-Batch-Patch.ps1 -OutputDir $PatchedFontsDir -InputFiles $InputPaths 
-        . $PSScriptRoot\Install-Registry.ps1 -PatchedFontsDir $PatchedFontsDir
+        . $PSScriptRoot\Manual-Install-Registry.ps1 -PatchedFontsDir $PatchedFontsDir
     } catch {
         Write-Error -Exception $_.Exception
     }
