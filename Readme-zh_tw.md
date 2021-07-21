@@ -28,15 +28,13 @@
 
 ## 使用方法（手動）
 
-1. 下載 [Rust 編譯器](https://www.rust-lang.org/tools/install)。
+1. 下載[最新釋出版本](https://github.com/m13253/FaithType/releases/download/latest/FaithType.zip)。
 
-2. 下載 FaithType 的原始碼。
+2. 解壓縮下載的 ZIP 檔案。
 
 3. 打開終端機（命令提示字元或者 PowerShell 皆可）：
    ```ps1
    cd path_to_FaithType
-   cargo build --release
-   cd .\target\release
    ```
 
 4. 閱讀使用說明（英文）：

@@ -37,15 +37,13 @@ PowerShell”, then restart the system. Always uninstall before re-installing.
 
 ## Usage (the manual way)
 
-1. Download [the Rust compiler](https://www.rust-lang.org/tools/install).
+1. Download the [latest release](https://github.com/m13253/FaithType/releases/download/latest/FaithType.zip).
 
-2. Download the source code of FaithType.
+2. Extract the downloaded ZIP file.
 
 3. Open a terminal (either Command Prompt or PowerShell):
    ```ps1
    cd path_to_FaithType
-   cargo build --release
-   cd .\target\release
    ```
 
 4. Read how to use the tool:

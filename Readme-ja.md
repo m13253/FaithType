@@ -28,15 +28,13 @@ Windows 10バージョン1703 (Creators Update) から、内蔵のTrueTypeレン
 
 ## 使い方（マニュアル）
 
-1. [Rust言語のコンパイラ](https://www.rust-lang.org/tools/install)をダウンロードします。
+1. [最新のリリース](https://github.com/m13253/FaithType/releases/download/latest/FaithType.zip)をダウンロードします。
 
-2. FaithTypeのソースコードをダウンロードします。
+2. ZIPファイルを展開します。
 
 3. ターミナル（コマンドプロンプトまたはPowerShell）を開きます。
    ```ps1
    cd path_to_FaithType
-   cargo build --release
-   cd .\target\release
    ```
 
 4. 使用方法を読みます（英語）：
