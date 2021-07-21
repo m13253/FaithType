@@ -64,7 +64,7 @@ PowerShell”, then restart the system. Always uninstall before re-installing.
    .\faithtype.exe --help
    ```
 
-5. Process the font:
+5. Process the fonts:
    ```ps1
    mkdir "C:\Patched Fonts"
    .\faithtype.exe "C:\Windows\Fonts\msgothic.ttc" -o "C:\Patched Fonts\msgothic.ttc"

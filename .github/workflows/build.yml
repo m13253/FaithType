@@ -21,7 +21,7 @@ jobs:
     - name: Create the ZIP file
       run: |
         New-Item -Path .\dist\FaithType -ItemType Directory -ErrorAction Stop | Out-Null
-        Copy -Path ('.\target\x86_64-pc-windows-msvc\release\faithtype.exe', '.\scripts\*.ps1', '.\LICENSE', '.\Readme*.md', '.\img') -Destination .\dist\FaithType -ErrorAction Stop
+        Copy -Path ('.\target\x86_64-pc-windows-msvc\release\faithtype.exe', '.\scripts\*.ps1', '.\LICENSE', '.\Readme*.md', '.\img') -Destination .\dist\FaithType -Recurse -ErrorAction Stop
         Push-Location .\dist
         7z a -mx=9 -mfb=258 -mpass=15 -mmt=off FaithType.zip FaithType\*
         Pop-Location
