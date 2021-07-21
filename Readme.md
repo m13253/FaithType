@@ -16,6 +16,23 @@ By using this tool, you can enable vertical anti-aliasing for almost any
 TrueType outline font, also removing the embedded bitmap, to make the text
 look much better on Hi-DPI displays.
 
+## Comparison
+
+Before                                                          | After                                                         | FreeType
+:-------------------------------------------------------------: | :-----------------------------------------------------------: | :-------------------------------------------------------------:
+![Microsoft JhengHei UI (Before)](img/msjh-before.svg =320x140) | ![Microsoft JhengHei UI (After)](img/msjh-after.svg =320x140) | ![Microsoft JhengHei UI (FreeType)](img/msjh-freetype.svg =320x140)
+![Microsoft YaHei UI (Before)](img/msyh-before.svg =320x140)    | ![Microsoft YaHei UI (After)](img/msyh-after.svg =320x140)    | ![Microsoft YaHei UI (FreeType)](img/msyh-freetype.svg =320x140)
+![Meiryo UI (Before)](img/meiryo-before.svg =320x140)           | ![Meiryo UI (After)](img/meiryo-after.svg =320x140)           | ![Meiryo UI (FreeType)](img/meiryo-freetype.svg =320x140)
+![PMingLiU (Before)](img/mingliu-before.svg =320x140)           | ![PMingLiU (After)](img/mingliu-after.svg =320x140)           | ![PMingLiU (FreeType)](img/mingliu-freetype.svg =320x140)
+![SimSun (Before)](img/simsun-before.svg =320x140)              | ![SimSun (After)](img/simsun-after.svg =320x140)              | ![SimSun (FreeType)](img/simsun-freetype.svg =320x140)
+![MS UI PGothic (Before)](img/msgothic-before.svg =320x140)     | ![MS UI PGothic (After)](img/msgothic-after.svg =320x140)     | ![MS UI Gothic (FreeType)](img/msgothic-freetype.svg =320x140)
+
+Before: Fresh installation of Windows 10 version 21H1.
+
+After: Font patched with FaithType. Also, LCD filter is disabled.
+
+FreeType: Fedora Linux 34, hinting and LCD filter disabled.
+
 ## Usage (the automatic way)
 
 1. Download the [latest release](https://github.com/m13253/FaithType/releases/download/latest/FaithType.zip).

@@ -10,6 +10,23 @@ Windows 10バージョン1703 (Creators Update) から、内蔵のTrueTypeレン
 
 このツールを使えば、ほとんどのTrueTypeアウトラインフォントに対して縦方向のアンチエイリアス処理を有効にすることができ、ビットマップも削除できるので、高DPIディスプレイでの書体の見栄えが格段に良くなります。
 
+## 比較
+
+使用前                                                          | 使用後                                                        | FreeType
+:-------------------------------------------------------------: | :-----------------------------------------------------------: | :-------------------------------------------------------------:
+![Microsoft JhengHei UI (Before)](img/msjh-before.svg =320x140) | ![Microsoft JhengHei UI (After)](img/msjh-after.svg =320x140) | ![Microsoft JhengHei UI (FreeType)](img/msjh-freetype.svg =320x140)
+![Microsoft YaHei UI (Before)](img/msyh-before.svg =320x140)    | ![Microsoft YaHei UI (After)](img/msyh-after.svg =320x140)    | ![Microsoft YaHei UI (FreeType)](img/msyh-freetype.svg =320x140)
+![Meiryo UI (Before)](img/meiryo-before.svg =320x140)           | ![Meiryo UI (After)](img/meiryo-after.svg =320x140)           | ![Meiryo UI (FreeType)](img/meiryo-freetype.svg =320x140)
+![PMingLiU (Before)](img/mingliu-before.svg =320x140)           | ![PMingLiU (After)](img/mingliu-after.svg =320x140)           | ![PMingLiU (FreeType)](img/mingliu-freetype.svg =320x140)
+![SimSun (Before)](img/simsun-before.svg =320x140)              | ![SimSun (After)](img/simsun-after.svg =320x140)              | ![SimSun (FreeType)](img/simsun-freetype.svg =320x140)
+![MS UI PGothic (Before)](img/msgothic-before.svg =320x140)     | ![MS UI PGothic (After)](img/msgothic-after.svg =320x140)     | ![MS UI Gothic (FreeType)](img/msgothic-freetype.svg =320x140)
+
+使用前：新たなWindows 10バージョン21H1のインストール。
+
+使用後：フォントはFaithTypeで修正しました。また、LCDフィルターを無効にしました。
+
+FreeType：Fedora Linux 34。ヒンティングとLCDフィルターを無効にしました。
+
 ## 使い方（オートマチック）
 
 1. [最新のリリース](https://github.com/m13253/FaithType/releases/download/latest/FaithType.zip)をダウンロードします。
@@ -88,7 +105,7 @@ Windows 10バージョン1703 (Creators Update) から、内蔵のTrueTypeレン
 
 - **なぜ`gasp`テーブルをパッチするのか？**
 
-  Windows 10バージョン1703と1903の間のどのバージョンかでClearTypeが壊れてしまったからです。「ClearTypeテキスト チューナー」でLCDフィルタを無効にすることができなくなっています。[\[ 調査 \]](https://github.com/bp2008/BetterClearTypeTuner/wiki/ClearType-Investigations)
+  Windows 10バージョン1703と1903の間のどのバージョンかで**ClearTypeが壊れてしまった**からです。「ClearTypeテキスト チューナー」でLCDフィルタを無効にすることができなくなっています。[\[ 調査 \]](https://github.com/bp2008/BetterClearTypeTuner/wiki/ClearType-Investigations)
 
   LCDフィルタは、本来1:1の表示倍率で液晶ディスプレイ用に設計されています。つまり、プロジェクター、テレビ、ペンタイル配列のディスプレイ、ピボット対応のディスプレイ、スクリーンキャスト、スクリーンショット、Web会議、スライドショー、DPIスケールが必要の古いアプリなどでは、LCDフィルタを使用してはいけません。**「Microsoftペイント」のテキストツールで描かれた文字も、LCDフィルタがかかっている。**
 

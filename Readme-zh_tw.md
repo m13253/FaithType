@@ -10,6 +10,23 @@
 
 使用本工具，你可以給幾乎任何 TrueType 字型啟用縱向反鋸齒，同時刪除內嵌的點陣字，讓字型在 Hi-DPI 熒幕上顯示更加美觀。
 
+## 比較
+
+使用前                                                          | 使用後                                                        | FreeType
+:-------------------------------------------------------------: | :-----------------------------------------------------------: | :-------------------------------------------------------------:
+![Microsoft JhengHei UI (Before)](img/msjh-before.svg =320x140) | ![Microsoft JhengHei UI (After)](img/msjh-after.svg =320x140) | ![Microsoft JhengHei UI (FreeType)](img/msjh-freetype.svg =320x140)
+![Microsoft YaHei UI (Before)](img/msyh-before.svg =320x140)    | ![Microsoft YaHei UI (After)](img/msyh-after.svg =320x140)    | ![Microsoft YaHei UI (FreeType)](img/msyh-freetype.svg =320x140)
+![Meiryo UI (Before)](img/meiryo-before.svg =320x140)           | ![Meiryo UI (After)](img/meiryo-after.svg =320x140)           | ![Meiryo UI (FreeType)](img/meiryo-freetype.svg =320x140)
+![PMingLiU (Before)](img/mingliu-before.svg =320x140)           | ![PMingLiU (After)](img/mingliu-after.svg =320x140)           | ![PMingLiU (FreeType)](img/mingliu-freetype.svg =320x140)
+![SimSun (Before)](img/simsun-before.svg =320x140)              | ![SimSun (After)](img/simsun-after.svg =320x140)              | ![SimSun (FreeType)](img/simsun-freetype.svg =320x140)
+![MS UI PGothic (Before)](img/msgothic-before.svg =320x140)     | ![MS UI PGothic (After)](img/msgothic-after.svg =320x140)     | ![MS UI Gothic (FreeType)](img/msgothic-freetype.svg =320x140)
+
+使用前：全新安裝的 Windows 10，21H1 版本。
+
+使用後：FaithType 修改後的字型檔，同時關閉 LCD 濾波器。
+
+FreeType：Fedora Linux 34，同時關閉 hinting 和 LCD 濾波器。
+
 ## 使用方法（自動）
 
 1. 下載[最新釋出版本](https://github.com/m13253/FaithType/releases/download/latest/FaithType.zip)。
