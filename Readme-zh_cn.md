@@ -12,14 +12,42 @@
 
 ## 比较
 
-使用前                                                          | 使用后                                                        | FreeType
-:-------------------------------------------------------------: | :-----------------------------------------------------------: | :-------------------------------------------------------------:
-![Microsoft JhengHei UI (Before)](img/msjh-before.svg =320x140) | ![Microsoft JhengHei UI (After)](img/msjh-after.svg =320x140) | ![Microsoft JhengHei UI (FreeType)](img/msjh-freetype.svg =320x140)
-![Microsoft YaHei UI (Before)](img/msyh-before.svg =320x140)    | ![Microsoft YaHei UI (After)](img/msyh-after.svg =320x140)    | ![Microsoft YaHei UI (FreeType)](img/msyh-freetype.svg =320x140)
-![Meiryo UI (Before)](img/meiryo-before.svg =320x140)           | ![Meiryo UI (After)](img/meiryo-after.svg =320x140)           | ![Meiryo UI (FreeType)](img/meiryo-freetype.svg =320x140)
-![PMingLiU (Before)](img/mingliu-before.svg =320x140)           | ![PMingLiU (After)](img/mingliu-after.svg =320x140)           | ![PMingLiU (FreeType)](img/mingliu-freetype.svg =320x140)
-![SimSun (Before)](img/simsun-before.svg =320x140)              | ![SimSun (After)](img/simsun-after.svg =320x140)              | ![SimSun (FreeType)](img/simsun-freetype.svg =320x140)
-![MS UI PGothic (Before)](img/msgothic-before.svg =320x140)     | ![MS UI PGothic (After)](img/msgothic-after.svg =320x140)     | ![MS UI Gothic (FreeType)](img/msgothic-freetype.svg =320x140)
+<table cellspacing="0">
+  <tr>
+    <th>使用前</th>
+    <th>使用后</th>
+    <th>FreeType</th></tr>
+  <tr>
+    <td><img src="img/msjh-before.svg" alt="Microsoft JhengHei UI (Before)" width="320" height="240" /></td>
+    <td><img src="img/msjh-after.svg" alt="Microsoft JhengHei UI (After)" width="320" height="240" /></td>
+    <td><img src="img/msjh-freetype.svg" alt="Microsoft JhengHei UI (FreeType)" width="320" height="240" /></td>
+  </tr>
+  <tr>
+    <td><img src="img/msyh-before.svg" alt="Microsoft YaHei UI (Before)" width="320" height="240" /></td>
+    <td><img src="img/msyh-after.svg" alt="Microsoft YaHei UI (After)" width="320" height="240" /></td>
+    <td><img src="img/msyh-freetype.svg" alt="Microsoft YaHei UI (FreeType)" width="320" height="240" /></td>
+  </tr>
+  <tr>
+    <td><img src="img/meiryo-before.svg" alt="Meiryo UI (Before)" width="320" height="240" /></td>
+    <td><img src="img/meiryo-after.svg" alt="Meiryo UI (After)" width="320" height="240" /></td>
+    <td><img src="img/meiryo-freetype.svg" alt="Meiryo UI (FreeType)" width="320" height="240" /></td>
+  </tr>
+  <tr>
+    <td><img src="img/mingliu-before.svg" alt="PMingLiU (Before)" width="320" height="240" /></td>
+    <td><img src="img/mingliu-after.svg" alt="PMingLiU (After)" width="320" height="240" /></td>
+    <td><img src="img/mingliu-freetype.svg" alt="PMingLiU (FreeType)" width="320" height="240" /></td>
+  </tr>
+  <tr>
+    <td><img src="img/simsun-before.svg" alt="SimSun (Before)" width="320" height="240" /></td>
+    <td><img src="img/simsun-after.svg" alt="SimSun (After)" width="320" height="240" /></td>
+    <td><img src="img/simsun-freetype.svg" alt="SimSun (FreeType)" width="320" height="240" /></td>
+  </tr>
+  <tr>
+    <td><img src="img/msgothic-before.svg" alt="MS UI Gothic (Before)" width="320" height="240" /></td>
+    <td><img src="img/msgothic-after.svg" alt="MS UI Gothic (After)" width="320" height="240" /></td>
+    <td><img src="img/msgothic-freetype.svg" alt="MS UI Gothic (FreeType)" width="320" height="240" /></td>
+  </tr>
+</table>
 
 使用前：全新安装的 Windows 10，21H1 版本。
 
