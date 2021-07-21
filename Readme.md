@@ -18,7 +18,10 @@ look much better on Hi-DPI displays.
 
 ## Comparison
 
-<img alt="Before and after using FaithType compared" src="img/comparison.svg" width="1000" height="966" />
+The image below must be viewed at 100% zoom. If you are on PC, click
+[`Readme.md`](Readme.md) to open a wider view.
+
+![Before and after using FaithType, compared](comparison.svg)
 
 **Before:** Fresh installation of Windows 10 version 21H1.
 

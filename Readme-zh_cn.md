@@ -12,13 +12,15 @@
 
 ## 比较
 
-<img alt="FaithType 使用前後的比較" src="img/comparison.svg" width="1000" height="966" />
+以下的图片必须以 100% 缩放比例观看。
 
-**Before：**全新安装的 Windows 10，21H1 版本。
+![FaithType 使用前后的比较](img/comparison.svg)
 
-**After：**FaithType 修改后的字体文件，同时关闭 LCD 滤波器。
+**Before：** 全新安装的 Windows 10，21H1 版本。
 
-**FreeType：**Fedora Linux 34，同时关闭 hinting 和 LCD 滤波器。
+**After：** FaithType 修改后的字体文件，同时关闭 LCD 滤波器。
+
+**FreeType：** Fedora Linux 34，同时关闭 hinting 和 LCD 滤波器。
 
 ## 使用方法（自动）
 

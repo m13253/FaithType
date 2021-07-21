@@ -12,13 +12,15 @@ Windows 10バージョン1703 (Creators Update) から、内蔵のTrueTypeレン
 
 ## 比較
 
-<img alt="FaithTypeを使用前後の比較" src="img/comparison.svg" width="1000" height="966" />
+下の画像は100%の表示倍率で見る必要があります。
 
-**Before：**新たなWindows 10バージョン21H1のインストール。
+![FaithTypeの使用前後の比較](img/comparison.svg)
 
-**After：**フォントはFaithTypeで修正しました。また、LCDフィルターを無効にしました。
+**Before：** 新たなWindows 10バージョン21H1のインストール。
 
-**FreeType：**Fedora Linux 34。ヒンティングとLCDフィルターを無効にしました。
+**After：** フォントはFaithTypeで修正しました。また、LCDフィルターを無効にしました。
+
+**FreeType：** Fedora Linux 34。ヒンティングとLCDフィルターを無効にしました。
 
 ## 使い方（オートマチック）
 
