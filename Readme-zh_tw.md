@@ -12,7 +12,7 @@
 
 ## 使用方法（自動）
 
-1. 下載[最新釋出版本](https://github.com/m13253/FaithType/releases/latest)。
+1. 下載[最新釋出版本](https://github.com/m13253/FaithType/releases/download/latest/FaithType.zip)。
 
 2. 解壓縮下載的 ZIP 檔案。
 

@@ -12,7 +12,7 @@ Windows 10バージョン1703 (Creators Update) から、内蔵のTrueTypeレン
 
 ## 使い方（オートマチック）
 
-1. [最新のリリース](https://github.com/m13253/FaithType/releases/latest)をダウンロードします。
+1. [最新のリリース](https://github.com/m13253/FaithType/releases/download/latest/FaithType.zip)をダウンロードします。
 
 2. ZIPファイルを展開します。
 

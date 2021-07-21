@@ -18,7 +18,7 @@ look much better on Hi-DPI displays.
 
 ## Usage (the automatic way)
 
-1. Download the [latest release](https://github.com/m13253/FaithType/releases/latest).
+1. Download the [latest release](https://github.com/m13253/FaithType/releases/download/latest/FaithType.zip).
 
 2. Extract the downloaded ZIP file.
 
