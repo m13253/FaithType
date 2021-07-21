@@ -18,42 +18,45 @@ look much better on Hi-DPI displays.
 
 ## Comparison
 
-<table cellspacing="0">
-  <tr>
-    <th>Before</th>
-    <th>After</th>
-    <th>FreeType</th></tr>
-  <tr>
-    <td><img src="img/msjh-before.svg" alt="Microsoft JhengHei UI (Before)" width="320" height="240" /></td>
-    <td><img src="img/msjh-after.svg" alt="Microsoft JhengHei UI (After)" width="320" height="240" /></td>
-    <td><img src="img/msjh-freetype.svg" alt="Microsoft JhengHei UI (FreeType)" width="320" height="240" /></td>
-  </tr>
-  <tr>
-    <td><img src="img/msyh-before.svg" alt="Microsoft YaHei UI (Before)" width="320" height="240" /></td>
-    <td><img src="img/msyh-after.svg" alt="Microsoft YaHei UI (After)" width="320" height="240" /></td>
-    <td><img src="img/msyh-freetype.svg" alt="Microsoft YaHei UI (FreeType)" width="320" height="240" /></td>
-  </tr>
-  <tr>
-    <td><img src="img/meiryo-before.svg" alt="Meiryo UI (Before)" width="320" height="240" /></td>
-    <td><img src="img/meiryo-after.svg" alt="Meiryo UI (After)" width="320" height="240" /></td>
-    <td><img src="img/meiryo-freetype.svg" alt="Meiryo UI (FreeType)" width="320" height="240" /></td>
-  </tr>
-  <tr>
-    <td><img src="img/mingliu-before.svg" alt="PMingLiU (Before)" width="320" height="240" /></td>
-    <td><img src="img/mingliu-after.svg" alt="PMingLiU (After)" width="320" height="240" /></td>
-    <td><img src="img/mingliu-freetype.svg" alt="PMingLiU (FreeType)" width="320" height="240" /></td>
-  </tr>
-  <tr>
-    <td><img src="img/simsun-before.svg" alt="SimSun (Before)" width="320" height="240" /></td>
-    <td><img src="img/simsun-after.svg" alt="SimSun (After)" width="320" height="240" /></td>
-    <td><img src="img/simsun-freetype.svg" alt="SimSun (FreeType)" width="320" height="240" /></td>
-  </tr>
-  <tr>
-    <td><img src="img/msgothic-before.svg" alt="MS UI Gothic (Before)" width="320" height="240" /></td>
-    <td><img src="img/msgothic-after.svg" alt="MS UI Gothic (After)" width="320" height="240" /></td>
-    <td><img src="img/msgothic-freetype.svg" alt="MS UI Gothic (FreeType)" width="320" height="240" /></td>
-  </tr>
-</table>
+<div style="overflow: scroll">
+  <table style="max-width: none">
+    <tr>
+      <th>Before</th>
+      <th>After</th>
+      <th>FreeType</th>
+    </tr>
+    <tr>
+      <td style="padding: 0px"><img src="img/msjh-before.svg" alt="Microsoft JhengHei UI (Before)" width="320" height="240" /></td>
+      <td style="padding: 0px"><img src="img/msjh-after.svg" alt="Microsoft JhengHei UI (After)" width="320" height="240" /></td>
+      <td style="padding: 0px"><img src="img/msjh-freetype.svg" alt="Microsoft JhengHei UI (FreeType)" width="320" height="240" /></td>
+    </tr>
+    <tr>
+      <td style="padding: 0px"><img src="img/msyh-before.svg" alt="Microsoft YaHei UI (Before)" width="320" height="240" /></td>
+      <td style="padding: 0px"><img src="img/msyh-after.svg" alt="Microsoft YaHei UI (After)" width="320" height="240" /></td>
+      <td style="padding: 0px"><img src="img/msyh-freetype.svg" alt="Microsoft YaHei UI (FreeType)" width="320" height="240" /></td>
+    </tr>
+    <tr>
+      <td style="padding: 0px"><img src="img/meiryo-before.svg" alt="Meiryo UI (Before)" width="320" height="240" /></td>
+      <td style="padding: 0px"><img src="img/meiryo-after.svg" alt="Meiryo UI (After)" width="320" height="240" /></td>
+      <td style="padding: 0px"><img src="img/meiryo-freetype.svg" alt="Meiryo UI (FreeType)" width="320" height="240" /></td>
+    </tr>
+    <tr>
+      <td style="padding: 0px"><img src="img/mingliu-before.svg" alt="PMingLiU (Before)" width="320" height="240" /></td>
+      <td style="padding: 0px"><img src="img/mingliu-after.svg" alt="PMingLiU (After)" width="320" height="240" /></td>
+      <td style="padding: 0px"><img src="img/mingliu-freetype.svg" alt="PMingLiU (FreeType)" width="320" height="240" /></td>
+    </tr>
+    <tr>
+      <td style="padding: 0px"><img src="img/simsun-before.svg" alt="SimSun (Before)" width="320" height="240" /></td>
+      <td style="padding: 0px"><img src="img/simsun-after.svg" alt="SimSun (After)" width="320" height="240" /></td>
+      <td style="padding: 0px"><img src="img/simsun-freetype.svg" alt="SimSun (FreeType)" width="320" height="240" /></td>
+    </tr>
+    <tr>
+      <td style="padding: 0px"><img src="img/msgothic-before.svg" alt="MS UI Gothic (Before)" width="320" height="240" /></td>
+      <td style="padding: 0px"><img src="img/msgothic-after.svg" alt="MS UI Gothic (After)" width="320" height="240" /></td>
+      <td style="padding: 0px"><img src="img/msgothic-freetype.svg" alt="MS UI Gothic (FreeType)" width="320" height="240" /></td>
+    </tr>
+  </table>
+</div>
 
 Before: Fresh installation of Windows 10 version 21H1.
 
