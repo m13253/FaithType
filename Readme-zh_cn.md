@@ -14,7 +14,7 @@
 
 以下的图片必须以 100% 缩放比例观看。
 
-![FaithType 使用前后的比较](img/comparison.svg)
+![（图片）FaithType 使用前后的比较](img/comparison.svg)
 
 **Before：** 全新安装的 Windows 10，21H1 版本。
 

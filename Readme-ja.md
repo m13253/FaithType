@@ -14,7 +14,7 @@ Windows 10バージョン1703 (Creators Update) から、内蔵のTrueTypeレン
 
 下の画像は100%の表示倍率で見る必要があります。
 
-![FaithTypeの使用前後の比較](img/comparison.svg)
+![（画像）FaithTypeの使用前後の比較](img/comparison.svg)
 
 **Before：** 新たなWindows 10バージョン21H1のインストール。
 
