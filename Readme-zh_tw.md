@@ -14,7 +14,7 @@
 
 以下的影像必須以 100% 縮放比例觀看。
 
-![（影像）FaithType 使用前後的比較](img/comparison.svg)
+<a href="https://raw.githubusercontent.com/m13253/FaithType/master/img/comparison.svg">![（影像）FaithType 使用前後的比較](img/comparison.svg)</a>
 
 **使用前：** 全新安裝的 Windows 10，21H1 版本。
 
