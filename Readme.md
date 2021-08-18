@@ -4,6 +4,10 @@ Modify fonts to remove bitmap and disable gridfit for Windows font rendering.
 
 \[ English \] [\[ 正體中文 \]](Readme-zh_tw.md) [\[ 简体中文 \]](Readme-zh_cn.md) [\[ 日本語 \]](Readme-ja.md)
 
+## Download
+
+[Download](https://github.com/m13253/FaithType/releases/download/latest/FaithType.zip)
+
 ## Description
 
 Since Windows 10 version 1703 (Creators Update), its built-in TrueType renderer

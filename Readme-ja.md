@@ -4,6 +4,10 @@ Windowsの文字レンダリングにおいて、ビットマップを削除し�
 
 [\[ English \]](Readme.md) [\[ 正體中文 \]](Readme-zh_tw.md) [\[ 简体中文 \]](Readme-zh_cn.md) \[ 日本語 \]
 
+## ダウンロード
+
+[ダウンロード](https://github.com/m13253/FaithType/releases/download/latest/FaithType.zip)
+
 ## 説明
 
 Windows 10バージョン1703 (Creators Update) から、内蔵のTrueTypeレンダラーが縦方向のアンチエイリアスを対応するようになりました。各方向に4段階のグレースケールの濃淡しかないにも関わらず、特に日本語の表現力が劇的に向上します。残念なことに、この機能は一部のフォントの特定のサイズに対してのみ有効です。

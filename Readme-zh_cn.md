@@ -4,6 +4,10 @@
 
 [\[ English \]](Readme.md) [\[ 正體中文 \]](Readme-zh_tw.md) \[ 简体中文 \] [\[ 日本語 \]](Readme-ja.md)
 
+## 下载
+
+[下载](https://github.com/m13253/FaithType/releases/download/latest/FaithType.zip)
+
 ## 简介
 
 自从 Windows 10 的 1703 版本（创造者更新）开始，自带的 TrueType 渲染器能支持纵向抗锯齿了。虽然每个方向只有 4 级灰度，但也大幅优化了中文显示的效果。可惜的是，只有寥寥数个字体在特定尺寸下能默认使用这个功能。

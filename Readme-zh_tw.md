@@ -4,6 +4,10 @@
 
 [\[ English \]](Readme.md) \[ 正體中文 \] [\[ 简体中文 \]](Readme-zh_cn.md) [\[ 日本語 \]](Readme-ja.md)
 
+## 下載
+
+[下載](https://github.com/m13253/FaithType/releases/download/latest/FaithType.zip)
+
 ## 簡介
 
 自從 Windows 10 的 1703 版本（創造者更新），內建的 TrueType 彩現器開始支援縱向反鋸齒了。雖然每個方向只有 4 級灰階，但已大幅提升了中文的呈現效果。可惜只有寥寥幾個字型檔的選定尺寸能夠使用這個功能。
