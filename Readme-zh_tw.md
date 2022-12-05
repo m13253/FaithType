@@ -108,7 +108,7 @@
 
 ## 筆畫太細了！
 
-在旧版本 (Mac) OS X 中，TrueType 彩現器會在低解析度熒幕上加粗筆畫來維持穩定的對比度。Windows 不會做筆畫加粗。我的個人經驗是，好認的文字彩現需要至少 1.3px 寬，而 Windows 內建的字型都太細了。
+在旧版本 (Mac) OS X 中，TrueType 彩現器會在低解析度熒幕上[加粗筆畫](https://github.com/snowie2000/mactype/issues/819)來維持穩定的對比度。Windows 不會做筆畫加粗。我的個人經驗是，好認的文字彩現需要至少 1.3px 寬，而 Windows 內建的字型都太細了。
 
 1. 將 gamma 值從 `0x00000898` 改為 `0x00000708` 能緩解：
    ```reg

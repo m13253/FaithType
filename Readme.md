@@ -152,7 +152,8 @@ PowerShell”, then restart the system. Always uninstall before re-installing.
 
 ## Strokes look too thin!
 
-On older versions of (Mac) OS X, the TrueType renderer widens the strokes to
+On older versions of (Mac) OS X, the TrueType renderer
+[widens the strokes](https://github.com/snowie2000/mactype/issues/819) to
 maintain a stable contrast on Low-DPI displays. Windows can't do stroke
 widening. My personal experience with graphics indicates 1.3px is the minimum
 width for legible font rendering, but most built-in fonts in Windows are way

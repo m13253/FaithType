@@ -114,7 +114,7 @@
 
 ## 笔划好细呀！
 
-在旧版 (Mac) OS X 中，TrueType 渲染器会加粗笔划来在低分屏上维持稳定的对比度。但 Windows 并不会做笔划加粗。我的个人经验是易认的文字渲染需要至少 1.3px 笔划宽度，但 Windows 自带的字体都太细了。
+在旧版 (Mac) OS X 中，TrueType 渲染器会[加粗笔划](https://github.com/snowie2000/mactype/issues/819)来在低分屏上维持稳定的对比度。但 Windows 并不会做笔划加粗。我的个人经验是易认的文字渲染需要至少 1.3px 笔划宽度，但 Windows 自带的字体都太细了。
 
 1. 把 gamma 从 `0x00000898` 改成 `0x00000708` 可能有用：
    ```reg
