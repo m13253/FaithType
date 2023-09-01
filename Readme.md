@@ -11,10 +11,11 @@ Modify fonts to remove bitmap and disable gridfit for Windows font rendering.
 ## Description
 
 Since Windows 10 version 1703 (Creators Update), its built-in TrueType renderer
-now supports vertical anti-aliasing. Despite there are only 4 levels of
-grayscale shade on each direction, it dramatically improves text rendering,
-especially for CJK languages. Sadly, it is only enabled for selected fonts at
-selected sizes.
+now supports vertical anti-aliasing. Although the new anti-aliasing mode is
+actually 16× SSAA, (still remarkably inferior than FreeType’s integration-based
+anti-aliasing,) it is much better than before, and dramatically improves text
+rendering, especially for CJK languages. Sadly, it is only enabled for selected
+fonts at selected sizes.
 
 By using this tool, you can enable vertical anti-aliasing for almost any
 TrueType outline font, also removing the embedded bitmap, to make the text
