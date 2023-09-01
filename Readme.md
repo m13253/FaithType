@@ -28,11 +28,11 @@ The image below must be viewed at 100% zoom. If you are on PC, click
 
 <a href="https://raw.githubusercontent.com/m13253/FaithType/master/img/comparison.svg">![(Image) Before and after using FaithType, compared](img/comparison.svg)</a>
 
-**Before:** Fresh installation of Windows 10 version 21H1.
+**Before FaithType:** Fresh installation of Windows 10 version 21H1.
 
-**After:** Font patched with FaithType. Also, LCD filter is disabled.
+**After FaithType:** Font patched with FaithType. Also, LCD filter is disabled.
 
-**FreeType:** Fedora Linux 34, hinting and LCD filter disabled.
+**FreeType (reference):** Fedora Linux 34, hinting and LCD filter disabled.
 
 ## Usage (the automatic way)
 
@@ -172,6 +172,17 @@ too thin.
    to generate TrueType hinting to widen the strokes.
 
 3. The ultimate solution is to buy a Hi-DPI display.
+
+## Text in some applications render even worse
+
+Depending on the GUI framework the application is developed on, there may be
+technical limitations with FaithType.
+
+- **Java**: Does not load fonts installed at a custom path.
+- **Qt**: Pixels at the border of each letter may be missing. A wrong gamma
+  value may be chosen, causing text to appear less dark than intended.
+- **WPF** (e.g., **Visual Studio**): Does not support bidirectional
+  anti-aliasing.
 
 ## Common issues
 

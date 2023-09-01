@@ -20,11 +20,11 @@
 
 <a href="https://raw.githubusercontent.com/m13253/FaithType/master/img/comparison.svg">![（影像）FaithType 使用前後的比較](img/comparison.svg)</a>
 
-**使用前：** 全新安裝的 Windows 10，21H1 版本。
+**Before FaithType：** 全新安裝的 Windows 10，21H1 版本。
 
-**使用後：** FaithType 修改後的字型檔，同時關閉 LCD 濾波器。
+**After FaithType：** FaithType 修改後的字型檔，同時關閉 LCD 濾波器。
 
-**FreeType：** Fedora Linux 34，同時關閉 hinting 和 LCD 濾波器。
+**FreeType（參考）：** Fedora Linux 34，同時關閉 hinting 和 LCD 濾波器。
 
 ## 使用方法（自動）
 
@@ -121,6 +121,14 @@
 2. 此外可以用 [ttfautohint](https://www.freetype.org/ttfautohint/#download) 來產生加粗筆畫的 TrueType hinting 指令。
 
 3. 終極解決方法是買一台 Hi-DPI 顯示器。
+
+## 部分應用程式的文字呈現效果變差了
+
+視程式開發選用的 GUI 框架不同，FaithType 會有一定的技術限制。
+
+- **Java**：不支援從自訂路徑載入字型。
+- **Qt**：文字邊緣的像素可能會消失。Gamma 值可能會錯誤，以致文字變淡。
+- **WPF**（例如 **Visual Studio**）：不支援雙向反鋸齒。
 
 ## 常見問題
 

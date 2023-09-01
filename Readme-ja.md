@@ -20,11 +20,11 @@ Windows 10バージョン1703 (Creators Update) から、内蔵のTrueTypeレン
 
 <a href="https://raw.githubusercontent.com/m13253/FaithType/master/img/comparison.svg">![（画像）FaithTypeの使用前後の比較](img/comparison.svg)</a>
 
-**Before：** 新たなWindows 10バージョン21H1のインストール。
+**Before FaithType：** 新たなWindows 10バージョン21H1のインストール。
 
-**After：** フォントはFaithTypeで修正しました。また、LCDフィルターを無効にしました。
+**After FaithType：** フォントはFaithTypeで修正しました。また、LCDフィルターを無効にしました。
 
-**FreeType：** Fedora Linux 34。ヒンティングとLCDフィルターを無効にしました。
+**FreeType（参照）：** Fedora Linux 34。ヒンティングとLCDフィルターを無効にしました。
 
 ## 使い方（オートマチック）
 
@@ -108,7 +108,7 @@ Windows 10バージョン1703 (Creators Update) から、内蔵のTrueTypeレン
 
   LCDフィルタは、本来1:1の表示倍率で液晶ディスプレイ用に設計されています。つまり、プロジェクター、テレビ、ペンタイル配列のディスプレイ、ピボット対応のディスプレイ、スクリーンキャスト、スクリーンショット、Web会議、スライドショー、DPIスケールが必要の古いアプリなどでは、LCDフィルタを使用してはいけません。**「Microsoftペイント」のテキストツールで描かれた文字も、LCDフィルタがかかっている。**
 
-  また、ClearTypeを完全に無効にすると、不具合が発生したり、特定のフォントが読むにくくなります。解決策の一つは、これらのフォントをFaithTypeで処理することです。FaithTypeは、ClearTypeをオフにしたまま、双方向のアンチエイリアシングを有効にするように`gasp`テーブルをパッチします。
+  また、ClearTypeを完全に無効にすると、不具合が発生したり、特定のフォントが読むにくくなります。解決策の一つは、これらのフォントをFaithTypeで処理することです。FaithTypeは、ClearTypeをオフにしたまま、双方向のアンチエイリアスを有効にするように`gasp`テーブルをパッチします。
 
 ## 筆画が細すぎます。
 
@@ -125,6 +125,14 @@ Windows 10バージョン1703 (Creators Update) から、内蔵のTrueTypeレン
 2. 他の方法としては、[ttfautohint](https://www.freetype.org/ttfautohint/)を使ってTrueTypeヒンティングを再生成し、筆画を太くします。
 
 3. 究極の解決策は、Hi-DPIモニターを購入することです。
+
+## 一部のアプリにはテキストの表現が悪くなります
+
+アプリの開発が対応するGUIフレームワークによっては、技術的な制限があるかもしれません。
+
+- **Java**：カスタムパスにインストールされたフォントをロードできません。
+- **Qt**：文字の周囲のピクセルが欠けていることがあります。誤ったガンマ値が選択され、文字が予想より暗く表示されることがあります。
+- **WPF**（例えば**Visual Studio**）：双方向のアンチエイリアスは対応しません。
 
 ## 一般的な問題
 

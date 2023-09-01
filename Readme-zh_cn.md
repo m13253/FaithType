@@ -20,11 +20,11 @@
 
 <a href="https://raw.githubusercontent.com/m13253/FaithType/master/img/comparison.svg">![（图片）FaithType 使用前后的比较](img/comparison.svg)</a>
 
-**Before：** 全新安装的 Windows 10，21H1 版本。
+**Before FaithType：** 全新安装的 Windows 10，21H1 版本。
 
-**After：** FaithType 修改后的字体文件，同时关闭 LCD 滤波器。
+**After FaithType：** FaithType 修改后的字体文件，同时关闭 LCD 滤波器。
 
-**FreeType：** Fedora Linux 34，同时关闭 hinting 和 LCD 滤波器。
+**FreeType（参考）：** Fedora Linux 34，同时关闭 hinting 和 LCD 滤波器。
 
 ## 使用方法（自动）
 
@@ -127,6 +127,14 @@
 2. 另外一个办法是使用 [ttfautohint](https://www.freetype.org/ttfautohint/) 来生成加粗笔划的 hinting 指令。
 
 3. 终极解决方案是去买一台高分屏。
+
+## 有些应用程序内的文字渲染变糟了
+
+根据应用程序开发所使用的 GUI 框架，FaithType 有如下的技术限制。
+
+- **Java**：不支持从自定义路径加载字体。
+- **Qt**：文字边缘的像素可能会被裁切。可能会选择错误的 gamma，导致文字太淡。
+- **WPF**（例如 **Visual Studio**）：不支持双向抗锯齿。
 
 ## 常见问题：
 
