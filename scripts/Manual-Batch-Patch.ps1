@@ -11,7 +11,7 @@ param (
     [String]
     [Parameter(Mandatory = $true)]
     # Path to output files.
-    $OutputDir = 'C:\Patched Fonts'
+    $OutputDir = 'C:\Windows\Fonts\FaithType'
 )
 
 Set-StrictMode -Version 3.0

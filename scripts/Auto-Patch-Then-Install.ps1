@@ -9,7 +9,7 @@ param (
 
     [String]
     # Path to output files.
-    $PatchedFontsDir = 'C:\Patched Fonts',
+    $PatchedFontsDir = 'C:\Windows\Fonts\FaithType',
 
     [String]
     $_Private0 = '',

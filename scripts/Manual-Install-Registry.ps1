@@ -6,7 +6,7 @@ param (
     [String]
     [Parameter(Mandatory = $true)]
     # Directory that contains already patched fonts.
-    $PatchedFontsDir = 'C:\Patched Fonts'
+    $PatchedFontsDir = 'C:\Windows\Fonts\FaithType'
 )
 
 Set-StrictMode -Version 3.0
