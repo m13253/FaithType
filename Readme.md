@@ -173,7 +173,7 @@ too thin.
 
 3. The ultimate solution is to buy a Hi-DPI display.
 
-## Text in some applications render even worse
+## Text in some applications renders even worse
 
 Depending on the GUI framework the application is developed on, there may be
 technical limitations with FaithType.
