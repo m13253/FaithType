@@ -34,7 +34,7 @@
 
 3. 右鍵點選 `Auto-Patch-Then-Install.ps1`，選擇「用 PowerShell 執行」。
 
-4. 等待指令碼自動處理字型檔並安裝至 `C:\Patched Fonts`。
+4. 等待指令碼自動處理字型檔並安裝至 `C:\Windows\Fonts\FaithType`。
 
 5. 完成後，視窗最下方會提示「Press Enter to exit」。請檢查是否有錯誤訊息。
 
@@ -60,12 +60,12 @@
 
 5. 處理字型檔：
    ```ps1
-   mkdir "C:\Patched Fonts"
-   .\faithtype.exe "C:\Windows\Fonts\msjh.ttc" -o "C:\Patched Fonts\msjh.ttc"
-   .\faithtype.exe "C:\Windows\Fonts\msjhbd.ttc" -o "C:\Patched Fonts\msjhbd.ttc"
-   .\faithtype.exe "C:\Windows\Fonts\msjhl.ttc" -o "C:\Patched Fonts\msjhl.ttc"
-   .\faithtype.exe "C:\Windows\Fonts\mingliu.ttc" -o "C:\Patched Fonts\mingliu.ttc"
-   .\faithtype.exe "C:\Windows\Fonts\mingliub.ttc" -o "C:\Patched Fonts\mingliub.ttc"
+   mkdir "C:\Windows\Fonts\FaithType"
+   .\faithtype.exe "C:\Windows\Fonts\msjh.ttc" -o "C:\Windows\Fonts\FaithType\msjh.ttc"
+   .\faithtype.exe "C:\Windows\Fonts\msjhbd.ttc" -o "C:\Windows\Fonts\FaithType\msjhbd.ttc"
+   .\faithtype.exe "C:\Windows\Fonts\msjhl.ttc" -o "C:\Windows\Fonts\FaithType\msjhl.ttc"
+   .\faithtype.exe "C:\Windows\Fonts\mingliu.ttc" -o "C:\Windows\Fonts\FaithType\mingliu.ttc"
+   .\faithtype.exe "C:\Windows\Fonts\mingliub.ttc" -o "C:\Windows\Fonts\FaithType\mingliub.ttc"
    ```
 
 6. **可省略：** 若要重建 hinting 指令，在這一步使用 [ttfautohint](https://www.freetype.org/ttfautohint/#download)。
@@ -77,11 +77,11 @@
    Windows Registry Editor Version 5.00
 
    [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Fonts]
-   "Microsoft JhengHei & Microsoft JhengHei UI (TrueType)"="C:\Patched Fonts\msjh.ttc"
-   "Microsoft JhengHei Bold & Microsoft JhengHei UI Bold (TrueType)"="C:\Patched Fonts\msjhbd.ttc"
-   "Microsoft JhengHei Light & Microsoft JhengHei UI Light (TrueType)"="C:\Patched Fonts\msjhl.ttc"
-   "MingLiU & PMingLiU & MingLiU_HKSCS (TrueType)"="C:\Patched Fonts\mingliu.ttc"
-   "MingLiU-ExtB & PMingLiU-ExtB & MingLiU_HKSCS-ExtB (TrueType)"="C:\Patched Fonts\mingliub.ttc"
+   "Microsoft JhengHei & Microsoft JhengHei UI (TrueType)"="C:\Windows\Fonts\FaithType\msjh.ttc"
+   "Microsoft JhengHei Bold & Microsoft JhengHei UI Bold (TrueType)"="C:\Windows\Fonts\FaithType\msjhbd.ttc"
+   "Microsoft JhengHei Light & Microsoft JhengHei UI Light (TrueType)"="C:\Windows\Fonts\FaithType\msjhl.ttc"
+   "MingLiU & PMingLiU & MingLiU_HKSCS (TrueType)"="C:\Windows\Fonts\FaithType\mingliu.ttc"
+   "MingLiU-ExtB & PMingLiU-ExtB & MingLiU_HKSCS-ExtB (TrueType)"="C:\Windows\Fonts\FaithType\mingliub.ttc"
    ```
 
 9. 重新啟動系統。

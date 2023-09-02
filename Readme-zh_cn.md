@@ -34,7 +34,7 @@
 
 3. 右键点击 `Auto-Patch-Then-Install.ps1`，选择“使用 PowerShell 运行”。
 
-4. 等待脚本自动处理字体文件并安装到 `C:\Patched Fonts`。
+4. 等待脚本自动处理字体文件并安装到 `C:\Windows\Fonts\FaithType`。
 
 5. 完成后，窗口最下方会提示“Press Enter to exit”。请检查有没有任何报错。
 
@@ -60,15 +60,15 @@
 
 5. 处理字体文件：
    ```ps1
-   mkdir "C:\Patched Fonts"
-   .\faithtype.exe "C:\Windows\Fonts\msyh.ttc" -o "C:\Patched Fonts\msyh.ttc"
-   .\faithtype.exe "C:\Windows\Fonts\msyhbd.ttc" -o "C:\Patched Fonts\msyhbd.ttc"
-   .\faithtype.exe "C:\Windows\Fonts\msyhl.ttc" -o "C:\Patched Fonts\msyhl.ttc"
-   .\faithtype.exe "C:\Windows\Fonts\simfang.ttf" -o "C:\Patched Fonts\simfang.ttf"
-   .\faithtype.exe "C:\Windows\Fonts\simhei.ttf" -o "C:\Patched Fonts\simhei.ttf"
-   .\faithtype.exe "C:\Windows\Fonts\simkai.ttf" -o "C:\Patched Fonts\simkai.ttf"
-   .\faithtype.exe "C:\Windows\Fonts\simsun.ttc" -o "C:\Patched Fonts\simsun.ttc"
-   .\faithtype.exe "C:\Windows\Fonts\simsunb.ttf" -o "C:\Patched Fonts\simsunb.ttf"
+   mkdir "C:\Windows\Fonts\FaithType"
+   .\faithtype.exe "C:\Windows\Fonts\msyh.ttc" -o "C:\Windows\Fonts\FaithType\msyh.ttc"
+   .\faithtype.exe "C:\Windows\Fonts\msyhbd.ttc" -o "C:\Windows\Fonts\FaithType\msyhbd.ttc"
+   .\faithtype.exe "C:\Windows\Fonts\msyhl.ttc" -o "C:\Windows\Fonts\FaithType\msyhl.ttc"
+   .\faithtype.exe "C:\Windows\Fonts\simfang.ttf" -o "C:\Windows\Fonts\FaithType\simfang.ttf"
+   .\faithtype.exe "C:\Windows\Fonts\simhei.ttf" -o "C:\Windows\Fonts\FaithType\simhei.ttf"
+   .\faithtype.exe "C:\Windows\Fonts\simkai.ttf" -o "C:\Windows\Fonts\FaithType\simkai.ttf"
+   .\faithtype.exe "C:\Windows\Fonts\simsun.ttc" -o "C:\Windows\Fonts\FaithType\simsun.ttc"
+   .\faithtype.exe "C:\Windows\Fonts\simsunb.ttf" -o "C:\Windows\Fonts\FaithType\simsunb.ttf"
    ```
 
 6. **可选：** 如果你打算重建 hinting 指令，在这一步使用 [ttfautohint](https://www.freetype.org/ttfautohint/#download) 进行 hinting 重建。
@@ -80,14 +80,14 @@
    Windows Registry Editor Version 5.00
 
    [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Fonts]
-   "FangSong (TrueType)"="C:\Patched Fonts\simfang.ttf"
-   "KaiTi (TrueType)"="C:\Patched Fonts\simkai.ttf"
-   "Microsoft YaHei & Microsoft YaHei UI (TrueType)"="C:\Patched Fonts\msyh.ttc"
-   "Microsoft YaHei Bold & Microsoft YaHei UI Bold (TrueType)"="C:\Patched Fonts\msyhbd.ttc"
-   "Microsoft YaHei Light & Microsoft YaHei UI Light (TrueType)"="C:\Patched Fonts\msyhl.ttc"
-   "SimHei (TrueType)"="C:\Patched Fonts\simhei.ttf"
-   "SimSun & NSimSun (TrueType)"="C:\Patched Fonts\simsun.ttc"
-   "SimSun-ExtB (TrueType)"="C:\Patched Fonts\simsunb.ttf"
+   "FangSong (TrueType)"="C:\Windows\Fonts\FaithType\simfang.ttf"
+   "KaiTi (TrueType)"="C:\Windows\Fonts\FaithType\simkai.ttf"
+   "Microsoft YaHei & Microsoft YaHei UI (TrueType)"="C:\Windows\Fonts\FaithType\msyh.ttc"
+   "Microsoft YaHei Bold & Microsoft YaHei UI Bold (TrueType)"="C:\Windows\Fonts\FaithType\msyhbd.ttc"
+   "Microsoft YaHei Light & Microsoft YaHei UI Light (TrueType)"="C:\Windows\Fonts\FaithType\msyhl.ttc"
+   "SimHei (TrueType)"="C:\Windows\Fonts\FaithType\simhei.ttf"
+   "SimSun & NSimSun (TrueType)"="C:\Windows\Fonts\FaithType\simsun.ttc"
+   "SimSun-ExtB (TrueType)"="C:\Windows\Fonts\FaithType\simsunb.ttf"
    ```
 
 9. 重启系统。
